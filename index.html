@@ -131,6 +131,20 @@
   .paused-summary { background:var(--surface); border:1px dashed var(--border); border-radius:16px; padding:20px 26px; font-size:13.5px; color:var(--ink-muted); }
   .paused-summary strong { color: var(--ink-secondary); }
 
+  .roadmap-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  .roadmap-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); padding:22px 24px; }
+  .roadmap-card h3 { font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:700; margin:0 0 4px; display:flex; align-items:center; gap:8px; }
+  .roadmap-card .roadmap-icon { width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; }
+  .roadmap-card.pendientes .roadmap-icon { background: var(--paused-bg); color: var(--paused); }
+  .roadmap-card.artes .roadmap-icon { background: var(--good-bg); color: var(--navy); }
+  :root[data-theme="dark"] .roadmap-card.artes .roadmap-icon,
+  @media (prefers-color-scheme: dark) { .roadmap-card.artes .roadmap-icon { color: var(--cyan); } }
+  .roadmap-card.pasos .roadmap-icon { background: var(--good-bg); color: var(--good); }
+  .roadmap-card ul { list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  .roadmap-card li { font-size:13.5px; color:var(--ink-secondary); padding-left:18px; position:relative; line-height:1.5; }
+  .roadmap-card li::before { content:""; position:absolute; left:0; top:6px; width:7px; height:7px; border-radius:50%; background:var(--border); border:1.5px solid var(--ink-muted); }
+  .roadmap-card.pasos li::before { background: var(--good); border-color: var(--good); }
+
   .card.expandable { cursor: pointer; }
   .card.expandable .card-head:hover .card-title-row h3 { color: var(--navy); }
   .expand-hint { font-size:12px; color:var(--ink-muted); display:flex; align-items:center; gap:5px; margin-top:-4px; }
@@ -182,6 +196,7 @@
     <button data-tab="resumen" class="active">Resumen</button>
     <button data-tab="creativos">Creativos</button>
     <button data-tab="funnel">Funnel &amp; GHL</button>
+    <button data-tab="roadmap">Roadmap</button>
     <button data-tab="historico">Histórico</button>
   </nav>
 
@@ -200,6 +215,11 @@
   <section id="panel-funnel" class="panel">
     <h2 class="section-title">Estado del funnel / GHL</h2>
     <div id="funnel-status"><div class="loading">Verificando conexión…</div></div>
+  </section>
+
+  <section id="panel-roadmap" class="panel">
+    <h2 class="section-title">Roadmap</h2>
+    <div id="roadmap" class="roadmap-grid"><div class="loading">Cargando…</div></div>
   </section>
 
   <section id="panel-historico" class="panel">
@@ -333,6 +353,26 @@
     document.getElementById('creative-grid-wrap').innerHTML = groups;
   }
 
+  function renderRoadmap(data) {
+    const r = data.roadmap;
+    if (!r) { document.getElementById('roadmap').innerHTML = ''; return; }
+    const list = items => items.map(i => `<li>${i}</li>`).join('');
+    document.getElementById('roadmap').innerHTML = `
+      <div class="roadmap-card pendientes">
+        <h3><span class="roadmap-icon">!</span>Pendientes</h3>
+        <ul>${list(r.pendientes)}</ul>
+      </div>
+      <div class="roadmap-card artes">
+        <h3><span class="roadmap-icon">✎</span>Próximas artes de campañas</h3>
+        <ul>${list(r.proximas_artes)}</ul>
+      </div>
+      <div class="roadmap-card pasos">
+        <h3><span class="roadmap-icon">→</span>Próximos pasos</h3>
+        <ul>${list(r.proximos_pasos)}</ul>
+      </div>
+    `;
+  }
+
   function renderHistorico(data) {
     const h = data.historico;
     document.getElementById('historico').innerHTML = `
@@ -362,6 +402,7 @@
       renderSummary(data);
       renderCampaigns(data);
       renderCreatives(data);
+      renderRoadmap(data);
       renderHistorico(data);
     } catch (e) {
       document.getElementById('campaign-list').innerHTML = `<div class="loading">No se pudo cargar (${e.message}). Intenta recargar la página.</div>`;
