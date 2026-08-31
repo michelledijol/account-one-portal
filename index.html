@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Account One · Portal de Anuncios</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2328368D%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22>A1</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root {
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --surface-sunken: #eef1f9;
+    --border: #dde3f0;
+    --ink: #171d3d;
+    --ink-secondary: #4a5178;
+    --ink-muted: #7f86a8;
+    --navy: #28368d;
+    --blue: #5b9bd5;
+    --cyan: #06b6d4;
+    --good: #1a8a5f;
+    --good-bg: #e5f6ee;
+    --paused: #8a7a1a;
+    --paused-bg: #f7f1de;
+    --live-dot: #1a8a5f;
+    --shadow: 0 1px 2px rgba(23,29,61,.04), 0 8px 24px -12px rgba(23,29,61,.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#0c1024; --surface:#12162e; --surface-sunken:#191f3c; --border:#262d52;
+      --ink:#eef0fb; --ink-secondary:#b3b9dc; --ink-muted:#7c84ae;
+      --navy:#7f93e8; --blue:#7fb4e6; --cyan:#3ad3ec;
+      --good:#4fce9c; --good-bg:#103826; --paused:#e3c95f; --paused-bg:#362e10;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 28px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#0c1024; --surface:#12162e; --surface-sunken:#191f3c; --border:#262d52;
+    --ink:#eef0fb; --ink-secondary:#b3b9dc; --ink-muted:#7c84ae;
+    --navy:#7f93e8; --blue:#7fb4e6; --cyan:#3ad3ec;
+    --good:#4fce9c; --good-bg:#103826; --paused:#e3c95f; --paused-bg:#362e10;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 28px -14px rgba(0,0,0,.6);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'Public Sans', -apple-system, sans-serif; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 90px; }
+
+  header.top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 20px; flex-wrap: wrap; margin-bottom: 22px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .mark { width: 42px; height: 42px; border-radius: 11px; background: linear-gradient(135deg, var(--navy), var(--cyan)); flex-shrink:0; }
+  .brand-text .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-muted); }
+  .brand-text h1 { font-family:'Manrope',sans-serif; font-weight:800; font-size:23px; margin:2px 0 0; letter-spacing:-.01em; }
+  .meta { text-align:right; font-size:12.5px; color:var(--ink-muted); font-family:'IBM Plex Mono',monospace; }
+  .meta strong { color: var(--ink-secondary); font-weight:600; }
+  .live-badge { display:inline-flex; align-items:center; gap:6px; font-size:11px; padding:3px 9px; border-radius:999px; background:var(--good-bg); color:var(--good); font-family:'Public Sans',sans-serif; font-weight:600; margin-top:4px; }
+  .live-badge.snapshot { background: var(--paused-bg); color: var(--paused); }
+  .live-badge .dot { width:6px; height:6px; border-radius:50%; background:currentColor; }
+
+  nav.tabs {
+    display: flex; gap: 4px; border-bottom: 1px solid var(--border);
+    margin-bottom: 28px; overflow-x: auto;
+  }
+  nav.tabs button {
+    font-family:'Manrope',sans-serif; font-weight:700; font-size:13.5px;
+    background:none; border:none; padding: 10px 16px; cursor:pointer;
+    color: var(--ink-muted); border-bottom: 2px solid transparent; white-space:nowrap;
+  }
+  nav.tabs button.active { color: var(--navy); border-bottom-color: var(--navy); }
+  :root[data-theme="dark"] nav.tabs button.active,
+  @media (prefers-color-scheme: dark) { nav.tabs button.active { color: var(--cyan); border-bottom-color: var(--cyan); } }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .summary { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden; box-shadow:var(--shadow); margin-bottom:32px; }
+  .summary .cell { background: var(--surface); padding:18px 20px; }
+  .summary .cell .label { font-size:12px; color:var(--ink-muted); margin-bottom:6px; }
+  .summary .cell .value { font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; font-weight:600; font-size:22px; letter-spacing:-.01em; }
+  .summary .cell .value small { font-size:12.5px; color:var(--ink-muted); font-family:'Public Sans',sans-serif; font-weight:500; }
+
+  h2.section-title { font-family:'Manrope',sans-serif; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-secondary); margin: 0 0 16px; }
+
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); padding:24px 26px; margin-bottom:18px; }
+  .card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+  .card-title-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .card-title-row h3 { font-family:'Manrope',sans-serif; font-size:18px; font-weight:700; margin:0; letter-spacing:-.005em; }
+  .pill { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600; padding:4px 10px; border-radius:999px; text-transform:uppercase; letter-spacing:.03em; }
+  .pill.active { background:var(--good-bg); color:var(--good); }
+  .pill.paused { background:var(--paused-bg); color:var(--paused); }
+  .pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .pill.days { background:var(--surface-sunken); color:var(--ink-secondary); font-family:'IBM Plex Mono',monospace; text-transform:none; letter-spacing:0; }
+  .pill.days::before { display:none; }
+  .objective { font-size:13px; color:var(--ink-muted); }
+  .window-note { font-size:12.5px; color:var(--ink-muted); font-style:italic; margin:-6px 0 18px; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(108px,1fr)); gap:14px; margin-bottom:16px; }
+  .stat .label { font-size:11.5px; color:var(--ink-muted); margin-bottom:4px; }
+  .stat .value { font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; font-weight:600; font-size:17px; }
+  .pacing { margin-top:14px; }
+  .pacing .row { display:flex; justify-content:space-between; font-size:12px; color:var(--ink-muted); margin-bottom:6px; }
+  .pacing .track { height:6px; border-radius:999px; background:var(--surface-sunken); overflow:hidden; }
+  .pacing .fill { height:100%; border-radius:999px; background:linear-gradient(90deg,var(--navy),var(--cyan)); }
+  .reco { margin-top:16px; display:flex; gap:10px; background:var(--surface-sunken); border:1px solid var(--border); border-radius:10px; padding:12px 14px; font-size:13px; color:var(--ink-secondary); }
+  .reco .tag { flex-shrink:0; font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color: var(--navy); background: var(--good-bg); padding: 2px 7px; border-radius: 6px; height: fit-content; }
+  :root[data-theme="dark"] .reco .tag,
+  @media (prefers-color-scheme: dark) { .reco .tag { color: var(--cyan); } }
+
+  .creative-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .creative-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:16px; box-shadow:var(--shadow); }
+  .creative-swatch { height:80px; border-radius:10px; background:linear-gradient(135deg, var(--navy), var(--blue)); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Manrope',sans-serif; font-weight:700; font-size:22px; margin-bottom:12px; opacity:.9; }
+  .creative-card .name { font-size:13.5px; font-weight:600; margin-bottom:4px; }
+  .creative-card .campaign { font-size:12px; color:var(--ink-muted); }
+  .creative-note { font-size:13px; color:var(--ink-muted); margin-bottom:20px; }
+
+  .status-card { display:flex; align-items:center; gap:14px; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px 22px; box-shadow:var(--shadow); }
+  .status-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+  .status-dot.ok { background: var(--good); }
+  .status-dot.pending { background: var(--paused); }
+  .status-dot.error { background: #c94b4b; }
+  .status-card .msg strong { display:block; font-family:'Manrope',sans-serif; font-size:15px; margin-bottom:2px; }
+  .status-card .msg span { font-size:13px; color:var(--ink-muted); }
+
+  .paused-summary { background:var(--surface); border:1px dashed var(--border); border-radius:16px; padding:20px 26px; font-size:13.5px; color:var(--ink-muted); }
+  .paused-summary strong { color: var(--ink-secondary); }
+
+  footer { margin-top:44px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--ink-muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+
+  .loading { font-size:13px; color:var(--ink-muted); padding: 20px 0; }
+
+  @media (max-width:640px) {
+    .summary { grid-template-columns:repeat(2,1fr); }
+    .meta { text-align:left; }
+    header.top { flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div class="brand-text">
+        <div class="eyebrow">Portal de campañas</div>
+        <h1>Account One</h1>
+      </div>
+    </div>
+    <div class="meta">
+      <div id="live-badge-wrap"><span class="live-badge snapshot"><span class="dot"></span>Cargando…</span></div>
+      Gestionado por Michelle Dijool — Automatización Digital
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button data-tab="resumen" class="active">Resumen</button>
+    <button data-tab="creativos">Creativos</button>
+    <button data-tab="funnel">Funnel &amp; GHL</button>
+    <button data-tab="historico">Histórico</button>
+  </nav>
+
+  <section id="panel-resumen" class="panel active">
+    <div id="summary" class="summary"></div>
+    <h2 class="section-title">Campañas activas ahora</h2>
+    <div id="campaign-list"><div class="loading">Cargando campañas…</div></div>
+  </section>
+
+  <section id="panel-creativos" class="panel">
+    <h2 class="section-title">Creativos en campañas activas</h2>
+    <p class="creative-note">Vista de referencia por nombre de anuncio. Las miniaturas de imagen/video se activan cuando conectemos la biblioteca de creativos de Meta a este portal.</p>
+    <div id="creative-grid" class="creative-grid"></div>
+  </section>
+
+  <section id="panel-funnel" class="panel">
+    <h2 class="section-title">Estado del funnel / GHL</h2>
+    <div id="funnel-status"><div class="loading">Verificando conexión…</div></div>
+  </section>
+
+  <section id="panel-historico" class="panel">
+    <h2 class="section-title">Histórico de campañas</h2>
+    <div id="historico"><div class="loading">Cargando…</div></div>
+  </section>
+
+  <footer>
+    <span>Cuenta publicitaria: Account One (677439744786765) · Meta Ads</span>
+    <span id="footer-mode">—</span>
+  </footer>
+</div>
+
+<script>
+  // Tabs
+  document.querySelectorAll('nav.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  const fmtMoney = n => n == null ? '—' : '$' + Number(n).toFixed(2);
+  const fmtInt = n => n == null ? '—' : Number(n).toLocaleString('es-DO');
+  const fmtPct = n => n == null ? '—' : Number(n).toFixed(2) + '%';
+
+  function daysSince(dateStr) {
+    const start = new Date(dateStr + 'T00:00:00');
+    const now = new Date();
+    return Math.max(1, Math.floor((now - start) / 86400000));
+  }
+
+  function renderSummary(data) {
+    const s = data.resumen;
+    document.getElementById('summary').innerHTML = `
+      <div class="cell"><div class="label">Campañas activas</div><div class="value">${s.campanas_activas}</div></div>
+      <div class="cell"><div class="label">Invertido (desde lanzamiento de cada una)</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div></div>
+      <div class="cell"><div class="label">Leads registrados</div><div class="value">${s.leads} <small>solo camp. de conversión</small></div></div>
+      <div class="cell"><div class="label">Alcance combinado</div><div class="value">${(s.alcance_combinado/1000).toFixed(1)}K <small>personas</small></div></div>
+    `;
+  }
+
+  function renderCampaigns(data) {
+    const html = data.campanas.map(c => {
+      const days = daysSince(c.inicio);
+      const m = c.metricas;
+      const pacing = c.presupuesto_diario ? Math.min(100, Math.round((m.gasto / (c.presupuesto_diario * days)) * 100)) : null;
+      return `
+        <article class="card">
+          <div class="card-head">
+            <div class="card-title-row">
+              <h3>${c.nombre}</h3>
+              <span class="pill active">Activa</span>
+              <span class="pill days">${days} día${days === 1 ? '' : 's'} publicada</span>
+            </div>
+            <span class="objective">Objetivo: ${c.objetivo}</span>
+          </div>
+          <p class="window-note">${c.ventana}</p>
+          <div class="stats">
+            <div class="stat"><div class="label">Gasto</div><div class="value">${fmtMoney(m.gasto)}</div></div>
+            <div class="stat"><div class="label">Impresiones</div><div class="value">${fmtInt(m.impresiones)}</div></div>
+            <div class="stat"><div class="label">Clics</div><div class="value">${fmtInt(m.clicks)}</div></div>
+            <div class="stat"><div class="label">CTR</div><div class="value">${fmtPct(m.ctr)}</div></div>
+            <div class="stat"><div class="label">CPC</div><div class="value">${fmtMoney(m.cpc)}</div></div>
+            <div class="stat"><div class="label">CPM</div><div class="value">${fmtMoney(m.cpm)}</div></div>
+            <div class="stat"><div class="label">Alcance</div><div class="value">${fmtInt(m.alcance)}</div></div>
+            ${m.resultado_nombre ? `<div class="stat"><div class="label">${m.resultado_nombre}</div><div class="value">${fmtInt(m.resultado_valor)}</div></div>` : ''}
+          </div>
+          ${pacing !== null ? `
+          <div class="pacing">
+            <div class="row"><span>Ritmo de gasto vs. presupuesto diario ($${c.presupuesto_diario.toFixed(2)}/día)</span><span>${pacing}%</span></div>
+            <div class="track"><div class="fill" style="width:${pacing}%"></div></div>
+          </div>` : ''}
+          <div class="reco"><span class="tag">Recomendación</span><span>${c.recomendacion}</span></div>
+        </article>
+      `;
+    }).join('');
+    document.getElementById('campaign-list').innerHTML = html;
+  }
+
+  function renderCreatives(data) {
+    // Placeholder set built from what we know is active in the account.
+    const ads = [
+      { name: 'Yo se que todavía usas excel (nuevo)', campaign: 'Contabilidad Sep–Dic' },
+      { name: 'Tu ni sabes que tienes un tema de contabilidad', campaign: 'Contabilidad Sep–Dic' },
+      { name: 'Comparativo Contadores', campaign: 'Contabilidad Sep–Dic' },
+      { name: '"Tu empresa será una de ellas?"', campaign: 'Reconocimiento 80% FE' },
+      { name: 'La llamada', campaign: 'Reconocimiento 80% FE' },
+      { name: 'Carrusel méxico', campaign: 'Reconocimiento 80% FE' },
+      { name: 'La vida es un video juego', campaign: 'Awareness' },
+      { name: 'Como es tener un negocio en RD', campaign: 'Awareness' }
+    ];
+    document.getElementById('creative-grid').innerHTML = ads.map(a => `
+      <div class="creative-card">
+        <div class="creative-swatch">${a.name.trim().slice(0,2).toUpperCase()}</div>
+        <div class="name">${a.name}</div>
+        <div class="campaign">${a.campaign}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderHistorico(data) {
+    const h = data.historico;
+    document.getElementById('historico').innerHTML = `
+      <div class="paused-summary">
+        <strong>${h.campanas_pausadas} campañas pausadas</strong> en el historial de la cuenta (${h.rango}). Este portal se enfoca en lo que está activo hoy; podemos añadir una tabla completa del histórico si es útil para comparar temporadas.
+      </div>
+    `;
+  }
+
+  function renderLiveBadge(modo) {
+    const wrap = document.getElementById('live-badge-wrap');
+    const footer = document.getElementById('footer-mode');
+    if (modo === 'live') {
+      wrap.innerHTML = `<span class="live-badge"><span class="dot"></span>Datos en vivo</span>`;
+      footer.textContent = 'Datos en vivo desde Meta Ads';
+    } else {
+      wrap.innerHTML = `<span class="live-badge snapshot"><span class="dot"></span>Modo snapshot</span>`;
+      footer.textContent = 'Snapshot manual — conecta META_ACCESS_TOKEN para datos en vivo';
+    }
+  }
+
+  async function loadCampaigns() {
+    try {
+      const res = await fetch('/api/campaigns');
+      const data = await res.json();
+      renderLiveBadge(data.modo);
+      renderSummary(data);
+      renderCampaigns(data);
+      renderCreatives(data);
+      renderHistorico(data);
+    } catch (e) {
+      document.getElementById('campaign-list').innerHTML = `<div class="loading">No se pudo cargar (${e.message}). Intenta recargar la página.</div>`;
+    }
+  }
+
+  async function loadFunnel() {
+    try {
+      const res = await fetch('/api/funnel');
+      const data = await res.json();
+      const cls = data.estado === 'conectado' ? 'ok' : (data.estado === 'error' ? 'error' : 'pending');
+      const title = data.estado === 'conectado' ? 'GHL conectado' : (data.estado === 'error' ? 'Error de conexión' : 'GHL no conectado todavía');
+      document.getElementById('funnel-status').innerHTML = `
+        <div class="status-card">
+          <div class="status-dot ${cls}"></div>
+          <div class="msg"><strong>${title}</strong><span>${data.mensaje}</span></div>
+        </div>
+      `;
+    } catch (e) {
+      document.getElementById('funnel-status').innerHTML = `<div class="loading">No se pudo verificar (${e.message}).</div>`;
+    }
+  }
+
+  loadCampaigns();
+  loadFunnel();
+</script>
+</body>
+</html>
