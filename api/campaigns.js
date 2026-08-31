@@ -110,6 +110,23 @@ const SNAPSHOT = {
   historico: {
     campanas_pausadas: 36,
     rango: "jul 2025 – ago 2026"
+  },
+  roadmap: {
+    pendientes: [
+      "Confirmar que el evento de \"citas agendadas\" está registrando bien en la landing de Contabilidad Sept–Dic (por el historial de bugs de tracking).",
+      "Decidir el futuro de RST_CLAUDE (test de Audience Network/Stories) según la calidad de los leads.",
+      "Conectar el portal a datos en vivo (falta el token de Meta y el API key de GHL)."
+    ],
+    proximas_artes: [
+      "Agregar artes estáticas y carruseles a la campaña de Contabilidad Sept–Dic (hasta ahora solo tiene video).",
+      "Etapa 2 (Consideración) del funnel de Facturación Electrónica — adelantada, en producción.",
+      "Posible refresco de creativos de Awareness si la frecuencia sube (fatiga de anuncio)."
+    ],
+    proximos_pasos: [
+      "Encender las demás campañas de retargeting el jueves 3 de septiembre, cuando se cumpla la fecha límite de la campaña de Reconocimiento 80% FE.",
+      "Evaluar la campaña de Contabilidad en 7–10 días antes de subir presupuesto.",
+      "Pasar Reconocimiento 80% FE a la etapa de Consideración cuando se cumpla el alcance objetivo."
+    ]
   }
 };
 
