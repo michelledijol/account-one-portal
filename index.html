@@ -140,10 +140,13 @@
   :root[data-theme="dark"] .roadmap-card.artes .roadmap-icon,
   @media (prefers-color-scheme: dark) { .roadmap-card.artes .roadmap-icon { color: var(--cyan); } }
   .roadmap-card.pasos .roadmap-icon { background: var(--good-bg); color: var(--good); }
+  .roadmap-card.completado .roadmap-icon { background: var(--good-bg); color: var(--good); }
   .roadmap-card ul { list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:12px; }
   .roadmap-card li { font-size:13.5px; color:var(--ink-secondary); padding-left:18px; position:relative; line-height:1.5; }
   .roadmap-card li::before { content:""; position:absolute; left:0; top:6px; width:7px; height:7px; border-radius:50%; background:var(--border); border:1.5px solid var(--ink-muted); }
   .roadmap-card.pasos li::before { background: var(--good); border-color: var(--good); }
+  .roadmap-card.completado li::before { content:"✓"; width:auto; height:auto; border-radius:0; background:none; border:none; color:var(--good); font-size:12px; font-weight:700; top:0; }
+  .roadmap-card.completado li { padding-left:16px; color:var(--ink); }
 
   .card.expandable { cursor: pointer; }
   .card.expandable .card-head:hover .card-title-row h3 { color: var(--navy); }
@@ -358,6 +361,11 @@
     if (!r) { document.getElementById('roadmap').innerHTML = ''; return; }
     const list = items => items.map(i => `<li>${i}</li>`).join('');
     document.getElementById('roadmap').innerHTML = `
+      ${r.completado ? `
+      <div class="roadmap-card completado">
+        <h3><span class="roadmap-icon">✓</span>Hecho esta semana</h3>
+        <ul>${list(r.completado)}</ul>
+      </div>` : ''}
       <div class="roadmap-card pendientes">
         <h3><span class="roadmap-icon">!</span>Pendientes</h3>
         <ul>${list(r.pendientes)}</ul>
