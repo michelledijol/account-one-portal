@@ -1,7 +1,7 @@
 // Serverless function: returns live campaign data from the Meta Marketing API
 // when META_ACCESS_TOKEN + META_AD_ACCOUNT_ID are configured as Vercel env vars.
 // Falls back to a static snapshot (clearly labeled) so the portal works before
-// those are wired up.
+// those are wired up, or if the live call fails for any reason.
 
 const AD_ACCOUNT_ID = process.env.META_AD_ACCOUNT_ID || "677439744786765";
 const GRAPH_VERSION = "v20.0";
@@ -130,30 +130,150 @@ const SNAPSHOT = {
   }
 };
 
-async function fetchLive(token, adAccountId) {
-  const fields = [
-    "campaign_name",
-    "objective",
-    "status",
-    "start_time",
-    "daily_budget",
-    "spend",
-    "impressions",
-    "clicks",
-    "ctr",
-    "cpc",
-    "cpm",
-    "reach"
-  ].join(",");
+const MESES_ES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
 
-  const url = `https://graph.facebook.com/${GRAPH_VERSION}/act_${adAccountId}/insights?level=campaign&fields=${fields}&filtering=[{"field":"campaign.effective_status","operator":"IN","value":["ACTIVE"]}]&access_token=${token}`;
+function fmtFechaEs(isoDate) {
+  const [y, m, d] = isoDate.split("-").map(Number);
+  return `${d} ${MESES_ES[m - 1]} ${y}`;
+}
 
-  const res = await fetch(url);
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`Meta Graph API error ${res.status}: ${body}`);
+function todayISO() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+// Best-effort mapping from Meta's "actions" array to a human result label.
+// Ordered by priority: the first matching action type found wins.
+const ACTION_PRIORITY = [
+  { type: "onsite_conversion.lead_grouped", label: "Leads" },
+  { type: "lead", label: "Leads" },
+  { type: "offsite_conversion.fb_pixel_lead", label: "Leads" },
+  { type: "onsite_conversion.messaging_conversation_started_7d", label: "Conversaciones iniciadas" },
+  { type: "onsite_conversion.total_messaging_connection", label: "Conversaciones" },
+  { type: "landing_page_view", label: "Vistas de landing page" },
+  { type: "video_view", label: "Reproducciones" },
+  { type: "link_click", label: "Clicks al enlace" },
+  { type: "post_engagement", label: "Interacciones" }
+];
+
+function pickResultado(actions) {
+  if (!Array.isArray(actions)) return { resultado_nombre: null, resultado_valor: null };
+  for (const { type, label } of ACTION_PRIORITY) {
+    const found = actions.find((a) => a.action_type === type);
+    if (found) return { resultado_nombre: label, resultado_valor: Math.round(Number(found.value)) };
   }
-  return res.json();
+  return { resultado_nombre: null, resultado_valor: null };
+}
+
+async function metaGet(path, token, params = {}) {
+  const qs = new URLSearchParams({ ...params, access_token: token }).toString();
+  const url = `https://graph.facebook.com/${GRAPH_VERSION}/${path}?${qs}`;
+  const res = await fetch(url);
+  const body = await res.json();
+  if (!res.ok) {
+    const msg = body?.error?.message || JSON.stringify(body);
+    throw new Error(`Meta Graph API error (${path}): ${msg}`);
+  }
+  return body;
+}
+
+async function fetchLive(token, adAccountId) {
+  const until = todayISO();
+
+  const campaignsResp = await metaGet(`act_${adAccountId}/campaigns`, token, {
+    fields: "id,name,objective,status,effective_status,start_time,daily_budget",
+    filtering: JSON.stringify([{ field: "effective_status", operator: "IN", value: ["ACTIVE"] }]),
+    limit: "100"
+  });
+
+  const activeCampaigns = (campaignsResp.data || []).filter((c) => c.effective_status === "ACTIVE");
+
+  const campanas = await Promise.all(
+    activeCampaigns.map(async (c) => {
+      const since = (c.start_time || until).slice(0, 10);
+      const timeRange = JSON.stringify({ since, until: since > until ? since : until });
+
+      const [insightsResp, adInsightsResp] = await Promise.all([
+        metaGet(`${c.id}/insights`, token, {
+          fields: "spend,impressions,clicks,ctr,cpc,cpm,reach,actions",
+          time_range: timeRange
+        }).catch(() => ({ data: [] })),
+        metaGet(`${c.id}/insights`, token, {
+          level: "ad",
+          fields: "ad_id,ad_name,spend,impressions,clicks,ctr,cpc,cpm,actions",
+          time_range: timeRange,
+          limit: "200"
+        }).catch(() => ({ data: [] }))
+      ]);
+
+      const row = insightsResp.data?.[0] || {};
+      const { resultado_nombre, resultado_valor } = pickResultado(row.actions);
+
+      const ads = (adInsightsResp.data || [])
+        .map((a) => {
+          const adResult = pickResultado(a.actions);
+          return {
+            nombre: a.ad_name || "(sin nombre)",
+            gasto: Number(a.spend || 0),
+            impresiones: Number(a.impressions || 0),
+            clicks: Number(a.clicks || 0),
+            ctr: Number(a.ctr || 0),
+            cpc: a.cpc ? Number(a.cpc) : null,
+            cpm: Number(a.cpm || 0),
+            resultado_nombre: adResult.resultado_nombre,
+            resultado_valor: adResult.resultado_valor
+          };
+        })
+        .sort((a, b) => b.gasto - a.gasto);
+
+      return {
+        id: c.id,
+        nombre: c.name,
+        estado: c.effective_status,
+        objetivo: c.objective || null,
+        inicio: since,
+        presupuesto_diario: c.daily_budget ? Number(c.daily_budget) / 100 : null,
+        ventana: `Desde su lanzamiento (${fmtFechaEs(since)}) hasta hoy`,
+        metricas: {
+          gasto: Number(row.spend || 0),
+          impresiones: Number(row.impressions || 0),
+          clicks: Number(row.clicks || 0),
+          ctr: Number(row.ctr || 0),
+          cpc: row.cpc ? Number(row.cpc) : null,
+          cpm: Number(row.cpm || 0),
+          alcance: Number(row.reach || 0),
+          resultado_nombre,
+          resultado_valor
+        },
+        // Auto-generated from live data — not a manual analyst note like in snapshot mode.
+        recomendacion:
+          ads.length > 0
+            ? `Anuncio con mayor gasto: "${ads[0].nombre}" ($${ads[0].gasto.toFixed(2)}, CTR ${ads[0].ctr.toFixed(2)}%).`
+            : "Aún no hay suficientes datos de anuncios individuales para esta campaña.",
+        ads
+      };
+    })
+  );
+
+  const resumen = {
+    campanas_activas: campanas.length,
+    invertido_total: Number(campanas.reduce((sum, c) => sum + c.metricas.gasto, 0).toFixed(2)),
+    leads: campanas.reduce(
+      (sum, c) => sum + (c.metricas.resultado_nombre === "Leads" ? c.metricas.resultado_valor : 0),
+      0
+    ),
+    alcance_combinado: campanas.reduce((sum, c) => sum + c.metricas.alcance, 0)
+  };
+
+  return {
+    modo: "live",
+    actualizado: new Date().toISOString(),
+    resumen,
+    campanas,
+    // Roadmap and historical counts reflect Michelle's real plans/records, not
+    // something derivable from the API — always sourced from the snapshot.
+    historico: SNAPSHOT.historico,
+    roadmap: SNAPSHOT.roadmap
+  };
 }
 
 export default async function handler(req, res) {
@@ -166,11 +286,7 @@ export default async function handler(req, res) {
 
   try {
     const live = await fetchLive(token, AD_ACCOUNT_ID);
-    res.status(200).json({
-      modo: "live",
-      actualizado: new Date().toISOString(),
-      datos: live
-    });
+    res.status(200).json(live);
   } catch (err) {
     res.status(200).json({
       ...SNAPSHOT,
