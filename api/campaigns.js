@@ -8,12 +8,12 @@ const GRAPH_VERSION = "v20.0";
 
 const SNAPSHOT = {
   modo: "snapshot",
-  actualizado: "2026-09-08T15:10:00+02:00",
+  actualizado: "2026-09-09T17:10:00+02:00",
   resumen: {
     campanas_activas: 4,
-    invertido_total: 393.38,
+    invertido_total: 408.03,
     leads: 4,
-    alcance_combinado: 504812
+    alcance_combinado: 497763
   },
   campanas: [
     {
@@ -25,25 +25,25 @@ const SNAPSHOT = {
       presupuesto_diario: null,
       ventana: "Desde su lanzamiento (4 sep 2026) hasta hoy",
       metricas: {
-        gasto: 51.09,
-        impresiones: 6160,
-        clicks: 172,
+        gasto: 60.09,
+        impresiones: 7086,
+        clicks: 198,
         ctr: 2.79,
         cpc: 0.30,
-        cpm: 8.29,
-        alcance: 3329,
+        cpm: 8.48,
+        alcance: 3688,
         resultado_nombre: "Citas agendadas",
         resultado_valor: 2
       },
       recomendacion:
-        "Ya sumó 2 citas agendadas (costo por resultado $25.55), ambas atribuidas a \"Operando a ciegas\" ($17.20 por cita) — muy buen arranque para una campaña de menos de una semana. \"Scrolling (17%)\" también tiene buen CTR (3.47%) pero sin citas aún.",
+        "Se mantiene en 2 citas agendadas (costo por resultado subió a $30.05 al no sumar nuevas), ambas siguen siendo de \"Operando a ciegas\" ($20.83 por cita) — sigue siendo el mejor creativo de la campaña. \"Scrolling (17%)\" mantiene buen CTR (3.55%) pero todavía sin citas atribuidas.",
       ads: [
-        { nombre: "Operando a ciegas", gasto: 34.40, impresiones: 3701, clicks: 97, ctr: 2.62, cpc: 0.35, cpm: 9.29, resultado_nombre: "Citas agendadas", resultado_valor: 2 },
-        { nombre: "Scrolling (17%)", gasto: 10.74, impresiones: 1701, clicks: 59, ctr: 3.47, cpc: 0.18, cpm: 6.31, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Hay empresarios", gasto: 4.56, impresiones: 510, clicks: 12, ctr: 2.35, cpc: 0.38, cpm: 8.94, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Garbage in garbage out - Estática", gasto: 0.98, impresiones: 153, clicks: 3, ctr: 1.96, cpc: 0.33, cpm: 6.41, resultado_nombre: null, resultado_valor: null },
-        { nombre: "4 formas de resolver FE - Estática", gasto: 0.33, impresiones: 62, clicks: 0, ctr: 0, cpc: null, cpm: 5.32, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Otros implementadores - Estática", gasto: 0.08, impresiones: 33, clicks: 1, ctr: 3.03, cpc: 0.08, cpm: 2.42, resultado_nombre: null, resultado_valor: null }
+        { nombre: "Operando a ciegas", gasto: 41.66, impresiones: 4457, clicks: 117, ctr: 2.63, cpc: 0.36, cpm: 9.35, resultado_nombre: "Citas agendadas", resultado_valor: 2 },
+        { nombre: "Scrolling (17%)", gasto: 11.72, impresiones: 1830, clicks: 65, ctr: 3.55, cpc: 0.18, cpm: 6.40, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Hay empresarios", gasto: 5.20, impresiones: 528, clicks: 12, ctr: 2.27, cpc: 0.43, cpm: 9.85, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Garbage in garbage out - Estática", gasto: 1.00, impresiones: 154, clicks: 3, ctr: 1.95, cpc: 0.33, cpm: 6.49, resultado_nombre: null, resultado_valor: null },
+        { nombre: "4 formas de resolver FE - Estática", gasto: 0.42, impresiones: 83, clicks: 0, ctr: 0, cpc: null, cpm: 5.06, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Otros implementadores - Estática", gasto: 0.09, impresiones: 34, clicks: 1, ctr: 2.94, cpc: 0.09, cpm: 2.65, resultado_nombre: null, resultado_valor: null }
       ]
     },
     {
@@ -55,25 +55,25 @@ const SNAPSHOT = {
       presupuesto_diario: 6.0,
       ventana: "Desde su lanzamiento (27 ago 2026) hasta hoy",
       metricas: {
-        gasto: 73.29,
-        impresiones: 19401,
-        clicks: 992,
-        ctr: 5.11,
+        gasto: 78.45,
+        impresiones: 20514,
+        clicks: 1060,
+        ctr: 5.17,
         cpc: 0.07,
-        cpm: 3.78,
-        alcance: 10070,
+        cpm: 3.82,
+        alcance: 10459,
         resultado_nombre: "Citas agendadas",
         resultado_valor: 2
       },
       recomendacion:
-        "Se mantiene en 2 citas agendadas (costo por resultado subió a $36.65 al no sumar nuevas esta semana, ambas siguen atribuidas a \"Dia 1 llevando Account One de 30 a 100\"). Ese mismo anuncio concentra el mayor gasto y buen CTR (4.83%). Vale la pena vigilar si el ritmo de citas se reactiva en los próximos días.",
+        "Sigue en 2 citas agendadas (costo por resultado ya en $39.23, tercera semana sin sumar nuevas, ambas atribuidas a \"Dia 1 llevando Account One de 30 a 100\"). Ese anuncio sigue concentrando el mayor gasto y buen CTR (4.92%), pero vale la pena revisar por qué el ritmo de citas se frenó.",
       ads: [
-        { nombre: "Dia 1 llevando Account One de 30 a 100", gasto: 47.84, impresiones: 11396, clicks: 550, ctr: 4.83, cpc: 0.09, cpm: 4.20, resultado_nombre: "Citas agendadas", resultado_valor: 2 },
-        { nombre: "Que hacemos en Account One mejor que en otras firmas", gasto: 11.09, impresiones: 3120, clicks: 134, ctr: 4.29, cpc: 0.08, cpm: 3.55, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Comparativo Contadores", gasto: 8.47, impresiones: 3445, clicks: 250, ctr: 7.26, cpc: 0.03, cpm: 2.46, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Meet the Team", gasto: 4.64, impresiones: 1111, clicks: 49, ctr: 4.41, cpc: 0.09, cpm: 4.18, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Yo se que todavía usas excel (nuevo)", gasto: 0.74, impresiones: 136, clicks: 2, ctr: 1.47, cpc: 0.37, cpm: 5.44, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Tu ni sabes que tienes un tema de contabilidad", gasto: 0.51, impresiones: 193, clicks: 7, ctr: 3.63, cpc: 0.07, cpm: 2.64, resultado_nombre: null, resultado_valor: null }
+        { nombre: "Dia 1 llevando Account One de 30 a 100", gasto: 52.42, impresiones: 12388, clicks: 609, ctr: 4.92, cpc: 0.09, cpm: 4.23, resultado_nombre: "Citas agendadas", resultado_valor: 2 },
+        { nombre: "Que hacemos en Account One mejor que en otras firmas", gasto: 11.30, impresiones: 3166, clicks: 135, ctr: 4.26, cpc: 0.08, cpm: 3.57, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Comparativo Contadores", gasto: 8.50, impresiones: 3453, clicks: 252, ctr: 7.30, cpc: 0.03, cpm: 2.46, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Meet the Team", gasto: 4.87, impresiones: 1156, clicks: 53, ctr: 4.58, cpc: 0.09, cpm: 4.21, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Yo se que todavía usas excel (nuevo)", gasto: 0.81, impresiones: 148, clicks: 2, ctr: 1.35, cpc: 0.41, cpm: 5.47, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Tu ni sabes que tienes un tema de contabilidad", gasto: 0.55, impresiones: 203, clicks: 9, ctr: 4.43, cpc: 0.06, cpm: 2.71, resultado_nombre: null, resultado_valor: null }
       ]
     },
     {
@@ -85,28 +85,28 @@ const SNAPSHOT = {
       presupuesto_diario: null,
       ventana: "Desde su lanzamiento (20 ago 2026) hasta hoy",
       metricas: {
-        gasto: 147.65,
-        impresiones: 484383,
-        clicks: 3010,
+        gasto: 149.37,
+        impresiones: 488177,
+        clicks: 3048,
         ctr: 0.62,
         cpc: 0.05,
-        cpm: 0.30,
-        alcance: 222778,
+        cpm: 0.31,
+        alcance: 223562,
         resultado_nombre: null,
         resultado_valor: null
       },
       recomendacion:
-        "\"La llamada\" sigue concentrando el mayor gasto y es por lejos el mejor creativo (47,980 reproducciones a CPM $0.50). Las variantes de imagen estática (Carrusel/Arte) siguen con CTR bajo (0.15–0.20%) — solo aportan alcance. Con la etapa de Consideración ya generando citas, esta campaña sigue cumpliendo su rol de generar el público para retargeting.",
+        "\"La llamada\" sigue concentrando el mayor gasto y es por lejos el mejor creativo (48,868 reproducciones a CPM $0.50). Las variantes de imagen estática (Carrusel/Arte) siguen con CTR bajo (0.15–0.20%) — solo aportan alcance. Con la etapa de Consideración ya generando citas, esta campaña sigue cumpliendo su rol de generar el público para retargeting.",
       ads: [
-        { nombre: "La llamada", gasto: 84.29, impresiones: 169656, clicks: 2342, ctr: 1.38, cpc: 0.04, cpm: 0.50, resultado_nombre: "Reproducciones", resultado_valor: 47980 },
+        { nombre: "La llamada", gasto: 85.90, impresiones: 173194, clicks: 2378, ctr: 1.37, cpc: 0.04, cpm: 0.50, resultado_nombre: "Reproducciones", resultado_valor: 48868 },
         { nombre: "Carrusel sera una de ellas", gasto: 42.06, impresiones: 206413, clicks: 351, ctr: 0.17, cpc: 0.12, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 79470 },
         { nombre: "Carrusel mexico", gasto: 6.71, impresiones: 38783, clicks: 78, ctr: 0.20, cpc: 0.09, cpm: 0.17, resultado_nombre: "Alcance", resultado_valor: 25235 },
         { nombre: "Carrusel la llamada", gasto: 4.46, impresiones: 22614, clicks: 43, ctr: 0.19, cpc: 0.10, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 16321 },
         { nombre: "Arte mexico", gasto: 2.88, impresiones: 13993, clicks: 21, ctr: 0.15, cpc: 0.14, cpm: 0.21, resultado_nombre: "Alcance", resultado_valor: 10697 },
-        { nombre: "mexico", gasto: 2.76, impresiones: 8636, clicks: 104, ctr: 1.20, cpc: 0.03, cpm: 0.32, resultado_nombre: "Reproducciones", resultado_valor: 1386 },
+        { nombre: "mexico", gasto: 2.87, impresiones: 8889, clicks: 106, ctr: 1.19, cpc: 0.03, cpm: 0.32, resultado_nombre: "Reproducciones", resultado_valor: 1438 },
         { nombre: "Arte la llamada", gasto: 2.17, impresiones: 11115, clicks: 20, ctr: 0.18, cpc: 0.11, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 8585 },
         { nombre: "Arte tu empresa sera una de ellas", gasto: 1.68, impresiones: 9558, clicks: 17, ctr: 0.18, cpc: 0.10, cpm: 0.18, resultado_nombre: "Alcance", resultado_valor: 8699 },
-        { nombre: "\"Tu empresa será una de ellas?\"", gasto: 0.64, impresiones: 3615, clicks: 34, ctr: 0.94, cpc: 0.02, cpm: 0.18, resultado_nombre: "Reproducciones", resultado_valor: 323 }
+        { nombre: "\"Tu empresa será una de ellas?\"", gasto: 0.64, impresiones: 3618, clicks: 34, ctr: 0.94, cpc: 0.02, cpm: 0.18, resultado_nombre: "Reproducciones", resultado_valor: 323 }
       ]
     },
     {
@@ -118,22 +118,22 @@ const SNAPSHOT = {
       presupuesto_diario: 4.0,
       ventana: "Últimos 30 días (campaña de largo plazo)",
       metricas: {
-        gasto: 121.35,
-        impresiones: 339062,
-        clicks: 2900,
-        ctr: 0.86,
+        gasto: 120.12,
+        impresiones: 331993,
+        clicks: 2897,
+        ctr: 0.87,
         cpc: 0.04,
         cpm: 0.36,
-        alcance: 268635,
+        alcance: 260054,
         resultado_nombre: "Reproducciones completas",
-        resultado_valor: 100413
+        resultado_valor: 98394
       },
       recomendacion:
-        "\"Como es tener un negocio en RD\" sigue liderando el gasto (CPM $0.35, ~84K reproducciones en 30 días). \"La vida es un video juego\" mantiene el CTR más alto (1.87%) y ya casi duplicó su gasto de la semana pasada — sigue siendo buen candidato para diversificar más allá del creativo dominante.",
+        "\"Como es tener un negocio en RD\" sigue liderando el gasto (CPM $0.35, ~80K reproducciones en 30 días), aunque va bajando de peso relativo. \"La vida es un video juego\" mantiene el CTR más alto (1.84%) y sigue ganando presupuesto semana a semana — buen candidato para diversificar más allá del creativo dominante.",
       ads: [
-        { nombre: "Como es tener un negocio en RD", gasto: 101.37, impresiones: 288820, clicks: 1959, ctr: 0.68, cpc: 0.05, cpm: 0.35, resultado_nombre: "Reproducciones", resultado_valor: 83958 },
-        { nombre: "La vida es un video juego", gasto: 19.63, impresiones: 49351, clicks: 923, ctr: 1.87, cpc: 0.02, cpm: 0.40, resultado_nombre: "Reproducciones", resultado_valor: 16209 },
-        { nombre: "Si el negocio paga todo", gasto: 0.35, impresiones: 891, clicks: 18, ctr: 2.02, cpc: 0.02, cpm: 0.39, resultado_nombre: "Reproducciones", resultado_valor: 246 }
+        { nombre: "Como es tener un negocio en RD", gasto: 97.82, impresiones: 275754, clicks: 1857, ctr: 0.67, cpc: 0.05, cpm: 0.35, resultado_nombre: "Reproducciones", resultado_valor: 80079 },
+        { nombre: "La vida es un video juego", gasto: 21.94, impresiones: 55320, clicks: 1020, ctr: 1.84, cpc: 0.02, cpm: 0.40, resultado_nombre: "Reproducciones", resultado_valor: 18059 },
+        { nombre: "Si el negocio paga todo", gasto: 0.36, impresiones: 919, clicks: 20, ctr: 2.18, cpc: 0.02, cpm: 0.39, resultado_nombre: "Reproducciones", resultado_valor: 256 }
       ]
     }
   ],
