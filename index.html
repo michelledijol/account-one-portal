@@ -162,6 +162,20 @@
   table.ad-table tr:last-child td { border-bottom:none; }
   .top-badge { display:inline-block; font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--good); background:var(--good-bg); padding:1px 6px; border-radius:5px; margin-left:6px; font-family:'Public Sans',sans-serif; }
 
+  .section-label { font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-muted); margin:0 0 10px; }
+  .trend-wrap { margin-top:18px; border-top:1px solid var(--border); padding-top:16px; }
+  table.trend-table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  table.trend-table th { text-align:left; font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--ink-muted); font-weight:600; padding:0 10px 8px; border-bottom:1px solid var(--border); }
+  table.trend-table td { padding:8px 10px; border-bottom:1px solid var(--border); font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; }
+  table.trend-table tr:last-child td { border-bottom:none; }
+  table.trend-table td.week-cell { font-family:'Public Sans',sans-serif; font-weight:500; color:var(--ink); }
+  .trend-bar-wrap { display:flex; align-items:center; gap:8px; }
+  .trend-bar-track { flex:1; height:6px; background:var(--surface-sunken); border-radius:3px; overflow:hidden; min-width:40px; }
+  .trend-bar-fill { height:100%; background:var(--cyan); border-radius:3px; }
+  .trend-delta { font-size:11px; font-weight:600; margin-left:8px; }
+  .trend-delta.up { color:var(--good); }
+  .trend-delta.down { color:var(--cardinal, #CF2127); }
+
   .creative-card.ranked { position:relative; }
   .creative-card .campaign-group-title { font-family:'Manrope',sans-serif; font-size:13px; font-weight:700; margin: 22px 0 10px; color:var(--ink-secondary); }
   .creative-card .metrics-row { display:flex; flex-wrap:wrap; gap:10px 16px; margin-top:10px; font-size:11.5px; }
@@ -275,6 +289,35 @@
       const ads = (c.ads || []).slice().sort((a, b) => b.gasto - a.gasto);
       const topSpendId = ads.length ? ads[0].nombre : null;
 
+      const trend = c.tendencia_semanal || [];
+      const trendMaxGasto = Math.max(1, ...trend.map(w => w.gasto));
+      const trendRows = trend.map((w, i) => {
+        const prev = i > 0 ? trend[i - 1] : null;
+        let deltaHtml = '';
+        if (prev && prev.gasto > 0) {
+          const deltaPct = Math.round(((w.gasto - prev.gasto) / prev.gasto) * 100);
+          if (deltaPct !== 0) {
+            const dir = deltaPct > 0 ? 'up' : 'down';
+            const arrow = deltaPct > 0 ? '▲' : '▼';
+            deltaHtml = `<span class="trend-delta ${dir}">${arrow} ${Math.abs(deltaPct)}%</span>`;
+          }
+        }
+        return `
+        <tr>
+          <td class="week-cell">${w.semana}</td>
+          <td>
+            <div class="trend-bar-wrap">
+              <div class="trend-bar-track"><div class="trend-bar-fill" style="width:${Math.round((w.gasto / trendMaxGasto) * 100)}%"></div></div>
+              <span>${fmtMoney(w.gasto)}</span>${deltaHtml}
+            </div>
+          </td>
+          <td>${fmtInt(w.impresiones)}</td>
+          <td>${fmtInt(w.alcance)}</td>
+          <td>${w.resultado_valor !== null && w.resultado_valor !== undefined ? fmtInt(w.resultado_valor) : '—'}</td>
+        </tr>
+      `;
+      }).join('');
+
       const adRows = ads.map(ad => `
         <tr>
           <td class="name-cell">${ad.nombre}${ad.nombre === topSpendId ? '<span class="top-badge">Mayor gasto</span>' : ''}</td>
@@ -316,6 +359,16 @@
           </div>` : ''}
           <div class="reco"><span class="tag">Recomendación</span><span>${c.recomendacion}</span></div>
           <div class="ad-table-wrap">
+            ${trend.length ? `
+            <div class="trend-wrap">
+              <p class="section-label">Tendencia semanal</p>
+              <table class="trend-table">
+                <thead><tr>
+                  <th>Semana</th><th>Gasto</th><th>Impr.</th><th>Alcance</th><th>${m.resultado_nombre || 'Resultado'}</th>
+                </tr></thead>
+                <tbody>${trendRows}</tbody>
+              </table>
+            </div>` : ''}
             <table class="ad-table">
               <thead><tr>
                 <th>Anuncio</th><th>Gasto</th><th>Impr.</th><th>Clics</th><th>CTR</th><th>CPC</th><th>Resultado</th>

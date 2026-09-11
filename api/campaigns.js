@@ -60,6 +60,9 @@ const SNAPSHOT = {
       },
       recomendacion:
         "Subió a 3 citas agendadas (costo por resultado bajó a $26.74). \"Operando a ciegas\" sigue siendo el creativo dominante en gasto ($61.17, CTR 2.88%) y el que sigue trayendo las citas. \"Scrolling (17%)\" mantiene buen CTR (3.79%) pero todavía sin citas atribuidas directamente.",
+      tendencia_semanal: [
+        { semana: "4–10 sep", gasto: 80.22, impresiones: 8857, alcance: 4525, resultado_valor: 3 }
+      ],
       ads: [
         { nombre: "Operando a ciegas", gasto: 61.17, impresiones: 6115, clicks: 176, ctr: 2.88, cpc: 0.35, cpm: 10.00, resultado_nombre: "Citas agendadas", resultado_valor: 3 },
         { nombre: "Scrolling (17%)", gasto: 12.11, impresiones: 1899, clicks: 72, ctr: 3.79, cpc: 0.17, cpm: 6.38, resultado_nombre: null, resultado_valor: null },
@@ -90,6 +93,11 @@ const SNAPSHOT = {
       },
       recomendacion:
         "Se mantiene en 2 citas agendadas (costo por resultado $44.51). \"Dia 1 llevando Account One de 30 a 100\" sigue concentrando el mayor gasto ($58.46) y buen CTR (4.79%) — sigue siendo el creativo a vigilar para las próximas citas.",
+      tendencia_semanal: [
+        { semana: "21–27 ago", gasto: 3.63, impresiones: 1213, alcance: 964, resultado_valor: null },
+        { semana: "28 ago–3 sep", gasto: 45.25, impresiones: 13169, alcance: 7609, resultado_valor: 2 },
+        { semana: "4–10 sep", gasto: 40.13, impresiones: 8374, alcance: 5307, resultado_valor: null }
+      ],
       ads: [
         { nombre: "Dia 1 llevando Account One de 30 a 100", gasto: 58.46, impresiones: 13667, clicks: 655, ctr: 4.79, cpc: 0.09, cpm: 4.28, resultado_nombre: "Citas agendadas", resultado_valor: 2 },
         { nombre: "Que hacemos en Account One mejor que en otras firmas", gasto: 11.91, impresiones: 3289, clicks: 139, ctr: 4.23, cpc: 0.09, cpm: 3.62, resultado_nombre: null, resultado_valor: null },
@@ -120,6 +128,12 @@ const SNAPSHOT = {
       },
       recomendacion:
         "\"La llamada\" sigue concentrando el mayor gasto y es por lejos el mejor creativo (CPM $0.50). Las variantes de imagen estática (Carrusel/Arte) siguen con CTR bajo (0.15–0.20%) — solo aportan alcance. Con Consideración y Ready to Buy ya armadas, esta campaña sigue cumpliendo su rol de generar el público para retargeting. Cierra el 30 de septiembre.",
+      tendencia_semanal: [
+        { semana: "14–20 ago", gasto: 5.39, impresiones: 28184, alcance: 25170, resultado_valor: null },
+        { semana: "21–27 ago", gasto: 95.30, impresiones: 281471, alcance: 147906, resultado_valor: null },
+        { semana: "28 ago–3 sep", gasto: 39.02, impresiones: 157010, alcance: 87792, resultado_valor: null },
+        { semana: "4–10 sep", gasto: 12.82, impresiones: 28071, alcance: 25683, resultado_valor: null }
+      ],
       ads: [
         { nombre: "La llamada", gasto: 89.01, impresiones: 179677, clicks: 2458, ctr: 1.37, cpc: 0.04, cpm: 0.50, resultado_nombre: null, resultado_valor: null },
         { nombre: "Carrusel sera una de ellas", gasto: 42.06, impresiones: 206413, clicks: 351, ctr: 0.17, cpc: 0.12, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 79470 },
@@ -153,6 +167,12 @@ const SNAPSHOT = {
       },
       recomendacion:
         "\"Como es tener un negocio en RD\" sigue liderando el gasto (CPM $0.36), aunque va bajando de peso relativo. \"La vida es un video juego\" mantiene el CTR más alto (1.77%) y sigue ganando presupuesto semana a semana — buen candidato para diversificar más allá del creativo dominante.",
+      tendencia_semanal: [
+        { semana: "14–20 ago", gasto: 29.16, impresiones: 79352, alcance: 73658, resultado_valor: 22794 },
+        { semana: "21–27 ago", gasto: 27.61, impresiones: 73651, alcance: 67857, resultado_valor: 22306 },
+        { semana: "28 ago–3 sep", gasto: 28.91, impresiones: 76026, alcance: 70942, resultado_valor: 22777 },
+        { semana: "4–10 sep", gasto: 27.34, impresiones: 74453, alcance: 64265, resultado_valor: 22234 }
+      ],
       ads: [
         { nombre: "Como es tener un negocio en RD", gasto: 86.04, impresiones: 236146, clicks: 1600, ctr: 0.68, cpc: 0.05, cpm: 0.36, resultado_nombre: null, resultado_valor: null },
         { nombre: "La vida es un video juego", gasto: 26.58, impresiones: 66273, clicks: 1170, ctr: 1.77, cpc: 0.02, cpm: 0.40, resultado_nombre: null, resultado_valor: null },
