@@ -8,9 +8,9 @@ const GRAPH_VERSION = "v20.0";
 
 const SNAPSHOT = {
   modo: "snapshot",
-  actualizado: "2026-09-11T18:10:00+02:00",
+  actualizado: "2026-09-11T19:05:00+02:00",
   resumen: {
-    campanas_activas: 4,
+    campanas_activas: 5,
     invertido_total: 434.77,
     leads: 5,
     alcance_combinado: 484322
@@ -19,11 +19,11 @@ const SNAPSHOT = {
     {
       id: "120252187070040560",
       nombre: "FE 3% Ready to Buy: Retargeting Caliente",
-      estado: "ARMADA, FALTA ACTIVAR",
+      estado: "ACTIVE",
       objetivo: "Leads (etapa 3 — Ready to Buy del funnel FE)",
-      inicio: null,
+      inicio: "2026-09-11",
       presupuesto_diario: null,
-      ventana: "Ad set y 6 anuncios ya aprobados y en ACTIVE — el interruptor de la campaña sigue en pausa",
+      ventana: "Encendida el 11 de septiembre — todavía sin impresiones registradas (normal en las primeras horas)",
       metricas: {
         gasto: 0,
         impresiones: 0,
@@ -36,7 +36,7 @@ const SNAPSHOT = {
         resultado_valor: null
       },
       recomendacion:
-        "Construida siguiendo el plan de Félix: retargeting a quienes vieron 25%+ de los videos de Consideración + visitantes de la landing que no dejaron el formulario, excluyendo clientes y quienes ya agendaron. República Dominicana completa. Presupuesto $358.40 total hasta el 10 de octubre, mismo cierre que Consideración. El ad set (\"Retargeting Caliente\") y los 6 anuncios (Doña v2, Cupo v2, Te lo voy a decir v2, video B-01, y las artes de \"180,000 empresas\" y \"Desde el 31 de diciembre\") ya pasaron la revisión de Meta y están en ACTIVE — pero la campaña en sí todavía está en pausa, así que no está gastando. Falta un solo switch en Ads Manager (el de la campaña, no el del ad set) para que empiece a correr.",
+        "Ya está ACTIVE de punta a punta (campaña, ad set y los 6 anuncios). Construida siguiendo el plan de Félix: retargeting a quienes vieron 25%+ de los videos de Consideración + visitantes de la landing que no dejaron el formulario, excluyendo clientes y quienes ya agendaron. República Dominicana completa. Presupuesto $358.40 total hasta el 10 de octubre, mismo cierre que Consideración. Anuncios: Doña v2, Cupo v2, Te lo voy a decir v2, video B-01, y las artes de \"180,000 empresas\" y \"Desde el 31 de diciembre\". Todavía en $0 y sin impresiones — normal recién encendida, debería empezar a entregar en las próximas horas. Revisar en 2-3 días para ver qué creativo está tirando del gasto.",
       ads: []
     },
     {
@@ -168,7 +168,7 @@ const SNAPSHOT = {
     completado: [
       "Se lanzó la campaña de Consideración (retargeting) del funnel FE: \"FE 17% Consideración: Leads Septiembre\", el 4 de septiembre. Ya va en 3 citas agendadas.",
       "Se leyó el plan oficial de Félix (\"Plan Funnel FE Septiembre 2026\") y se armó la etapa 3 — Ready to Buy — siguiendo esa estructura exacta: retargeting a quienes vieron 25%+ de los videos de Consideración + visitantes de la landing sin lead, excluyendo clientes/agendados, RD completa, $358.40 hasta el 10 de octubre (mismo cierre que Consideración).",
-      "Se armó el ad set de Ready to Buy y sus 6 anuncios en Meta Ads Manager (Doña v2, Cupo v2, Te lo voy a decir v2, video B-01, y las artes de \"180,000 empresas\" y \"Desde el 31 de diciembre\") — ya pasaron la revisión de Meta y están en ACTIVE.",
+      "Se armó, aprobó y encendió la campaña completa de Ready to Buy en Meta Ads Manager: campaña, ad set y sus 6 anuncios (Doña v2, Cupo v2, Te lo voy a decir v2, video B-01, y las artes de \"180,000 empresas\" y \"Desde el 31 de diciembre\") ya están en ACTIVE de punta a punta — etapa 3 del funnel FE queda completa y corriendo (11 de septiembre).",
       "Se verificó en vivo la oferta real de la landing (accountone.io/citas2-8041) antes de escribir el copy: 25% de descuento, $375 en vez de $500, válido hasta el 30 de septiembre.",
       "Se recibió el sistema de diseño de marca oficial de Account One (logos, paleta, tipografía Poppins) y se usó para diseñar 4 artes estáticas de Ready to Buy — cierre, oferta/riesgo B-01, simplicidad, y urgencia (180k empresas) — cada una con su copy de anuncio.",
       "Se decidió no producir el set completo de 3 artes + 3 carruseles por campaña que pedía el plan original para Reconocimiento y Consideración — ya había mucho contenido compitiendo entre sí en esas etapas, así que se priorizó calidad sobre cantidad.",
@@ -178,7 +178,7 @@ const SNAPSHOT = {
       "Se restableció el acceso de escritura al portal (token de GitHub) para poder seguir actualizándolo directo."
     ],
     pendientes: [
-      "Activar la campaña de Ready to Buy en Ads Manager — el ad set y los 6 anuncios ya están en ACTIVE, pero el interruptor de la campaña en sí sigue en pausa, así que todavía no está gastando.",
+      "Revisar Ready to Buy en 2–3 días para confirmar que ya está entregando (recién encendida, todavía en $0 y sin impresiones) y ver qué creativo está tirando del gasto.",
       "Pausar el anuncio de la oferta 25%/B-01 el 30 de septiembre — después de esa fecha el precio y el dato de comprobantes B-01 dejan de ser exactos y hay que revisar el copy.",
       "Completar la verificación de negocio (Business Verification) en el Business Manager de Meta para desbloquear el acceso a datos en vivo del portal."
     ],
@@ -186,7 +186,7 @@ const SNAPSHOT = {
       "Posible refresco de creativos de Awareness si la frecuencia sube (fatiga de anuncio)."
     ],
     proximos_pasos: [
-      "Activar la campaña de Ready to Buy — es el único paso que falta para que la etapa 3 del funnel FE quede completa y corriendo.",
+      "Monitorear el arranque de Ready to Buy en los próximos días — las 3 etapas del funnel FE ya están corriendo en paralelo.",
       "Pausar el anuncio de oferta B-01/25% el 30 de septiembre.",
       "Evaluar la campaña de Contabilidad en 7–10 días antes de subir presupuesto."
     ]
