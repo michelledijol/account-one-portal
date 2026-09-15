@@ -223,6 +223,7 @@ const SNAPSHOT = {
       "Posible refresco de creativos de Awareness si la frecuencia sube (fatiga de anuncio)."
     ],
     proximos_pasos: [
+      "Planificar webinars quincenales del 30 de septiembre al 7 de noviembre — definir landing de registro, campaña de promoción en Meta Ads y calendario de fechas exactas.",
       "Evaluar si el salto de Consideración y Contabilidad esta semana fue puntual o es una tendencia — revisar en 3-4 días con más datos.",
       "Pausar el anuncio de oferta B-01/25% el 30 de septiembre.",
       "Evaluar la campaña de Contabilidad en 7–10 días antes de subir presupuesto."
