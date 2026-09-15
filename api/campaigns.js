@@ -23,11 +23,14 @@ const SNAPSHOT = {
       objetivo: "Leads (etapa 3 — Ready to Buy del funnel FE)",
       inicio: "2026-09-11",
       presupuesto_diario: null,
+      presupuesto_mensual: { sep: 358.40, oct: 537.60 },
       ventana: "Encendida el 11 de septiembre — 4 días activa",
       metricas: {
         gasto: 60.78,
         impresiones: 8670,
         clicks: 246,
+        clics_enlace: 153,
+        vistas_landing: 87,
         ctr: 2.84,
         cpc: 0.25,
         cpm: 7.01,
@@ -56,11 +59,14 @@ const SNAPSHOT = {
       objetivo: "Leads (etapa 2 — Consideración del funnel FE)",
       inicio: "2026-09-04",
       presupuesto_diario: null,
+      presupuesto_mensual: { sep: 358.40, oct: 537.60 },
       ventana: "Desde su lanzamiento (4 sep 2026) hasta hoy",
       metricas: {
         gasto: 129.06,
         impresiones: 13646,
         clicks: 405,
+        clics_enlace: 259,
+        vistas_landing: 159,
         ctr: 2.97,
         cpc: 0.32,
         cpm: 9.46,
@@ -125,11 +131,14 @@ const SNAPSHOT = {
       objetivo: "Reconocimiento de marca (etapa 1 del funnel FE)",
       inicio: "2026-08-20",
       presupuesto_diario: null,
+      presupuesto_mensual: { sep: 179.20, oct: 268.80 },
       ventana: "Desde su lanzamiento (20 ago 2026) hasta hoy",
       metricas: {
         gasto: 160.08,
         impresiones: 509640,
         clicks: 3315,
+        clics_enlace: 693,
+        vistas_landing: 155,
         ctr: 0.65,
         cpc: 0.05,
         cpm: 0.31,
@@ -210,7 +219,8 @@ const SNAPSHOT = {
       "Se restableció el acceso de escritura al portal (token de GitHub) para poder seguir actualizándolo directo.",
       "Se agregó tendencia semanal (gasto, impresiones, alcance, resultado) a cada campaña dentro del portal, visible al expandir la tarjeta.",
       "Se entregó a Félix un reporte formal por campaña en Word, con resumen ejecutivo, roadmap y detalle semanal por creativo.",
-      "Ready to Buy ya confirmó resultados: 4 leads en sus primeros 4 días activa ($15.20 costo por lead). Consideración pegó un salto fuerte (3 → 8 citas, costo por resultado de $26.74 a $16.13) y Contabilidad subió de 2 a 6 citas (costo por resultado de ~$44 a $19.22)."
+      "Ready to Buy ya confirmó resultados: 4 leads en sus primeros 4 días activa ($15.20 costo por lead). Consideración pegó un salto fuerte (3 → 8 citas, costo por resultado de $26.74 a $16.13) y Contabilidad subió de 2 a 6 citas (costo por resultado de ~$44 a $19.22).",
+      "Se agregó al portal el embudo detallado de Facturación Electrónica (Reconocimiento → Consideración → Ready to Buy): impresiones, alcance, clics, vistas de landing y resultado por etapa, con el presupuesto mensual acordado con Félix en cada campaña. Se actualiza solo con cada refresco de datos."
     ],
     pendientes: [
       "Todavía no hay visibilidad de ventas/contratos cerrados — los 18 leads/citas agendadas del funnel FE + Contabilidad son lo máximo que mide Meta Ads (llega hasta la cita agendada). Falta que Félix comparta desde su CRM/GHL cuántas de esas citas se convirtieron en cliente, para poder medir el resultado real del negocio y no solo el volumen de leads.",
@@ -244,6 +254,16 @@ function fmtFechaEs(isoDate) {
 function todayISO() {
   return new Date().toISOString().slice(0, 10);
 }
+
+// Fixed monthly budgets agreed with Félix for the 3-stage FE funnel
+// ("Plan Funnel FE Septiembre 2026") — not derivable from the API since
+// budget is set at ad-set level and this is the plan figure, not the
+// account's live daily_budget. Same map used in snapshot and live mode.
+const FE_PRESUPUESTOS = {
+  "120251858423240560": { sep: 179.20, oct: 268.80 }, // Reconocimiento (20%)
+  "120252085024140560": { sep: 358.40, oct: 537.60 }, // Consideración (40%)
+  "120252187070040560": { sep: 358.40, oct: 537.60 }  // Ready to Buy (40%)
+};
 
 // Best-effort mapping from Meta's "actions" array to a human result label.
 // Ordered by priority: the first matching action type found wins.
@@ -298,7 +318,7 @@ async function fetchLive(token, adAccountId) {
 
       const [insightsResp, adInsightsResp] = await Promise.all([
         metaGet(`${c.id}/insights`, token, {
-          fields: "spend,impressions,clicks,ctr,cpc,cpm,reach,actions",
+          fields: "spend,impressions,clicks,ctr,cpc,cpm,reach,actions,link_click,landing_page_view",
           time_range: timeRange
         }).catch(() => ({ data: [] })),
         metaGet(`${c.id}/insights`, token, {
@@ -336,11 +356,14 @@ async function fetchLive(token, adAccountId) {
         objetivo: c.objective || null,
         inicio: since,
         presupuesto_diario: c.daily_budget ? Number(c.daily_budget) / 100 : null,
+        presupuesto_mensual: FE_PRESUPUESTOS[c.id] || null,
         ventana: `Desde su lanzamiento (${fmtFechaEs(since)}) hasta hoy`,
         metricas: {
           gasto: Number(row.spend || 0),
           impresiones: Number(row.impressions || 0),
           clicks: Number(row.clicks || 0),
+          clics_enlace: Number(row.link_click || 0),
+          vistas_landing: Number(row.landing_page_view || 0),
           ctr: Number(row.ctr || 0),
           cpc: row.cpc ? Number(row.cpc) : null,
           cpm: Number(row.cpm || 0),

@@ -186,6 +186,27 @@
 
   .loading { font-size:13px; color:var(--ink-muted); padding: 20px 0; }
 
+  .embudo-wrap { margin-bottom: 28px; }
+  .embudo-intro { font-size:13px; color:var(--ink-muted); margin: -6px 0 18px; }
+  .embudo-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-bottom: 10px; }
+  .embudo-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); padding:20px 22px; }
+  .embudo-card h4 { font-family:'Manrope',sans-serif; font-size:15px; font-weight:700; margin:0 0 2px; }
+  .embudo-card .embudo-obj { font-size:11.5px; color:var(--ink-muted); margin-bottom:2px; }
+  .embudo-card .embudo-budget { font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-secondary); margin-bottom:14px; }
+  .embudo-card .embudo-budget b { color: var(--ink); }
+  .embudo-stage { margin-bottom: 11px; }
+  .embudo-stage-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:3px; }
+  .embudo-stage-label { font-size:11.5px; color:var(--ink-muted); }
+  .embudo-stage-val { font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; }
+  .embudo-track { background:var(--surface-sunken); border-radius:5px; height:16px; overflow:hidden; }
+  .embudo-fill { height:100%; border-radius:5px; background:linear-gradient(90deg,var(--navy),var(--cyan)); }
+  .embudo-drop { font-size:10.5px; color:var(--ink-muted); margin-top:2px; }
+  .embudo-result { margin-top:12px; padding-top:12px; border-top:1px solid var(--border); font-size:12.5px; font-weight:700; color:var(--navy); }
+  :root[data-theme="dark"] .embudo-result,
+  @media (prefers-color-scheme: dark) { .embudo-result { color: var(--cyan); } }
+  .embudo-result span { font-weight:400; color:var(--ink-muted); }
+  .embudo-note { background:var(--surface-sunken); border:1px solid var(--border); border-radius:12px; padding:14px 18px; font-size:12.5px; color:var(--ink-secondary); line-height:1.55; margin-bottom:8px; }
+
   @media (max-width:640px) {
     .summary { grid-template-columns:repeat(2,1fr); }
     .meta { text-align:left; }
@@ -230,7 +251,11 @@
   </section>
 
   <section id="panel-funnel" class="panel">
-    <h2 class="section-title">Estado del funnel / GHL</h2>
+    <h2 class="section-title">Embudo Facturación Electrónica</h2>
+    <p class="embudo-intro">De impresión a cita agendada, etapa por etapa. Se actualiza solo con los datos de cada campaña.</p>
+    <div id="embudo-fe"><div class="loading">Cargando embudo…</div></div>
+
+    <h2 class="section-title" style="margin-top:32px;">Estado del funnel / GHL</h2>
     <div id="funnel-status"><div class="loading">Verificando conexión…</div></div>
   </section>
 
@@ -409,6 +434,73 @@
     document.getElementById('creative-grid-wrap').innerHTML = groups;
   }
 
+  // The 3 campaigns that make up the FE funnel, in top-to-bottom stage order.
+  const FE_FUNNEL_IDS = ["120251858423240560", "120252085024140560", "120252187070040560"];
+
+  function renderEmbudoFE(data) {
+    const wrap = document.getElementById('embudo-fe');
+    if (!wrap) return;
+    const byId = {};
+    (data.campanas || []).forEach(c => { byId[c.id] = c; });
+    const campaigns = FE_FUNNEL_IDS.map(id => byId[id]).filter(Boolean);
+    if (!campaigns.length) {
+      wrap.innerHTML = '<div class="loading">No se encontraron las campañas del funnel FE en los datos actuales.</div>';
+      return;
+    }
+
+    const cards = campaigns.map(c => {
+      const m = c.metricas || {};
+      const stages = [
+        { label: 'Impresiones', val: m.impresiones },
+        { label: 'Alcance (únicos)', val: m.alcance },
+        { label: 'Clics al enlace', val: m.clics_enlace != null ? m.clics_enlace : m.clicks },
+        { label: 'Vistas de landing', val: m.vistas_landing }
+      ];
+      if (m.resultado_nombre) stages.push({ label: m.resultado_nombre, val: m.resultado_valor });
+
+      const maxVal = Math.max(1, ...stages.map(s => s.val || 0));
+      const stageHtml = stages.map((s, i) => {
+        const v = s.val || 0;
+        const widthPct = Math.max(6, 100 * Math.log10(v + 1) / Math.log10(maxVal + 1));
+        let dropHtml = '';
+        if (i > 0) {
+          const prevVal = stages[i - 1].val || 0;
+          const pct = prevVal > 0 ? (v / prevVal * 100) : 0;
+          dropHtml = `<div class="embudo-drop">${pct.toFixed(pct < 10 ? 1 : 0)}% de la etapa anterior</div>`;
+        }
+        return `
+          <div class="embudo-stage">
+            <div class="embudo-stage-top"><span class="embudo-stage-label">${s.label}</span><span class="embudo-stage-val">${fmtInt(v)}</span></div>
+            <div class="embudo-track"><div class="embudo-fill" style="width:${widthPct.toFixed(1)}%"></div></div>
+            ${dropHtml}
+          </div>
+        `;
+      }).join('');
+
+      const p = c.presupuesto_mensual;
+      const budgetHtml = p
+        ? `Presupuesto: <b>${fmtMoney(p.sep)}/mes</b> (sept) → ${fmtMoney(p.oct)}/mes en oct · gastado hasta hoy: <b>${fmtMoney(m.gasto)}</b>`
+        : `Gastado hasta hoy: <b>${fmtMoney(m.gasto)}</b>`;
+
+      const costoResultado = m.resultado_nombre && m.resultado_valor ? (m.gasto / m.resultado_valor) : null;
+
+      return `
+        <div class="embudo-card">
+          <h4>${c.nombre}</h4>
+          <div class="embudo-obj">${c.objetivo || ''}</div>
+          <div class="embudo-budget">${budgetHtml}</div>
+          ${stageHtml}
+          <div class="embudo-result">${costoResultado ? fmtMoney(costoResultado) : '—'} <span>${costoResultado ? `costo por ${(m.resultado_nombre || 'resultado').toLowerCase()}` : 'sin resultado de conversión en esta etapa — alimenta la audiencia de la siguiente'}</span></div>
+        </div>
+      `;
+    }).join('');
+
+    wrap.innerHTML = `
+      <div class="embudo-grid">${cards}</div>
+      <div class="embudo-note">Las 3 etapas están encadenadas: Reconocimiento construye la audiencia para retargeting, Consideración retarguetea con contenido de comparación/educación, y Ready to Buy retarguetea en caliente a quienes ya interactuaron. Por eso el volumen baja en cada etapa — cada una parte de un público más chico y calificado que la anterior.</div>
+    `;
+  }
+
   function renderRoadmap(data) {
     const r = data.roadmap;
     if (!r) { document.getElementById('roadmap').innerHTML = ''; return; }
@@ -463,6 +555,7 @@
       renderSummary(data);
       renderCampaigns(data);
       renderCreatives(data);
+      renderEmbudoFE(data);
       renderRoadmap(data);
       renderHistorico(data);
     } catch (e) {
