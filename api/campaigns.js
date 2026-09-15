@@ -8,12 +8,12 @@ const GRAPH_VERSION = "v20.0";
 
 const SNAPSHOT = {
   modo: "snapshot",
-  actualizado: "2026-09-11T19:05:00+02:00",
+  actualizado: "2026-09-15T12:20:00+02:00",
   resumen: {
     campanas_activas: 5,
-    invertido_total: 434.77,
-    leads: 5,
-    alcance_combinado: 484322
+    invertido_total: 586.79,
+    leads: 18,
+    alcance_combinado: 508106
   },
   campanas: [
     {
@@ -23,21 +23,31 @@ const SNAPSHOT = {
       objetivo: "Leads (etapa 3 — Ready to Buy del funnel FE)",
       inicio: "2026-09-11",
       presupuesto_diario: null,
-      ventana: "Encendida el 11 de septiembre — todavía sin impresiones registradas (normal en las primeras horas)",
+      ventana: "Encendida el 11 de septiembre — 4 días activa",
       metricas: {
-        gasto: 0,
-        impresiones: 0,
-        clicks: 0,
-        ctr: 0,
-        cpc: null,
-        cpm: 0,
-        alcance: 0,
-        resultado_nombre: null,
-        resultado_valor: null
+        gasto: 60.78,
+        impresiones: 8670,
+        clicks: 246,
+        ctr: 2.84,
+        cpc: 0.25,
+        cpm: 7.01,
+        alcance: 4789,
+        resultado_nombre: "Leads",
+        resultado_valor: 4
       },
+      tendencia_semanal: [
+        { semana: "9–15 sep", gasto: 60.78, impresiones: 8670, alcance: 4789, resultado_valor: 4 }
+      ],
       recomendacion:
-        "Ya está ACTIVE de punta a punta (campaña, ad set y los 6 anuncios). Construida siguiendo el plan de Félix: retargeting a quienes vieron 25%+ de los videos de Consideración + visitantes de la landing que no dejaron el formulario, excluyendo clientes y quienes ya agendaron. República Dominicana completa. Presupuesto $358.40 total hasta el 10 de octubre, mismo cierre que Consideración. Anuncios: Doña v2, Cupo v2, Te lo voy a decir v2, video B-01, y las artes de \"180,000 empresas\" y \"Desde el 31 de diciembre\". Todavía en $0 y sin impresiones — normal recién encendida, debería empezar a entregar en las próximas horas. Revisar en 2-3 días para ver qué creativo está tirando del gasto.",
-      ads: []
+        "Ya está entregando: 4 leads en sus primeros 4 días activa (costo por lead $15.20, el más caro de las 3 etapas del funnel, esperable siendo el público más caliente y pequeño). \"180,000 empresas-Imagen\" trae 2 de los 4 leads con el mejor CPM ($5.82). \"Cupo v2\" y \"Faltan 180,000 empresas\" aportan 1 cada uno. \"Doña v2\", \"Te lo voy a decir v2\" y \"Desde el 31 de diciembre\" todavía sin leads propios pero con gasto bajo — están apenas arrancando dentro del ad set.",
+      ads: [
+        { nombre: "180,000 empresas-Imagen", gasto: 14.53, impresiones: 2497, clicks: 77, ctr: 3.08, cpc: 0.19, cpm: 5.82, resultado_nombre: "Leads", resultado_valor: 2 },
+        { nombre: "Faltan 180,000 empresas", gasto: 25.78, impresiones: 3562, clicks: 92, ctr: 2.58, cpc: 0.28, cpm: 7.24, resultado_nombre: "Leads", resultado_valor: 1 },
+        { nombre: "Cupo v2", gasto: 13.15, impresiones: 1754, clicks: 49, ctr: 2.79, cpc: 0.27, cpm: 7.50, resultado_nombre: "Leads", resultado_valor: 1 },
+        { nombre: "Te lo voy a decir v2", gasto: 4.47, impresiones: 515, clicks: 18, ctr: 3.50, cpc: 0.25, cpm: 8.68, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Doña vs 2", gasto: 2.34, impresiones: 243, clicks: 7, ctr: 2.88, cpc: 0.33, cpm: 9.63, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Desde el 31 de diciembre", gasto: 0.51, impresiones: 99, clicks: 3, ctr: 3.03, cpc: 0.17, cpm: 5.15, resultado_nombre: null, resultado_valor: null }
+      ]
     },
     {
       id: "120252085024140560",
@@ -48,28 +58,29 @@ const SNAPSHOT = {
       presupuesto_diario: null,
       ventana: "Desde su lanzamiento (4 sep 2026) hasta hoy",
       metricas: {
-        gasto: 80.22,
-        impresiones: 8857,
-        clicks: 265,
-        ctr: 2.99,
-        cpc: 0.30,
-        cpm: 9.06,
-        alcance: 4525,
+        gasto: 129.06,
+        impresiones: 13646,
+        clicks: 405,
+        ctr: 2.97,
+        cpc: 0.32,
+        cpm: 9.46,
+        alcance: 6559,
         resultado_nombre: "Citas agendadas",
-        resultado_valor: 3
+        resultado_valor: 8
       },
       recomendacion:
-        "Subió a 3 citas agendadas (costo por resultado bajó a $26.74). \"Operando a ciegas\" sigue siendo el creativo dominante en gasto ($61.17, CTR 2.88%) y el que sigue trayendo las citas. \"Scrolling (17%)\" mantiene buen CTR (3.79%) pero todavía sin citas atribuidas directamente.",
+        "Salto fuerte esta última semana: de 3 a 8 citas agendadas (costo por resultado bajó de $26.74 a $16.13). \"Operando a ciegas\" sigue siendo el creativo dominante en gasto ($107.71) y ahora acumula las 8 citas. \"Scrolling (17%)\" mantiene el mejor CTR (3.72%) pero sigue sin citas atribuidas directamente — buen candidato para escalar si el volumen de Operando a ciegas se estanca.",
       tendencia_semanal: [
-        { semana: "4–10 sep", gasto: 80.22, impresiones: 8857, alcance: 4525, resultado_valor: 3 }
+        { semana: "2–8 sep", gasto: 56.58, impresiones: 6723, alcance: 3558, resultado_valor: 0 },
+        { semana: "9–15 sep", gasto: 72.48, impresiones: 6923, alcance: 4458, resultado_valor: 8 }
       ],
       ads: [
-        { nombre: "Operando a ciegas", gasto: 61.17, impresiones: 6115, clicks: 176, ctr: 2.88, cpc: 0.35, cpm: 10.00, resultado_nombre: "Citas agendadas", resultado_valor: 3 },
-        { nombre: "Scrolling (17%)", gasto: 12.11, impresiones: 1899, clicks: 72, ctr: 3.79, cpc: 0.17, cpm: 6.38, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Hay empresarios", gasto: 5.31, impresiones: 547, clicks: 13, ctr: 2.38, cpc: 0.41, cpm: 9.71, resultado_nombre: null, resultado_valor: null },
-        { nombre: "garbage in garbage out - Estática", gasto: 1.08, impresiones: 172, clicks: 3, ctr: 1.74, cpc: 0.36, cpm: 6.28, resultado_nombre: null, resultado_valor: null },
-        { nombre: "4 formas de resolver FE - Estática", gasto: 0.43, impresiones: 87, clicks: 0, ctr: 0, cpc: null, cpm: 4.94, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Otros implementadores - Estática", gasto: 0.12, impresiones: 37, clicks: 1, ctr: 2.70, cpc: 0.12, cpm: 3.24, resultado_nombre: null, resultado_valor: null }
+        { nombre: "Operando a ciegas", gasto: 107.71, impresiones: 10647, clicks: 309, ctr: 2.90, cpc: 0.35, cpm: 10.12, resultado_nombre: "Citas agendadas", resultado_valor: 8 },
+        { nombre: "Scrolling (17%)", gasto: 13.03, impresiones: 1988, clicks: 74, ctr: 3.72, cpc: 0.18, cpm: 6.55, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Hay empresarios", gasto: 5.88, impresiones: 603, clicks: 14, ctr: 2.32, cpc: 0.42, cpm: 9.75, resultado_nombre: null, resultado_valor: null },
+        { nombre: "garbage in garbage out - Estática", gasto: 1.26, impresiones: 203, clicks: 4, ctr: 1.97, cpc: 0.32, cpm: 6.21, resultado_nombre: null, resultado_valor: null },
+        { nombre: "4 formas de resolver FE - Estática", gasto: 0.80, impresiones: 111, clicks: 1, ctr: 0.90, cpc: 0.80, cpm: 7.21, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Otros implementadores - Estática", gasto: 0.38, impresiones: 94, clicks: 3, ctr: 3.19, cpc: 0.13, cpm: 4.04, resultado_nombre: null, resultado_valor: null }
       ]
     },
     {
@@ -81,30 +92,30 @@ const SNAPSHOT = {
       presupuesto_diario: 6.0,
       ventana: "Desde su lanzamiento (27 ago 2026) hasta hoy",
       metricas: {
-        gasto: 89.01,
-        impresiones: 22756,
-        clicks: 1147,
-        ctr: 5.04,
-        cpc: 0.08,
-        cpm: 3.91,
-        alcance: 11215,
+        gasto: 115.31,
+        impresiones: 28524,
+        clicks: 1339,
+        ctr: 4.69,
+        cpc: 0.09,
+        cpm: 4.04,
+        alcance: 13305,
         resultado_nombre: "Citas agendadas",
-        resultado_valor: 2
+        resultado_valor: 6
       },
       recomendacion:
-        "Se mantiene en 2 citas agendadas (costo por resultado $44.51). \"Dia 1 llevando Account One de 30 a 100\" sigue concentrando el mayor gasto ($58.46) y buen CTR (4.79%) — sigue siendo el creativo a vigilar para las próximas citas.",
+        "Subió a 6 citas agendadas (costo por resultado bajó a $19.22, desde ~$44). \"Dia 1 llevando Account One de 30 a 100\" sigue concentrando el mayor gasto ($77.96) y ahora tiene 5 de las 6 citas — el creativo más consistente de la campaña.",
       tendencia_semanal: [
-        { semana: "21–27 ago", gasto: 3.63, impresiones: 1213, alcance: 964, resultado_valor: null },
-        { semana: "28 ago–3 sep", gasto: 45.25, impresiones: 13169, alcance: 7609, resultado_valor: 2 },
-        { semana: "4–10 sep", gasto: 40.13, impresiones: 8374, alcance: 5307, resultado_valor: null }
+        { semana: "26 ago–1 sep", gasto: 36.42, impresiones: 11561, alcance: 6810, resultado_valor: 3 },
+        { semana: "2–8 sep", gasto: 39.98, impresiones: 8569, alcance: 5493, resultado_valor: 1 },
+        { semana: "9–15 sep", gasto: 38.91, impresiones: 8394, alcance: 5801, resultado_valor: 2 }
       ],
       ads: [
-        { nombre: "Dia 1 llevando Account One de 30 a 100", gasto: 58.46, impresiones: 13667, clicks: 655, ctr: 4.79, cpc: 0.09, cpm: 4.28, resultado_nombre: "Citas agendadas", resultado_valor: 2 },
-        { nombre: "Que hacemos en Account One mejor que en otras firmas", gasto: 11.91, impresiones: 3289, clicks: 139, ctr: 4.23, cpc: 0.09, cpm: 3.62, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Comparativo Contadores", gasto: 8.55, impresiones: 3468, clicks: 255, ctr: 7.35, cpc: 0.03, cpm: 2.47, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Meet the Team", gasto: 7.72, impresiones: 1700, clicks: 73, ctr: 4.29, cpc: 0.11, cpm: 4.54, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Yo se que todavía usas excel (nuevo)", gasto: 0.95, impresiones: 197, clicks: 2, ctr: 1.02, cpc: 0.48, cpm: 4.82, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Tu ni sabes que tienes un tema de contabilidad", gasto: 1.42, impresiones: 435, clicks: 23, ctr: 5.29, cpc: 0.06, cpm: 3.26, resultado_nombre: null, resultado_valor: null }
+        { nombre: "Dia 1 llevando Account One de 30 a 100", gasto: 77.96, impresiones: 18064, clicks: 814, ctr: 4.51, cpc: 0.10, cpm: 4.32, resultado_nombre: "Citas agendadas", resultado_valor: 5 },
+        { nombre: "Que hacemos en Account One mejor que en otras firmas", gasto: 14.80, impresiones: 3722, clicks: 154, ctr: 4.14, cpc: 0.10, cpm: 3.98, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Comparativo Contadores", gasto: 8.85, impresiones: 3528, clicks: 256, ctr: 7.26, cpc: 0.03, cpm: 2.51, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Meet the Team", gasto: 9.09, impresiones: 2075, clicks: 82, ctr: 3.95, cpc: 0.11, cpm: 4.38, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Yo se que todavía usas excel (nuevo)", gasto: 1.02, impresiones: 209, clicks: 3, ctr: 1.44, cpc: 0.34, cpm: 4.88, resultado_nombre: "Citas agendadas", resultado_valor: 1 },
+        { nombre: "Tu ni sabes que tienes un tema de contabilidad", gasto: 3.59, impresiones: 926, clicks: 30, ctr: 3.24, cpc: 0.12, cpm: 3.88, resultado_nombre: null, resultado_valor: null }
       ]
     },
     {
@@ -116,34 +127,34 @@ const SNAPSHOT = {
       presupuesto_diario: null,
       ventana: "Desde su lanzamiento (20 ago 2026) hasta hoy",
       metricas: {
-        gasto: 152.52,
-        impresiones: 494735,
-        clicks: 3131,
-        ctr: 0.63,
+        gasto: 160.08,
+        impresiones: 509640,
+        clicks: 3315,
+        ctr: 0.65,
         cpc: 0.05,
         cpm: 0.31,
-        alcance: 228129,
+        alcance: 233031,
         resultado_nombre: null,
         resultado_valor: null
       },
       recomendacion:
-        "\"La llamada\" sigue concentrando el mayor gasto y es por lejos el mejor creativo (CPM $0.50). Las variantes de imagen estática (Carrusel/Arte) siguen con CTR bajo (0.15–0.20%) — solo aportan alcance. Con Consideración y Ready to Buy ya armadas, esta campaña sigue cumpliendo su rol de generar el público para retargeting. Cierra el 30 de septiembre.",
+        "\"La llamada\" sigue concentrando el mayor gasto y es por lejos el mejor creativo (CPM $0.50). Las variantes de imagen estática (Carrusel/Arte) siguen con CTR bajo (0.15–0.20%) — solo aportan alcance. Con Consideración y Ready to Buy ya armadas y entregando leads, esta campaña sigue cumpliendo su rol de generar el público para retargeting. Cierra el 30 de septiembre.",
       tendencia_semanal: [
-        { semana: "14–20 ago", gasto: 5.39, impresiones: 28184, alcance: 25170, resultado_valor: null },
-        { semana: "21–27 ago", gasto: 95.30, impresiones: 281471, alcance: 147906, resultado_valor: null },
-        { semana: "28 ago–3 sep", gasto: 39.02, impresiones: 157010, alcance: 87792, resultado_valor: null },
-        { semana: "4–10 sep", gasto: 12.82, impresiones: 28071, alcance: 25683, resultado_valor: null }
+        { semana: "19–25 ago", gasto: 78.73, impresiones: 245728, alcance: 141151, resultado_valor: null },
+        { semana: "26 ago–1 sep", gasto: 55.68, impresiones: 201372, alcance: 105926, resultado_valor: null },
+        { semana: "2–8 sep", gasto: 14.55, impresiones: 40252, alcance: 34153, resultado_valor: null },
+        { semana: "9–15 sep", gasto: 11.12, impresiones: 22288, alcance: 20132, resultado_valor: null }
       ],
       ads: [
-        { nombre: "La llamada", gasto: 89.01, impresiones: 179677, clicks: 2458, ctr: 1.37, cpc: 0.04, cpm: 0.50, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Carrusel sera una de ellas", gasto: 42.06, impresiones: 206413, clicks: 351, ctr: 0.17, cpc: 0.12, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 79470 },
-        { nombre: "Carrusel mexico", gasto: 6.71, impresiones: 38783, clicks: 78, ctr: 0.20, cpc: 0.09, cpm: 0.17, resultado_nombre: "Alcance", resultado_valor: 25235 },
-        { nombre: "Carrusel la llamada", gasto: 4.46, impresiones: 22614, clicks: 43, ctr: 0.19, cpc: 0.10, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 16321 },
-        { nombre: "mexico", gasto: 2.91, impresiones: 8960, clicks: 109, ctr: 1.22, cpc: 0.03, cpm: 0.32, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Arte mexico", gasto: 2.88, impresiones: 13993, clicks: 21, ctr: 0.15, cpc: 0.14, cpm: 0.21, resultado_nombre: "Alcance", resultado_valor: 10697 },
-        { nombre: "Arte la llamada", gasto: 2.17, impresiones: 11115, clicks: 20, ctr: 0.18, cpc: 0.11, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 8585 },
-        { nombre: "Arte tu empresa sera una de ellas", gasto: 1.68, impresiones: 9558, clicks: 17, ctr: 0.18, cpc: 0.10, cpm: 0.18, resultado_nombre: "Alcance", resultado_valor: 8699 },
-        { nombre: "\"Tu empresa será una de ellas?\"", gasto: 0.64, impresiones: 3622, clicks: 34, ctr: 0.94, cpc: 0.02, cpm: 0.18, resultado_nombre: null, resultado_valor: null }
+        { nombre: "La llamada", gasto: 96.39, impresiones: 194093, clicks: 2628, ctr: 1.35, cpc: 0.04, cpm: 0.50, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Carrusel sera una de ellas", gasto: 42.06, impresiones: 206413, clicks: 351, ctr: 0.17, cpc: 0.12, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 86449 },
+        { nombre: "Carrusel mexico", gasto: 6.71, impresiones: 38783, clicks: 78, ctr: 0.20, cpc: 0.09, cpm: 0.17, resultado_nombre: "Alcance", resultado_valor: 26156 },
+        { nombre: "Carrusel la llamada", gasto: 4.46, impresiones: 22614, clicks: 43, ctr: 0.19, cpc: 0.10, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 16500 },
+        { nombre: "mexico", gasto: 3.09, impresiones: 9425, clicks: 122, ctr: 1.29, cpc: 0.03, cpm: 0.33, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Arte mexico", gasto: 2.88, impresiones: 13993, clicks: 21, ctr: 0.15, cpc: 0.14, cpm: 0.21, resultado_nombre: "Alcance", resultado_valor: 11094 },
+        { nombre: "Arte la llamada", gasto: 2.17, impresiones: 11115, clicks: 20, ctr: 0.18, cpc: 0.11, cpm: 0.20, resultado_nombre: "Alcance", resultado_valor: 8612 },
+        { nombre: "Arte tu empresa sera una de ellas", gasto: 1.68, impresiones: 9558, clicks: 17, ctr: 0.18, cpc: 0.10, cpm: 0.18, resultado_nombre: "Alcance", resultado_valor: 8716 },
+        { nombre: "\"Tu empresa será una de ellas?\"", gasto: 0.64, impresiones: 3646, clicks: 35, ctr: 0.96, cpc: 0.02, cpm: 0.18, resultado_nombre: null, resultado_valor: null }
       ]
     },
     {
@@ -155,28 +166,28 @@ const SNAPSHOT = {
       presupuesto_diario: 4.0,
       ventana: "Últimos 30 días (campaña de largo plazo)",
       metricas: {
-        gasto: 113.02,
-        impresiones: 303479,
-        clicks: 2796,
-        ctr: 0.92,
+        gasto: 121.56,
+        impresiones: 322064,
+        clicks: 3137,
+        ctr: 0.97,
         cpc: 0.04,
-        cpm: 0.37,
-        alcance: 240453,
+        cpm: 0.38,
+        alcance: 250422,
         resultado_nombre: "Reproducciones completas",
-        resultado_valor: 90110
+        resultado_valor: 96415
       },
       recomendacion:
-        "\"Como es tener un negocio en RD\" sigue liderando el gasto (CPM $0.36), aunque va bajando de peso relativo. \"La vida es un video juego\" mantiene el CTR más alto (1.77%) y sigue ganando presupuesto semana a semana — buen candidato para diversificar más allá del creativo dominante.",
+        "\"Como es tener un negocio en RD\" sigue liderando el gasto (CPM $0.36) aunque va bajando de peso relativo. \"La vida es un video juego\" mantiene el CTR más alto (1.71%) y sigue ganando presupuesto semana a semana — buen candidato para diversificar más allá del creativo dominante.",
       tendencia_semanal: [
-        { semana: "14–20 ago", gasto: 29.16, impresiones: 79352, alcance: 73658, resultado_valor: 22794 },
-        { semana: "21–27 ago", gasto: 27.61, impresiones: 73651, alcance: 67857, resultado_valor: 22306 },
-        { semana: "28 ago–3 sep", gasto: 28.91, impresiones: 76026, alcance: 70942, resultado_valor: 22777 },
-        { semana: "4–10 sep", gasto: 27.34, impresiones: 74453, alcance: 64265, resultado_valor: 22234 }
+        { semana: "19–25 ago", gasto: 27.63, impresiones: 75236, alcance: 68730, resultado_valor: null },
+        { semana: "26 ago–1 sep", gasto: 29.78, impresiones: 74801, alcance: 71757, resultado_valor: null },
+        { semana: "2–8 sep", gasto: 26.78, impresiones: 76267, alcance: 67641, resultado_valor: null },
+        { semana: "9–15 sep", gasto: 25.91, impresiones: 64114, alcance: 59805, resultado_valor: null }
       ],
       ads: [
-        { nombre: "Como es tener un negocio en RD", gasto: 86.04, impresiones: 236146, clicks: 1600, ctr: 0.68, cpc: 0.05, cpm: 0.36, resultado_nombre: null, resultado_valor: null },
-        { nombre: "La vida es un video juego", gasto: 26.58, impresiones: 66273, clicks: 1170, ctr: 1.77, cpc: 0.02, cpm: 0.40, resultado_nombre: null, resultado_valor: null },
-        { nombre: "Si el negocio paga todo", gasto: 0.40, impresiones: 1060, clicks: 26, ctr: 2.45, cpc: 0.02, cpm: 0.38, resultado_nombre: null, resultado_valor: null }
+        { nombre: "Como es tener un negocio en RD", gasto: 83.43, impresiones: 229546, clicks: 1550, ctr: 0.68, cpc: 0.05, cpm: 0.36, resultado_nombre: null, resultado_valor: null },
+        { nombre: "La vida es un video juego", gasto: 37.40, impresiones: 90649, clicks: 1547, ctr: 1.71, cpc: 0.02, cpm: 0.41, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Si el negocio paga todo", gasto: 0.73, impresiones: 1869, clicks: 40, ctr: 2.14, cpc: 0.02, cpm: 0.39, resultado_nombre: null, resultado_valor: null }
       ]
     }
   ],
@@ -196,10 +207,13 @@ const SNAPSHOT = {
       "Se eliminó la campaña huérfana \"FE 3% Ready to Buy\" vieja (con presupuesto diario, nunca usada) que había quedado abandonada en la cuenta.",
       "Monitoreo de campañas de la mano de Naomi.",
       "Se construyó y publicó este portal de reportes (account-one-portal.vercel.app), con vista por campaña, por creativo, y este roadmap.",
-      "Se restableció el acceso de escritura al portal (token de GitHub) para poder seguir actualizándolo directo."
+      "Se restableció el acceso de escritura al portal (token de GitHub) para poder seguir actualizándolo directo.",
+      "Se agregó tendencia semanal (gasto, impresiones, alcance, resultado) a cada campaña dentro del portal, visible al expandir la tarjeta.",
+      "Se entregó a Félix un reporte formal por campaña en Word, con resumen ejecutivo, roadmap y detalle semanal por creativo.",
+      "Ready to Buy ya confirmó resultados: 4 leads en sus primeros 4 días activa ($15.20 costo por lead). Consideración pegó un salto fuerte (3 → 8 citas, costo por resultado de $26.74 a $16.13) y Contabilidad subió de 2 a 6 citas (costo por resultado de ~$44 a $19.22)."
     ],
     pendientes: [
-      "Revisar Ready to Buy en 2–3 días para confirmar que ya está entregando (recién encendida, todavía en $0 y sin impresiones) y ver qué creativo está tirando del gasto.",
+      "Seguir de cerca Ready to Buy los próximos días para confirmar cuál de los 6 anuncios termina liderando en costo por lead (por ahora \"180,000 empresas-Imagen\" va mejor, $7.27/lead).",
       "Pausar el anuncio de la oferta 25%/B-01 el 30 de septiembre — después de esa fecha el precio y el dato de comprobantes B-01 dejan de ser exactos y hay que revisar el copy.",
       "Completar la verificación de negocio (Business Verification) en el Business Manager de Meta para desbloquear el acceso a datos en vivo del portal."
     ],
@@ -207,7 +221,7 @@ const SNAPSHOT = {
       "Posible refresco de creativos de Awareness si la frecuencia sube (fatiga de anuncio)."
     ],
     proximos_pasos: [
-      "Monitorear el arranque de Ready to Buy en los próximos días — las 3 etapas del funnel FE ya están corriendo en paralelo.",
+      "Evaluar si el salto de Consideración y Contabilidad esta semana fue puntual o es una tendencia — revisar en 3-4 días con más datos.",
       "Pausar el anuncio de oferta B-01/25% el 30 de septiembre.",
       "Evaluar la campaña de Contabilidad en 7–10 días antes de subir presupuesto."
     ]
