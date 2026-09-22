@@ -43,7 +43,7 @@ const SNAPSHOT = {
         { semana: "17–22 sep", gasto: 67.43, impresiones: 10550, alcance: 5743, resultado_valor: 5 }
       ],
       recomendacion:
-        "7 citas agendadas acumuladas desde su lanzamiento, costo por resultado de $21.22 — sigue siendo la etapa más cara del funnel, esperable siendo el público más caliente y pequeño. La semana más reciente mejoró bastante: bajó de $40.56 a $13.49 por resultado, señal de que el ad set se está estabilizando a medida que madura.",
+        "7 citas agendadas acumuladas, costo por resultado de $21.22 — sigue siendo la etapa más cara del funnel, esperable siendo el público más caliente y pequeño (retargeting de gente que ya vio Consideración). La semana más reciente mejoró fuerte: bajó de $40.56 a $13.49 por resultado. Es normal que un ad set nuevo tarde 1–2 semanas en salir de fase de aprendizaje de Meta y estabilizarse — esta caída de costo probablemente sea justo eso, no un cambio de creativo o audiencia. Solo tiene 6 anuncios y ninguno se ha refrescado desde que se armó la campaña; si el costo vuelve a subir en la próxima semana (en vez de seguir bajando), ahí sí valdría meterle una variante nueva en vez de esperar más.",
       ads: [
         { nombre: "180,000 empresas-Imagen", gasto: 14.53, impresiones: 2497, clicks: 77, ctr: 3.08, cpc: 0.19, cpm: 5.82, resultado_nombre: "Leads", resultado_valor: 2 },
         { nombre: "Faltan 180,000 empresas", gasto: 25.78, impresiones: 3562, clicks: 92, ctr: 2.58, cpc: 0.28, cpm: 7.24, resultado_nombre: "Leads", resultado_valor: 1 },
@@ -76,7 +76,7 @@ const SNAPSHOT = {
         resultado_valor: 9
       },
       recomendacion:
-        "9 citas agendadas acumuladas, costo por resultado de $21.85. Viene de una mejor semana ($13.22, 6 citas) a una más floja esta última semana ($50.88, solo 1 cita) — vale la pena revisar si es fatiga de creativo o solo variación normal antes de mover presupuesto.",
+        "9 citas agendadas acumuladas, costo por resultado de $21.85. La última semana subió fuerte, de $13.22 a $50.88 (solo 1 cita). \"Operando a ciegas\" sigue siendo el creativo que carga casi todo el gasto de esta campaña desde que se lanzó el 4 de septiembre, sin ningún refresco — con casi 3 semanas corriendo el mismo anuncio a la misma audiencia, fatiga de creativo es la explicación más probable, más que un problema de audiencia. Recomendación concreta: subir una variante nueva de \"Operando a ciegas\" (mismo ángulo, otro gancho o formato) antes de tocar presupuesto — si el costo no baja con un creativo fresco, ahí sí revisar audiencia.",
       tendencia_semanal: [
         { semana: "3–9 sep", gasto: 66.44, impresiones: 7808, alcance: 4034, resultado_valor: 2 },
         { semana: "10–16 sep", gasto: 79.31, impresiones: 8122, alcance: 5230, resultado_valor: 6 },
@@ -113,7 +113,7 @@ const SNAPSHOT = {
         resultado_valor: 6
       },
       recomendacion:
-        "6 citas agendadas acumuladas, costo por resultado de $26.02. Se mantiene estable entre $16 y $22 por resultado semana a semana (sin la racha sin citas de fines de agosto) — buen candidato para evaluar subida de presupuesto si se sostiene unos días más.",
+        "6 citas agendadas acumuladas, costo por resultado de $26.02, con una semana sin ninguna cita a principios de septiembre y ahora estabilizándose entre $16 y $21. Esta campaña sigue siendo 100% video — no tiene ni una sola arte estática o carrusel corriendo, algo que quedó pendiente desde que se armó (sí se hizo para Ready to Buy). Con casi un mes corriendo los mismos 6 videos a la misma audiencia, meterle 1–2 artes estáticas ahora mismo es probablemente la palanca más barata para bajar el costo por resultado antes de subir presupuesto — un formato distinto compitiendo en el mismo ad set casi siempre saca al ganador actual de su meseta.",
       tendencia_semanal: [
         { semana: "27 ago–2 sep", gasto: 43.31, impresiones: 13033, alcance: 7449, resultado_valor: 2 },
         { semana: "3–9 sep", gasto: 39.52, impresiones: 8288, alcance: 5348, resultado_valor: 0 },
@@ -152,7 +152,7 @@ const SNAPSHOT = {
         resultado_valor: null
       },
       recomendacion:
-        "Sigue cumpliendo su rol de generar audiencia para retargeting: 239,538 personas alcanzadas a un CPM de $0.32. Con Consideración y Ready to Buy ya entregando citas agendadas de forma consistente, esta campaña puede mantenerse en piloto automático hasta que cierre el 30 de septiembre.",
+        "Sigue cumpliendo su rol de generar audiencia para retargeting: 239,538 personas alcanzadas a un CPM de $0.32. El gasto semanal viene bajando (de $92.95 la primera semana a $8.67 ahora) porque el ad set ya cubrió a la mayor parte de la audiencia fría disponible — normal en una campaña de reconocimiento con casi 5 semanas activa. Como Consideración y Ready to Buy ya están entregando citas de forma consistente, no hace falta reactivar el gasto aquí; puede quedarse bajando así hasta que cierre el 30 de septiembre sin que afecte al resto del funnel.",
       tendencia_semanal: [
         { semana: "20–26 ago", gasto: 92.95, impresiones: 282236, alcance: 154531, resultado_valor: null },
         { semana: "27 ago–2 sep", gasto: 44.89, impresiones: 180088, alcance: 94738, resultado_valor: null },
@@ -192,7 +192,7 @@ const SNAPSHOT = {
         resultado_valor: 105141
       },
       recomendacion:
-        "105,141 reproducciones completas acumuladas a un costo marginal (menos de $0.002 por reproducción). Sigue funcionando como generador de alcance de bajo costo, sin señales de fatiga que pidan un cambio de creativo todavía.",
+        "105,141 reproducciones completas acumuladas a un costo marginal (menos de $0.002 por reproducción). Es una campaña de largo plazo (corriendo desde noviembre pasado) con solo 3 creativos, y el gasto semanal se mantiene parejo entre $20 y $28 sin caídas — no hay señal de fatiga que pida un refresco todavía. Si en algún momento el CPM empieza a subir de forma sostenida (no solo una semana), ese sería el momento de meter un video nuevo; por ahora no toca tocar nada aquí.",
       tendencia_semanal: [
         { semana: "20–26 ago", gasto: 27.04, impresiones: 72589, alcance: 67404, resultado_valor: null },
         { semana: "27 ago–2 sep", gasto: 29.75, impresiones: 76453, alcance: 72431, resultado_valor: null },
@@ -232,6 +232,8 @@ const SNAPSHOT = {
       "Se refrescaron métricas, tendencia semanal y las recomendaciones de cada campaña con datos reales al 22 de septiembre — se corrigió que la recomendación de Ready to Buy seguía diciendo \"sus primeros 4 días activa\" con la campaña ya en 11 días. De ahora en adelante, cada refresco de datos debe reescribir el texto de recomendación de cada campaña, no solo las cifras."
     ],
     pendientes: [
+      "Meterle 1–2 artes estáticas a la campaña de Contabilidad: sigue siendo 100% video (6 creativos, ninguno refrescado en casi un mes) y el costo por resultado subió a $26.02 acumulado — un formato distinto compitiendo en el mismo ad set es la forma más barata de probar si es fatiga de creativo antes de subir presupuesto.",
+      "Consideración subió de $13.22 a $50.88 por resultado esta última semana. \"Operando a ciegas\" lleva casi 3 semanas siendo el único creativo con gasto real en esa campaña — subir una variante nueva del mismo ángulo antes de tocar presupuesto o audiencia.",
       "Todavía no hay visibilidad de ventas/contratos cerrados — los 18 leads/citas agendadas del funnel FE + Contabilidad son lo máximo que mide Meta Ads (llega hasta la cita agendada). Falta que Félix comparta desde su CRM/GHL cuántas de esas citas se convirtieron en cliente, para poder medir el resultado real del negocio y no solo el volumen de leads.",
       "Hallazgo de Naomi (monitoreo de leads): está llegando un volumen notable de negocios de retail y restaurantes preguntando específicamente si el servicio se conecta con su punto de venta (POS) — para ese perfil de negocio, la Facturación Electrónica tiene que salir integrada directo de la caja/POS, no como trámite aparte. Decidir con Félix: (1) si Account One ofrece o puede conectar con integración de POS, vale crear un ángulo de anuncio específico para retail/restaurantes mencionándolo, porque hay demanda represada ahí; (2) si no la ofrece, aclarar esto en la landing o en el primer mensaje de contacto para evitar leads mal calificados que entran esperando algo que no se les puede dar. Corto plazo: pedirle a Naomi que cuantifique cuántos leads mencionan POS para dimensionar el segmento.",
       "Seguir de cerca Ready to Buy los próximos días para confirmar cuál de los 6 anuncios termina liderando en costo por lead (por ahora \"180,000 empresas-Imagen\" va mejor, $7.27/lead).",
