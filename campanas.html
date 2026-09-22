@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Account One · Campañas</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2328368D%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22>A1</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div class="brand-text">
+        <div class="eyebrow">Portal de campañas</div>
+        <h1>Account One</h1>
+      </div>
+    </div>
+    <div class="meta">
+      <div id="live-badge-wrap"><span class="live-badge snapshot"><span class="dot"></span>Cargando…</span></div>
+      Gestionado por Michelle Dijool — Automatización Digital
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <a href="index.html">Dashboard</a>
+    <a href="campanas.html">Campañas</a>
+    <a href="funnel-roadmap.html">Funnel &amp; Roadmap</a>
+    <a href="historico.html">Histórico</a>
+  </nav>
+
+  <section class="panel">
+    <h2 class="section-title">Embudo Facturación Electrónica</h2>
+    <p class="embudo-intro">De impresión a cita agendada, etapa por etapa. Se actualiza solo con los datos de cada campaña.</p>
+    <div id="embudo-fe" class="embudo-wrap"><div class="loading">Cargando embudo…</div></div>
+
+    <h2 class="section-title">Campañas activas — detalle completo</h2>
+    <div id="campaign-list"><div class="loading">Cargando campañas…</div></div>
+
+    <h2 class="section-title" style="margin-top:12px;">Análisis por creativo</h2>
+    <p class="creative-note">Cada anuncio con su gasto, CTR, CPC y resultado, agrupado por campaña. El de mayor gasto en cada grupo va marcado.</p>
+    <div id="creative-grid-wrap"></div>
+  </section>
+
+  <footer>
+    <span>Cuenta publicitaria: Account One (677439744786765) · Meta Ads</span>
+    <span id="footer-mode">—</span>
+  </footer>
+</div>
+
+<script src="common.js"></script>
+<script>
+  function renderCampaigns(data) {
+    const html = data.campanas.map((c) => {
+      const days = daysSince(c.inicio);
+      const m = c.metricas;
+      const pacing = c.presupuesto_diario ? Math.min(100, Math.round((m.gasto / (c.presupuesto_diario * days)) * 100)) : null;
+      const ads = (c.ads || []).slice().sort((a, b) => b.gasto - a.gasto);
+      const topSpendId = ads.length ? ads[0].nombre : null;
+
+      const trend = c.tendencia_semanal || [];
+      const trendMaxGasto = Math.max(1, ...trend.map(w => w.gasto));
+      const trendRows = trend.map((w, i) => {
+        const prev = i > 0 ? trend[i - 1] : null;
+        let deltaHtml = '';
+        if (prev && prev.gasto > 0) {
+          const deltaPct = Math.round(((w.gasto - prev.gasto) / prev.gasto) * 100);
+          if (deltaPct !== 0) {
+            const dir = deltaPct > 0 ? 'up' : 'down';
+            const arrow = deltaPct > 0 ? '▲' : '▼';
+            deltaHtml = `<span class="trend-delta ${dir}">${arrow} ${Math.abs(deltaPct)}%</span>`;
+          }
+        }
+        let cprDeltaHtml = '';
+        if (prev && prev.costo_resultado && w.costo_resultado) {
+          const cprDeltaPct = Math.round(((w.costo_resultado - prev.costo_resultado) / prev.costo_resultado) * 100);
+          if (cprDeltaPct !== 0) {
+            const dir = cprDeltaPct > 0 ? 'cpr-up' : 'cpr-down';
+            const arrow = cprDeltaPct > 0 ? '▲' : '▼';
+            cprDeltaHtml = `<span class="trend-delta ${dir}">${arrow} ${Math.abs(cprDeltaPct)}%</span>`;
+          }
+        }
+        const cprCell = w.costo_resultado
+          ? `<span class="cpr-cell">${fmtMoney(w.costo_resultado)}</span>${cprDeltaHtml}`
+          : `<span class="cpr-cell na">—</span>`;
+        return `
+        <tr>
+          <td class="week-cell">${w.semana}</td>
+          <td>
+            <div class="trend-bar-wrap">
+              <div class="trend-bar-track"><div class="trend-bar-fill" style="width:${Math.round((w.gasto / trendMaxGasto) * 100)}%"></div></div>
+              <span>${fmtMoney(w.gasto)}</span>${deltaHtml}
+            </div>
+          </td>
+          <td>${fmtInt(w.impresiones)}</td>
+          <td>${fmtInt(w.alcance)}</td>
+          <td>${w.resultado_valor !== null && w.resultado_valor !== undefined ? fmtInt(w.resultado_valor) : '—'}</td>
+          <td>${cprCell}</td>
+        </tr>
+      `;
+      }).join('');
+
+      const adRows = ads.map(ad => `
+        <tr>
+          <td class="name-cell">${ad.nombre}${ad.nombre === topSpendId ? '<span class="top-badge">Mayor gasto</span>' : ''}</td>
+          <td>${fmtMoney(ad.gasto)}</td>
+          <td>${fmtInt(ad.impresiones)}</td>
+          <td>${fmtInt(ad.clicks)}</td>
+          <td>${fmtPct(ad.ctr)}</td>
+          <td>${fmtMoney(ad.cpc)}</td>
+          <td>${ad.resultado_nombre ? `${fmtInt(ad.resultado_valor)}<br><span style="color:var(--ink-muted);font-family:'Public Sans',sans-serif;font-size:10.5px;">${ad.resultado_nombre}</span>` : '—'}</td>
+        </tr>
+      `).join('');
+
+      return `
+        <article class="card expandable" id="campaign-${c.id}">
+          <div class="card-head" onclick="toggleCampaign('${c.id}')">
+            <div class="card-title-row">
+              <h3>${c.nombre}</h3>
+              <span class="pill active">Activa</span>
+              <span class="pill days">${days} día${days === 1 ? '' : 's'} publicada</span>
+            </div>
+            <span class="objective">Objetivo: ${c.objetivo}</span>
+          </div>
+          <div class="expand-hint" onclick="toggleCampaign('${c.id}')"><span class="chev">▸</span> ${ads.length} anuncio${ads.length === 1 ? '' : 's'} activos — clic para ver el detalle por creativo</div>
+          <p class="window-note">${c.ventana}</p>
+          <div class="stats">
+            <div class="stat"><div class="label">Gasto</div><div class="value">${fmtMoney(m.gasto)}</div></div>
+            <div class="stat"><div class="label">Impresiones</div><div class="value">${fmtInt(m.impresiones)}</div></div>
+            <div class="stat"><div class="label">Clics</div><div class="value">${fmtInt(m.clicks)}</div></div>
+            <div class="stat"><div class="label">CTR</div><div class="value">${fmtPct(m.ctr)}</div></div>
+            <div class="stat"><div class="label">CPC</div><div class="value">${fmtMoney(m.cpc)}</div></div>
+            <div class="stat"><div class="label">CPM</div><div class="value">${fmtMoney(m.cpm)}</div></div>
+            <div class="stat"><div class="label">Alcance</div><div class="value">${fmtInt(m.alcance)}</div></div>
+            ${m.resultado_nombre ? `<div class="stat"><div class="label">${m.resultado_nombre}</div><div class="value">${fmtInt(m.resultado_valor)}</div></div>` : ''}
+          </div>
+          ${pacing !== null ? `
+          <div class="pacing">
+            <div class="row"><span>Ritmo de gasto vs. presupuesto diario ($${c.presupuesto_diario.toFixed(2)}/día)</span><span>${pacing}%</span></div>
+            <div class="track"><div class="fill" style="width:${pacing}%"></div></div>
+          </div>` : ''}
+          <div class="reco"><span class="tag">Recomendación</span><span>${c.recomendacion}</span></div>
+          <div class="ad-table-wrap">
+            ${trend.length ? `
+            <div class="trend-wrap">
+              <p class="section-label">Tendencia semanal</p>
+              <table class="trend-table">
+                <thead><tr>
+                  <th>Semana</th><th>Gasto</th><th>Impr.</th><th>Alcance</th><th>${m.resultado_nombre || 'Resultado'}</th><th>Costo/Resultado</th>
+                </tr></thead>
+                <tbody>${trendRows}</tbody>
+              </table>
+            </div>` : ''}
+            <table class="ad-table">
+              <thead><tr>
+                <th>Anuncio</th><th>Gasto</th><th>Impr.</th><th>Clics</th><th>CTR</th><th>CPC</th><th>Resultado</th>
+              </tr></thead>
+              <tbody>${adRows}</tbody>
+            </table>
+          </div>
+        </article>
+      `;
+    }).join('');
+    document.getElementById('campaign-list').innerHTML = html;
+
+    // If we arrived via a #campaign-<id> link from the dashboard, open that card.
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el && el.classList.contains('card')) {
+        el.classList.add('open');
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
+  function toggleCampaign(id) {
+    document.getElementById('campaign-' + id).classList.toggle('open');
+  }
+  window.toggleCampaign = toggleCampaign;
+
+  function renderCreatives(data) {
+    const groups = data.campanas.map(c => {
+      const ads = (c.ads || []).slice().sort((a, b) => b.gasto - a.gasto);
+      const cards = ads.map((ad, i) => `
+        <div class="creative-card ranked">
+          <div class="creative-swatch">${ad.nombre.trim().slice(0,2).toUpperCase()}</div>
+          <div class="name">${ad.nombre}${i === 0 ? '<span class="top-badge">Mejor de la campaña</span>' : ''}</div>
+          <div class="campaign">${c.nombre}</div>
+          <div class="metrics-row">
+            <div class="m"><span class="l">Gasto </span><span class="v">${fmtMoney(ad.gasto)}</span></div>
+            <div class="m"><span class="l">CTR </span><span class="v">${fmtPct(ad.ctr)}</span></div>
+            <div class="m"><span class="l">CPC </span><span class="v">${fmtMoney(ad.cpc)}</span></div>
+            ${ad.resultado_nombre ? `<div class="m"><span class="l">${ad.resultado_nombre} </span><span class="v">${fmtInt(ad.resultado_valor)}</span></div>` : ''}
+          </div>
+        </div>
+      `).join('');
+      return `<div class="campaign-group-title">${c.nombre} <span style="color:var(--ink-muted); font-weight:500;">— ${ads.length} anuncio${ads.length === 1 ? '' : 's'}</span></div>
+        <div class="creative-grid">${cards}</div>`;
+    }).join('');
+    document.getElementById('creative-grid-wrap').innerHTML = groups;
+  }
+
+  // The 3 campaigns that make up the FE funnel, in top-to-bottom stage order.
+  const FE_FUNNEL_IDS = ["120251858423240560", "120252085024140560", "120252187070040560"];
+
+  function renderEmbudoFE(data) {
+    const wrap = document.getElementById('embudo-fe');
+    if (!wrap) return;
+    const byId = {};
+    (data.campanas || []).forEach(c => { byId[c.id] = c; });
+    const campaigns = FE_FUNNEL_IDS.map(id => byId[id]).filter(Boolean);
+    if (!campaigns.length) {
+      wrap.innerHTML = '<div class="loading">No se encontraron las campañas del funnel FE en los datos actuales.</div>';
+      return;
+    }
+
+    const cards = campaigns.map(c => {
+      const m = c.metricas || {};
+      const stages = [
+        { label: 'Impresiones', val: m.impresiones },
+        { label: 'Alcance (únicos)', val: m.alcance },
+        { label: 'Clics al enlace', val: m.clics_enlace != null ? m.clics_enlace : m.clicks },
+        { label: 'Vistas de landing', val: m.vistas_landing }
+      ];
+      if (m.resultado_nombre) stages.push({ label: m.resultado_nombre, val: m.resultado_valor });
+
+      const maxVal = Math.max(1, ...stages.map(s => s.val || 0));
+      const stageHtml = stages.map((s, i) => {
+        const v = s.val || 0;
+        const widthPct = Math.max(6, 100 * Math.log10(v + 1) / Math.log10(maxVal + 1));
+        let dropHtml = '';
+        if (i > 0) {
+          const prevVal = stages[i - 1].val || 0;
+          const pct = prevVal > 0 ? (v / prevVal * 100) : 0;
+          dropHtml = `<div class="embudo-drop">${pct.toFixed(pct < 10 ? 1 : 0)}% de la etapa anterior</div>`;
+        }
+        return `
+          <div class="embudo-stage">
+            <div class="embudo-stage-top"><span class="embudo-stage-label">${s.label}</span><span class="embudo-stage-val">${fmtInt(v)}</span></div>
+            <div class="embudo-track"><div class="embudo-fill" style="width:${widthPct.toFixed(1)}%"></div></div>
+            ${dropHtml}
+          </div>
+        `;
+      }).join('');
+
+      const p = c.presupuesto_mensual;
+      const budgetHtml = p
+        ? `Presupuesto: <b>${fmtMoney(p.sep)}/mes</b> (sept) → ${fmtMoney(p.oct)}/mes en oct · gastado hasta hoy: <b>${fmtMoney(m.gasto)}</b>`
+        : `Gastado hasta hoy: <b>${fmtMoney(m.gasto)}</b>`;
+
+      const costoResultado = m.resultado_nombre && m.resultado_valor ? (m.gasto / m.resultado_valor) : null;
+
+      return `
+        <div class="embudo-card">
+          <h4>${c.nombre}</h4>
+          <div class="embudo-obj">${c.objetivo || ''}</div>
+          <div class="embudo-budget">${budgetHtml}</div>
+          ${stageHtml}
+          <div class="embudo-result">${costoResultado ? fmtMoney(costoResultado) : '—'} <span>${costoResultado ? `costo por ${(m.resultado_nombre || 'resultado').toLowerCase()}` : 'sin resultado de conversión en esta etapa — alimenta la audiencia de la siguiente'}</span></div>
+        </div>
+      `;
+    }).join('');
+
+    wrap.innerHTML = `
+      <div class="embudo-grid">${cards}</div>
+      <div class="embudo-note">Las 3 etapas están encadenadas: Reconocimiento construye la audiencia para retargeting, Consideración retarguetea con contenido de comparación/educación, y Ready to Buy retarguetea en caliente a quienes ya interactuaron. Por eso el volumen baja en cada etapa — cada una parte de un público más chico y calificado que la anterior.</div>
+    `;
+  }
+
+  async function loadCampanas() {
+    try {
+      const res = await fetch('/api/campaigns');
+      const data = await res.json();
+      renderLiveBadge(data.modo);
+      renderEmbudoFE(data);
+      renderCampaigns(data);
+      renderCreatives(data);
+    } catch (e) {
+      document.getElementById('campaign-list').innerHTML = `<div class="loading">No se pudo cargar (${e.message}). Intenta recargar la página.</div>`;
+    }
+  }
+
+  loadCampanas();
+</script>
+</body>
+</html>
