@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Account One · Histórico</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2328368D%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22>A1</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div class="brand-text">
+        <div class="eyebrow">Portal de campañas</div>
+        <h1>Account One</h1>
+      </div>
+    </div>
+    <div class="meta">
+      <div id="live-badge-wrap"><span class="live-badge snapshot"><span class="dot"></span>Cargando…</span></div>
+      Gestionado por Michelle Dijool — Automatización Digital
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <a href="index.html">Dashboard</a>
+    <a href="campanas.html">Campañas</a>
+    <a href="funnel-roadmap.html">Funnel &amp; Roadmap</a>
+    <a href="historico.html">Histórico</a>
+  </nav>
+
+  <section class="panel">
+    <h2 class="section-title">Histórico de campañas</h2>
+    <div id="historico"><div class="loading">Cargando…</div></div>
+  </section>
+
+  <footer>
+    <span>Cuenta publicitaria: Account One (677439744786765) · Meta Ads</span>
+    <span id="footer-mode">—</span>
+  </footer>
+</div>
+
+<script src="common.js"></script>
+<script>
+  function renderHistorico(data) {
+    const h = data.historico;
+    document.getElementById('historico').innerHTML = `
+      <div class="paused-summary">
+        <strong>${h.campanas_pausadas} campañas pausadas</strong> en el historial de la cuenta (${h.rango}). Este portal se enfoca en lo que está activo hoy; podemos añadir una tabla completa del histórico si es útil para comparar temporadas.
+      </div>
+    `;
+  }
+
+  async function loadHistorico() {
+    try {
+      const res = await fetch('/api/campaigns');
+      const data = await res.json();
+      renderLiveBadge(data.modo);
+      renderHistorico(data);
+    } catch (e) {
+      document.getElementById('historico').innerHTML = `<div class="loading">No se pudo cargar (${e.message}).</div>`;
+    }
+  }
+
+  loadHistorico();
+</script>
+</body>
+</html>
