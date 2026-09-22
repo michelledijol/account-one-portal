@@ -188,6 +188,14 @@
   table.compare-table tr:last-child td { border-bottom:none; }
   table.compare-table td.name-cell { font-family:'Public Sans',sans-serif; font-weight:500; color:var(--ink); }
 
+  .insight-list { list-style:none; margin:16px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .insight-list li { display:flex; flex-wrap:wrap; gap:8px; font-size:12.5px; line-height:1.5; padding:10px 14px; background:var(--surface-sunken); border-radius:10px; }
+  .insight-name { font-family:'Public Sans',sans-serif; font-weight:700; color:var(--ink); flex-shrink:0; }
+  .insight-note { color:var(--ink-muted); }
+  .insight-note.good { color:var(--good); }
+  .insight-note.bad { color:var(--cardinal, #CF2127); }
+  .insight-note.na { font-style:italic; }
+
   .creative-card.ranked { position:relative; }
   .creative-card .campaign-group-title { font-family:'Manrope',sans-serif; font-size:13px; font-weight:700; margin: 22px 0 10px; color:var(--ink-secondary); }
   .creative-card .metrics-row { display:flex; flex-wrap:wrap; gap:10px 16px; margin-top:10px; font-size:11.5px; }
@@ -358,6 +366,29 @@
       i === maxWeeks - 1 ? '<th>Semana actual</th>' : `<th>Semana ${i + 1 - maxWeeks}</th>`
     ).join('');
 
+    // Auto-generated from the same weekly numbers as the table above — this
+    // never needs to be rewritten by hand, so it can't go stale the way a
+    // manually-authored "recomendación" can.
+    const insightRows = rows.map(c => {
+      const withCpr = c.tendencia_semanal.filter(w => w.costo_resultado != null);
+      if (withCpr.length < 2) {
+        return `<li><span class="insight-name">${c.nombre}</span><span class="insight-note na">Aún no hay dos semanas con resultado para comparar tendencia.</span></li>`;
+      }
+      const last = withCpr[withCpr.length - 1];
+      const prev = withCpr[withCpr.length - 2];
+      const pct = Math.round(((last.costo_resultado - prev.costo_resultado) / prev.costo_resultado) * 100);
+      if (pct === 0) {
+        return `<li><span class="insight-name">${c.nombre}</span><span class="insight-note">Costo por resultado estable en ${fmtMoney(last.costo_resultado)} respecto a la semana anterior.</span></li>`;
+      }
+      const improved = pct < 0;
+      const tone = improved ? 'good' : 'bad';
+      const verb = improved ? 'bajó' : 'subió';
+      const advice = improved
+        ? 'buen momento para sostener o subir presupuesto si el volumen lo permite.'
+        : 'vale la pena revisar creativo/audiencia antes de escalar más presupuesto.';
+      return `<li><span class="insight-name">${c.nombre}</span><span class="insight-note ${tone}">Costo por resultado ${verb} ${Math.abs(pct)}% esta semana (${fmtMoney(prev.costo_resultado)} → ${fmtMoney(last.costo_resultado)}) — ${advice}</span></li>`;
+    }).join('');
+
     target.innerHTML = `
       <div class="compare-wrap">
         <h2 class="section-title">Comparación semanal — costo por resultado</h2>
@@ -365,6 +396,7 @@
           <thead><tr><th>Campaña</th>${headCells}</tr></thead>
           <tbody>${bodyRows}</tbody>
         </table>
+        <ul class="insight-list">${insightRows}</ul>
       </div>
     `;
   }
