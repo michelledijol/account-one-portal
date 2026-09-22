@@ -8,12 +8,12 @@ const GRAPH_VERSION = "v20.0";
 
 const SNAPSHOT = {
   modo: "snapshot",
-  actualizado: "2026-09-15T12:20:00+02:00",
+  actualizado: "2026-09-22T12:20:00+02:00",
   resumen: {
     campanas_activas: 5,
-    invertido_total: 586.79,
-    leads: 18,
-    alcance_combinado: 508106
+    invertido_total: 806.02,
+    leads: 22,
+    alcance_combinado: 552031
   },
   campanas: [
     {
@@ -24,25 +24,26 @@ const SNAPSHOT = {
       inicio: "2026-09-11",
       presupuesto_diario: null,
       presupuesto_mensual: { sep: 358.40, oct: 537.60 },
-      ventana: "Encendida el 11 de septiembre — 4 días activa",
+      ventana: "Desde su lanzamiento (11 sep 2026) hasta hoy",
       metricas: {
-        gasto: 60.78,
-        impresiones: 8670,
-        clicks: 246,
-        clics_enlace: 153,
-        vistas_landing: 87,
-        ctr: 2.84,
-        cpc: 0.25,
-        cpm: 7.01,
-        alcance: 4789,
-        resultado_nombre: "Leads",
-        resultado_valor: 4
+        gasto: 148.54,
+        impresiones: 22474,
+        clicks: 579,
+        clics_enlace: 358,
+        vistas_landing: 212,
+        ctr: 2.58,
+        cpc: 0.26,
+        cpm: 6.61,
+        alcance: 10395,
+        resultado_nombre: "Citas agendadas",
+        resultado_valor: 7
       },
       tendencia_semanal: [
-        { semana: "9–15 sep", gasto: 60.78, impresiones: 8670, alcance: 4789, resultado_valor: 4 }
+        { semana: "10–16 sep", gasto: 81.11, impresiones: 11924, alcance: 6481, resultado_valor: 2 },
+        { semana: "17–22 sep", gasto: 67.43, impresiones: 10550, alcance: 5743, resultado_valor: 5 }
       ],
       recomendacion:
-        "Ya está entregando: 4 leads en sus primeros 4 días activa (costo por lead $15.20, el más caro de las 3 etapas del funnel, esperable siendo el público más caliente y pequeño). \"180,000 empresas-Imagen\" trae 2 de los 4 leads con el mejor CPM ($5.82). \"Cupo v2\" y \"Faltan 180,000 empresas\" aportan 1 cada uno. \"Doña v2\", \"Te lo voy a decir v2\" y \"Desde el 31 de diciembre\" todavía sin leads propios pero con gasto bajo — están apenas arrancando dentro del ad set.",
+        "7 citas agendadas acumuladas desde su lanzamiento, costo por resultado de $21.22 — sigue siendo la etapa más cara del funnel, esperable siendo el público más caliente y pequeño. La semana más reciente mejoró bastante: bajó de $40.56 a $13.49 por resultado, señal de que el ad set se está estabilizando a medida que madura.",
       ads: [
         { nombre: "180,000 empresas-Imagen", gasto: 14.53, impresiones: 2497, clicks: 77, ctr: 3.08, cpc: 0.19, cpm: 5.82, resultado_nombre: "Leads", resultado_valor: 2 },
         { nombre: "Faltan 180,000 empresas", gasto: 25.78, impresiones: 3562, clicks: 92, ctr: 2.58, cpc: 0.28, cpm: 7.24, resultado_nombre: "Leads", resultado_valor: 1 },
@@ -62,23 +63,24 @@ const SNAPSHOT = {
       presupuesto_mensual: { sep: 358.40, oct: 537.60 },
       ventana: "Desde su lanzamiento (4 sep 2026) hasta hoy",
       metricas: {
-        gasto: 129.06,
-        impresiones: 13646,
-        clicks: 405,
-        clics_enlace: 259,
-        vistas_landing: 159,
-        ctr: 2.97,
-        cpc: 0.32,
-        cpm: 9.46,
-        alcance: 6559,
+        gasto: 196.63,
+        impresiones: 21867,
+        clicks: 605,
+        clics_enlace: 384,
+        vistas_landing: 252,
+        ctr: 2.77,
+        cpc: 0.33,
+        cpm: 8.99,
+        alcance: 9933,
         resultado_nombre: "Citas agendadas",
-        resultado_valor: 8
+        resultado_valor: 9
       },
       recomendacion:
-        "Salto fuerte esta última semana: de 3 a 8 citas agendadas (costo por resultado bajó de $26.74 a $16.13). \"Operando a ciegas\" sigue siendo el creativo dominante en gasto ($107.71) y ahora acumula las 8 citas. \"Scrolling (17%)\" mantiene el mejor CTR (3.72%) pero sigue sin citas atribuidas directamente — buen candidato para escalar si el volumen de Operando a ciegas se estanca.",
+        "9 citas agendadas acumuladas, costo por resultado de $21.85. Viene de una mejor semana ($13.22, 6 citas) a una más floja esta última semana ($50.88, solo 1 cita) — vale la pena revisar si es fatiga de creativo o solo variación normal antes de mover presupuesto.",
       tendencia_semanal: [
-        { semana: "2–8 sep", gasto: 56.58, impresiones: 6723, alcance: 3558, resultado_valor: 0 },
-        { semana: "9–15 sep", gasto: 72.48, impresiones: 6923, alcance: 4458, resultado_valor: 8 }
+        { semana: "3–9 sep", gasto: 66.44, impresiones: 7808, alcance: 4034, resultado_valor: 2 },
+        { semana: "10–16 sep", gasto: 79.31, impresiones: 8122, alcance: 5230, resultado_valor: 6 },
+        { semana: "17–22 sep", gasto: 50.88, impresiones: 5937, alcance: 4147, resultado_valor: 1 }
       ],
       ads: [
         { nombre: "Operando a ciegas", gasto: 107.71, impresiones: 10647, clicks: 309, ctr: 2.90, cpc: 0.35, cpm: 10.12, resultado_nombre: "Citas agendadas", resultado_valor: 8 },
@@ -98,22 +100,25 @@ const SNAPSHOT = {
       presupuesto_diario: 6.0,
       ventana: "Desde su lanzamiento (27 ago 2026) hasta hoy",
       metricas: {
-        gasto: 115.31,
-        impresiones: 28524,
-        clicks: 1339,
-        ctr: 4.69,
-        cpc: 0.09,
-        cpm: 4.04,
-        alcance: 13305,
+        gasto: 156.14,
+        impresiones: 36973,
+        clicks: 1581,
+        clics_enlace: 955,
+        vistas_landing: 734,
+        ctr: 4.28,
+        cpc: 0.10,
+        cpm: 4.22,
+        alcance: 15420,
         resultado_nombre: "Citas agendadas",
         resultado_valor: 6
       },
       recomendacion:
-        "Subió a 6 citas agendadas (costo por resultado bajó a $19.22, desde ~$44). \"Dia 1 llevando Account One de 30 a 100\" sigue concentrando el mayor gasto ($77.96) y ahora tiene 5 de las 6 citas — el creativo más consistente de la campaña.",
+        "6 citas agendadas acumuladas, costo por resultado de $26.02. Se mantiene estable entre $16 y $22 por resultado semana a semana (sin la racha sin citas de fines de agosto) — buen candidato para evaluar subida de presupuesto si se sostiene unos días más.",
       tendencia_semanal: [
-        { semana: "26 ago–1 sep", gasto: 36.42, impresiones: 11561, alcance: 6810, resultado_valor: 3 },
-        { semana: "2–8 sep", gasto: 39.98, impresiones: 8569, alcance: 5493, resultado_valor: 1 },
-        { semana: "9–15 sep", gasto: 38.91, impresiones: 8394, alcance: 5801, resultado_valor: 2 }
+        { semana: "27 ago–2 sep", gasto: 43.31, impresiones: 13033, alcance: 7449, resultado_valor: 2 },
+        { semana: "3–9 sep", gasto: 39.52, impresiones: 8288, alcance: 5348, resultado_valor: 0 },
+        { semana: "10–16 sep", gasto: 41.26, impresiones: 9220, alcance: 6111, resultado_valor: 2 },
+        { semana: "17–22 sep", gasto: 32.05, impresiones: 6432, alcance: 4107, resultado_valor: 2 }
       ],
       ads: [
         { nombre: "Dia 1 llevando Account One de 30 a 100", gasto: 77.96, impresiones: 18064, clicks: 814, ctr: 4.51, cpc: 0.10, cpm: 4.32, resultado_nombre: "Citas agendadas", resultado_valor: 5 },
@@ -134,25 +139,26 @@ const SNAPSHOT = {
       presupuesto_mensual: { sep: 179.20, oct: 268.80 },
       ventana: "Desde su lanzamiento (20 ago 2026) hasta hoy",
       metricas: {
-        gasto: 160.08,
-        impresiones: 509640,
-        clicks: 3315,
-        clics_enlace: 693,
-        vistas_landing: 155,
-        ctr: 0.65,
+        gasto: 171.93,
+        impresiones: 532831,
+        clicks: 3632,
+        clics_enlace: 724,
+        vistas_landing: 158,
+        ctr: 0.68,
         cpc: 0.05,
-        cpm: 0.31,
-        alcance: 233031,
+        cpm: 0.32,
+        alcance: 239538,
         resultado_nombre: null,
         resultado_valor: null
       },
       recomendacion:
-        "\"La llamada\" sigue concentrando el mayor gasto y es por lejos el mejor creativo (CPM $0.50). Las variantes de imagen estática (Carrusel/Arte) siguen con CTR bajo (0.15–0.20%) — solo aportan alcance. Con Consideración y Ready to Buy ya armadas y entregando leads, esta campaña sigue cumpliendo su rol de generar el público para retargeting. Cierra el 30 de septiembre.",
+        "Sigue cumpliendo su rol de generar audiencia para retargeting: 239,538 personas alcanzadas a un CPM de $0.32. Con Consideración y Ready to Buy ya entregando citas agendadas de forma consistente, esta campaña puede mantenerse en piloto automático hasta que cierre el 30 de septiembre.",
       tendencia_semanal: [
-        { semana: "19–25 ago", gasto: 78.73, impresiones: 245728, alcance: 141151, resultado_valor: null },
-        { semana: "26 ago–1 sep", gasto: 55.68, impresiones: 201372, alcance: 105926, resultado_valor: null },
-        { semana: "2–8 sep", gasto: 14.55, impresiones: 40252, alcance: 34153, resultado_valor: null },
-        { semana: "9–15 sep", gasto: 11.12, impresiones: 22288, alcance: 20132, resultado_valor: null }
+        { semana: "20–26 ago", gasto: 92.95, impresiones: 282236, alcance: 154531, resultado_valor: null },
+        { semana: "27 ago–2 sep", gasto: 44.89, impresiones: 180088, alcance: 94738, resultado_valor: null },
+        { semana: "3–9 sep", gasto: 12.92, impresiones: 28881, alcance: 26597, resultado_valor: null },
+        { semana: "10–16 sep", gasto: 12.50, impresiones: 24980, alcance: 22210, resultado_valor: null },
+        { semana: "17–22 sep", gasto: 8.67, impresiones: 16646, alcance: 15380, resultado_valor: null }
       ],
       ads: [
         { nombre: "La llamada", gasto: 96.39, impresiones: 194093, clicks: 2628, ctr: 1.35, cpc: 0.04, cpm: 0.50, resultado_nombre: null, resultado_valor: null },
@@ -175,23 +181,24 @@ const SNAPSHOT = {
       presupuesto_diario: 4.0,
       ventana: "Últimos 30 días (campaña de largo plazo)",
       metricas: {
-        gasto: 121.56,
-        impresiones: 322064,
-        clicks: 3137,
-        ctr: 0.97,
+        gasto: 132.78,
+        impresiones: 350960,
+        clicks: 3231,
+        ctr: 0.92,
         cpc: 0.04,
         cpm: 0.38,
-        alcance: 250422,
+        alcance: 276745,
         resultado_nombre: "Reproducciones completas",
-        resultado_valor: 96415
+        resultado_valor: 105141
       },
       recomendacion:
-        "\"Como es tener un negocio en RD\" sigue liderando el gasto (CPM $0.36) aunque va bajando de peso relativo. \"La vida es un video juego\" mantiene el CTR más alto (1.71%) y sigue ganando presupuesto semana a semana — buen candidato para diversificar más allá del creativo dominante.",
+        "105,141 reproducciones completas acumuladas a un costo marginal (menos de $0.002 por reproducción). Sigue funcionando como generador de alcance de bajo costo, sin señales de fatiga que pidan un cambio de creativo todavía.",
       tendencia_semanal: [
-        { semana: "19–25 ago", gasto: 27.63, impresiones: 75236, alcance: 68730, resultado_valor: null },
-        { semana: "26 ago–1 sep", gasto: 29.78, impresiones: 74801, alcance: 71757, resultado_valor: null },
-        { semana: "2–8 sep", gasto: 26.78, impresiones: 76267, alcance: 67641, resultado_valor: null },
-        { semana: "9–15 sep", gasto: 25.91, impresiones: 64114, alcance: 59805, resultado_valor: null }
+        { semana: "20–26 ago", gasto: 27.04, impresiones: 72589, alcance: 67404, resultado_valor: null },
+        { semana: "27 ago–2 sep", gasto: 29.75, impresiones: 76453, alcance: 72431, resultado_valor: null },
+        { semana: "3–9 sep", gasto: 27.33, impresiones: 76504, alcance: 67373, resultado_valor: null },
+        { semana: "10–16 sep", gasto: 28.13, impresiones: 70800, alcance: 65708, resultado_valor: null },
+        { semana: "17–22 sep", gasto: 20.53, impresiones: 54614, alcance: 50279, resultado_valor: null }
       ],
       ads: [
         { nombre: "Como es tener un negocio en RD", gasto: 83.43, impresiones: 229546, clicks: 1550, ctr: 0.68, cpc: 0.05, cpm: 0.36, resultado_nombre: null, resultado_valor: null },
@@ -220,7 +227,9 @@ const SNAPSHOT = {
       "Se agregó tendencia semanal (gasto, impresiones, alcance, resultado) a cada campaña dentro del portal, visible al expandir la tarjeta.",
       "Se entregó a Félix un reporte formal por campaña en Word, con resumen ejecutivo, roadmap y detalle semanal por creativo.",
       "Ready to Buy ya confirmó resultados: 4 leads en sus primeros 4 días activa ($15.20 costo por lead). Consideración pegó un salto fuerte (3 → 8 citas, costo por resultado de $26.74 a $16.13) y Contabilidad subió de 2 a 6 citas (costo por resultado de ~$44 a $19.22).",
-      "Se agregó al portal el embudo detallado de Facturación Electrónica (Reconocimiento → Consideración → Ready to Buy): impresiones, alcance, clics, vistas de landing y resultado por etapa, con el presupuesto mensual acordado con Félix en cada campaña. Se actualiza solo con cada refresco de datos."
+      "Se agregó al portal el embudo detallado de Facturación Electrónica (Reconocimiento → Consideración → Ready to Buy): impresiones, alcance, clics, vistas de landing y resultado por etapa, con el presupuesto mensual acordado con Félix en cada campaña. Se actualiza solo con cada refresco de datos.",
+      "Se agregó la comparación semanal de costo por resultado entre campañas (tabla arriba de \"Campañas activas ahora\"), con recomendaciones automáticas debajo calculadas directo del dato de cada semana — no dependen de texto escrito a mano, así que no se desactualizan.",
+      "Se refrescaron métricas, tendencia semanal y las recomendaciones de cada campaña con datos reales al 22 de septiembre — se corrigió que la recomendación de Ready to Buy seguía diciendo \"sus primeros 4 días activa\" con la campaña ya en 11 días. De ahora en adelante, cada refresco de datos debe reescribir el texto de recomendación de cada campaña, no solo las cifras."
     ],
     pendientes: [
       "Todavía no hay visibilidad de ventas/contratos cerrados — los 18 leads/citas agendadas del funnel FE + Contabilidad son lo máximo que mide Meta Ads (llega hasta la cita agendada). Falta que Félix comparta desde su CRM/GHL cuántas de esas citas se convirtieron en cliente, para poder medir el resultado real del negocio y no solo el volumen de leads.",
