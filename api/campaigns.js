@@ -10,12 +10,45 @@ const SNAPSHOT = {
   modo: "snapshot",
   actualizado: "2026-09-22T12:20:00+02:00",
   resumen: {
-    campanas_activas: 5,
-    invertido_total: 806.02,
+    campanas_activas: 6,
+    invertido_total: 819.45,
     leads: 22,
-    alcance_combinado: 552031
+    alcance_combinado: 557141
   },
   campanas: [
+    {
+      id: "120252328774890560",
+      nombre: "Campaña Septiembre-Webinar",
+      estado: "ACTIVE",
+      objetivo: "Leads (registro al webinar del 29 de septiembre)",
+      inicio: "2026-09-19",
+      presupuesto_diario: 5,
+      presupuesto_mensual: null,
+      ventana: "Desde su lanzamiento (19 sep 2026) hasta hoy",
+      metricas: {
+        gasto: 13.43,
+        impresiones: 6151,
+        clicks: 489,
+        clics_enlace: 224,
+        vistas_landing: 158,
+        ctr: 7.95,
+        cpc: 0.03,
+        cpm: 2.18,
+        alcance: 5110,
+        resultado_nombre: "Registros al webinar",
+        resultado_valor: 8
+      },
+      tendencia_semanal: [],
+      recomendacion:
+        "8 registros al webinar vía Meta Ads en sus primeros 3 días ($1.68 por registro), de los 12 registros totales confirmados — los otros 4 llegaron por fuera de esta campaña (orgánico/otros canales). El CTR general es alto (7.95%) gracias a \"Video 2\", que solo con $11.15 de gasto trae 6 de los 8 registros y un CTR de 8.98% — es, por lejos, el creativo ganador hasta ahora. \"Video 1\" tiene el costo por registro más bajo de todos ($0.48) pero con apenas $0.96 gastado — muestra insuficiente para sacar conclusiones todavía, aunque vale la pena vigilarlo. Las 3 artes estáticas (Imagen 1, 2 y 3) casi no han recibido presupuesto y ninguna tiene registros aún, normal con solo $5/día repartido entre 5 anuncios. Con el webinar el 29 de septiembre acercándose, lo más eficiente es subir el presupuesto diario ahora concentrándolo en \"Video 2\" (y darle más chance a \"Video 1\" antes de descartar las artes) en vez de esperar a que el ad set salga solo de su fase de aprendizaje con $5/día.",
+      ads: [
+        { nombre: "Video 2", gasto: 11.15, impresiones: 5135, clicks: 461, ctr: 8.98, cpc: 0.02, cpm: 2.17, resultado_nombre: "Registros al webinar", resultado_valor: 6 },
+        { nombre: "Video 1", gasto: 0.96, impresiones: 384, clicks: 14, ctr: 3.65, cpc: 0.07, cpm: 2.50, resultado_nombre: "Registros al webinar", resultado_valor: 2 },
+        { nombre: "Imagen 2", gasto: 1.10, impresiones: 507, clicks: 11, ctr: 2.17, cpc: 0.10, cpm: 2.17, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Imagen 3", gasto: 0.21, impresiones: 92, clicks: 2, ctr: 2.17, cpc: 0.11, cpm: 2.28, resultado_nombre: null, resultado_valor: null },
+        { nombre: "Imagen 1", gasto: 0.01, impresiones: 33, clicks: 1, ctr: 3.03, cpc: 0.01, cpm: 0.30, resultado_nombre: null, resultado_valor: null }
+      ]
+    },
     {
       id: "120252187070040560",
       nombre: "FE 3% Ready to Buy: Retargeting Caliente",
@@ -232,6 +265,7 @@ const SNAPSHOT = {
       "Se refrescaron métricas, tendencia semanal y las recomendaciones de cada campaña con datos reales al 22 de septiembre — se corrigió que la recomendación de Ready to Buy seguía diciendo \"sus primeros 4 días activa\" con la campaña ya en 11 días. De ahora en adelante, cada refresco de datos debe reescribir el texto de recomendación de cada campaña, no solo las cifras."
     ],
     pendientes: [
+      "Subir el presupuesto diario de \"Campaña Septiembre-Webinar\" (hoy $5/día) concentrándolo en \"Video 2\", que trae 6 de los 8 registros a $1.86 c/u con el mejor CTR (8.98%) — el webinar es el 29 de septiembre y con presupuesto tan bajo el ad set tarda más en salir de la fase de aprendizaje de Meta.",
       "Meterle 1–2 artes estáticas a la campaña de Contabilidad: sigue siendo 100% video (6 creativos, ninguno refrescado en casi un mes) y el costo por resultado subió a $26.02 acumulado — un formato distinto compitiendo en el mismo ad set es la forma más barata de probar si es fatiga de creativo antes de subir presupuesto.",
       "Consideración subió de $13.22 a $50.88 por resultado esta última semana. \"Operando a ciegas\" lleva casi 3 semanas siendo el único creativo con gasto real en esa campaña — subir una variante nueva del mismo ángulo antes de tocar presupuesto o audiencia.",
       "Todavía no hay visibilidad de ventas/contratos cerrados — los 18 leads/citas agendadas del funnel FE + Contabilidad son lo máximo que mide Meta Ads (llega hasta la cita agendada). Falta que Félix comparta desde su CRM/GHL cuántas de esas citas se convirtieron en cliente, para poder medir el resultado real del negocio y no solo el volumen de leads.",
