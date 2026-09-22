@@ -251,8 +251,31 @@ function fmtFechaEs(isoDate) {
   return `${d} ${MESES_ES[m - 1]} ${y}`;
 }
 
+// Short "9–15 sep" / "28 ago–3 sep" label for a weekly trend row.
+function fmtSemana(since, until) {
+  const [, m1, d1] = since.split("-").map(Number);
+  const [, m2, d2] = until.split("-").map(Number);
+  if (m1 === m2) return `${d1}–${d2} ${MESES_ES[m1 - 1]}`;
+  return `${d1} ${MESES_ES[m1 - 1]}–${d2} ${MESES_ES[m2 - 1]}`;
+}
+
+// Cost per result for a single week's row — null when there's no result yet
+// (avoids dividing by zero / showing a misleading $0.00).
+function cprOf(gasto, resultado) {
+  return resultado ? Number((gasto / resultado).toFixed(2)) : null;
+}
+
 function todayISO() {
   return new Date().toISOString().slice(0, 10);
+}
+
+// Annotate the snapshot's weekly trend rows with cost-per-result so the
+// portal can render week-over-week CPR comparisons straight from this data,
+// without re-deriving it client-side.
+for (const c of SNAPSHOT.campanas) {
+  for (const w of c.tendencia_semanal || []) {
+    w.costo_resultado = cprOf(w.gasto, w.resultado_valor);
+  }
 }
 
 // Fixed monthly budgets agreed with Félix for the 3-stage FE funnel
@@ -316,7 +339,7 @@ async function fetchLive(token, adAccountId) {
       const since = (c.start_time || until).slice(0, 10);
       const timeRange = JSON.stringify({ since, until: since > until ? since : until });
 
-      const [insightsResp, adInsightsResp] = await Promise.all([
+      const [insightsResp, adInsightsResp, weeklyResp] = await Promise.all([
         metaGet(`${c.id}/insights`, token, {
           fields: "spend,impressions,clicks,ctr,cpc,cpm,reach,actions,link_click,landing_page_view",
           time_range: timeRange
@@ -326,11 +349,32 @@ async function fetchLive(token, adAccountId) {
           fields: "ad_id,ad_name,spend,impressions,clicks,ctr,cpc,cpm,actions",
           time_range: timeRange,
           limit: "200"
+        }).catch(() => ({ data: [] })),
+        // Weekly buckets (Meta anchors these to the account's reporting week,
+        // not necessarily Mon–Sun) so the portal can show a CPR trend per
+        // campaign the same way the snapshot data does.
+        metaGet(`${c.id}/insights`, token, {
+          fields: "spend,impressions,reach,actions",
+          time_range: timeRange,
+          time_increment: "7"
         }).catch(() => ({ data: [] }))
       ]);
 
       const row = insightsResp.data?.[0] || {};
       const { resultado_nombre, resultado_valor } = pickResultado(row.actions);
+
+      const tendencia_semanal = (weeklyResp.data || []).map((w) => {
+        const gasto = Number(w.spend || 0);
+        const { resultado_valor: weekResultado } = pickResultado(w.actions);
+        return {
+          semana: fmtSemana(w.date_start, w.date_stop),
+          gasto,
+          impresiones: Number(w.impressions || 0),
+          alcance: Number(w.reach || 0),
+          resultado_valor: weekResultado,
+          costo_resultado: cprOf(gasto, weekResultado)
+        };
+      });
 
       const ads = (adInsightsResp.data || [])
         .map((a) => {
@@ -376,6 +420,7 @@ async function fetchLive(token, adAccountId) {
           ads.length > 0
             ? `Anuncio con mayor gasto: "${ads[0].nombre}" ($${ads[0].gasto.toFixed(2)}, CTR ${ads[0].ctr.toFixed(2)}%).`
             : "Aún no hay suficientes datos de anuncios individuales para esta campaña.",
+        tendencia_semanal,
         ads
       };
     })
