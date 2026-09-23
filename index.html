@@ -38,6 +38,19 @@
       <div class="highlight-value">17 <span>registros al webinar</span></div>
     </div>
 
+    <div class="date-filter-bar">
+      <div class="date-filter-field">
+        <label for="filter-desde">Desde</label>
+        <input type="date" id="filter-desde">
+      </div>
+      <div class="date-filter-field">
+        <label for="filter-hasta">Hasta</label>
+        <input type="date" id="filter-hasta">
+      </div>
+      <button type="button" id="filter-reset" class="filter-reset-btn">Ver todo el período</button>
+      <span id="filter-status" class="filter-status"></span>
+    </div>
+
     <div id="summary" class="summary"></div>
     <div id="compare-section"></div>
 
@@ -69,14 +82,82 @@
 
 <script src="common.js"></script>
 <script>
-  function renderSummary(data) {
+  // Campañas cuyo "resultado" semanal representa citas/leads reales (no registros
+  // de webinar, ni reproducciones de video), para que el filtro de fechas sume
+  // el mismo tipo de "lead" que ya reporta el resumen estático.
+  const LEADS_CAMPAIGN_IDS = ["120252187070040560", "120252085024140560", "120251975182080560"];
+
+  let DASHBOARD_DATA = null;
+
+  // Suma invertido / leads / alcance a partir de las semanas (tendencia_semanal)
+  // cuyo rango [desde, hasta] se solapa con el rango de fechas elegido.
+  // Si no hay filtro activo (desde/hasta vacíos), usa los totales estáticos del resumen.
+  function computeSummary(data, desde, hasta) {
     const s = data.resumen;
+    if (!desde && !hasta) {
+      return { campanas_activas: s.campanas_activas, invertido_total: s.invertido_total, leads: s.leads, alcance_combinado: s.alcance_combinado, filtered: false };
+    }
+    const lo = desde || '0000-01-01';
+    const hi = hasta || '9999-12-31';
+    let invertido_total = 0;
+    let leads = 0;
+    let alcance_combinado = 0;
+    data.campanas.forEach(c => {
+      const weeks = (c.tendencia_semanal || []).filter(w => w.desde && w.hasta && w.desde <= hi && w.hasta >= lo);
+      weeks.forEach(w => {
+        invertido_total += Number(w.gasto || 0);
+        alcance_combinado += Number(w.alcance || 0);
+        if (LEADS_CAMPAIGN_IDS.includes(c.id) && w.resultado_valor != null) {
+          leads += Number(w.resultado_valor || 0);
+        }
+      });
+    });
+    return { campanas_activas: s.campanas_activas, invertido_total, leads, alcance_combinado, filtered: true };
+  }
+
+  function renderSummary(data, desde, hasta) {
+    const s = computeSummary(data, desde, hasta);
     document.getElementById('summary').innerHTML = `
       <div class="cell"><div class="label">Campañas activas</div><div class="value">${s.campanas_activas}</div></div>
-      <div class="cell"><div class="label">Invertido (desde lanzamiento de cada una)</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div></div>
+      <div class="cell"><div class="label">Invertido${s.filtered ? ' (período filtrado)' : ' (desde lanzamiento de cada una)'}</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div></div>
       <div class="cell"><div class="label">Leads registrados</div><div class="value">${s.leads} <small>solo camp. de conversión</small></div></div>
       <div class="cell"><div class="label">Alcance combinado</div><div class="value">${(s.alcance_combinado/1000).toFixed(1)}K <small>personas</small></div></div>
     `;
+    const statusEl = document.getElementById('filter-status');
+    if (statusEl) {
+      statusEl.textContent = s.filtered ? 'Mostrando totales del período seleccionado' : 'Mostrando totales acumulados de cada campaña';
+    }
+  }
+
+  function fullDateRange(data) {
+    let min = null, max = null;
+    data.campanas.forEach(c => {
+      (c.tendencia_semanal || []).forEach(w => {
+        if (w.desde) { if (!min || w.desde < min) min = w.desde; }
+        if (w.hasta) { if (!max || w.hasta > max) max = w.hasta; }
+      });
+    });
+    return { min, max };
+  }
+
+  function setupDateFilter(data) {
+    const desdeInput = document.getElementById('filter-desde');
+    const hastaInput = document.getElementById('filter-hasta');
+    const resetBtn = document.getElementById('filter-reset');
+    const { min, max } = fullDateRange(data);
+    if (min) desdeInput.min = min;
+    if (max) desdeInput.max = max;
+    if (min) hastaInput.min = min;
+    if (max) hastaInput.max = max;
+
+    const rerender = () => renderSummary(data, desdeInput.value, hastaInput.value);
+    desdeInput.addEventListener('change', rerender);
+    hastaInput.addEventListener('change', rerender);
+    resetBtn.addEventListener('click', () => {
+      desdeInput.value = '';
+      hastaInput.value = '';
+      rerender();
+    });
   }
 
   // Bird's-eye week-over-week costo-por-resultado comparison across every
@@ -174,8 +255,10 @@
     try {
       const res = await fetch('/api/campaigns');
       const data = await res.json();
+      DASHBOARD_DATA = data;
       renderLiveBadge(data.modo);
       renderSummary(data);
+      setupDateFilter(data);
       renderCompare(data);
       renderMiniCampaigns(data);
     } catch (e) {
