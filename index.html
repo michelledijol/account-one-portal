@@ -38,16 +38,8 @@
       <div class="highlight-value">19 <span>registros al webinar</span></div>
     </div>
 
-    <div class="date-filter-bar">
-      <div class="date-filter-field">
-        <label for="filter-desde">Desde</label>
-        <input type="date" id="filter-desde">
-      </div>
-      <div class="date-filter-field">
-        <label for="filter-hasta">Hasta</label>
-        <input type="date" id="filter-hasta">
-      </div>
-      <button type="button" id="filter-reset" class="filter-reset-btn">Ver todo el período</button>
+    <div class="month-filter-bar">
+      <div id="month-filter-tabs" class="month-filter-tabs"></div>
       <span id="filter-status" class="filter-status"></span>
     </div>
 
@@ -83,27 +75,28 @@
 <script src="common.js"></script>
 <script>
   // Campañas cuyo "resultado" semanal representa citas/leads reales (no registros
-  // de webinar, ni reproducciones de video), para que el filtro de fechas sume
+  // de webinar, ni reproducciones de video), para que el filtro por mes sume
   // el mismo tipo de "lead" que ya reporta el resumen estático.
   const LEADS_CAMPAIGN_IDS = ["120252187070040560", "120252085024140560", "120251975182080560"];
 
+  const MONTH_NAMES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+
   let DASHBOARD_DATA = null;
+  let ACTIVE_MONTH = null; // "YYYY-MM" o null = todo el período
 
   // Suma invertido / leads / alcance a partir de las semanas (tendencia_semanal)
-  // cuyo rango [desde, hasta] se solapa con el rango de fechas elegido.
-  // Si no hay filtro activo (desde/hasta vacíos), usa los totales estáticos del resumen.
-  function computeSummary(data, desde, hasta) {
+  // cuyo campo "desde" cae dentro del mes elegido (YYYY-MM).
+  // Sin mes activo, usa los totales estáticos del resumen.
+  function computeSummary(data, monthKey) {
     const s = data.resumen;
-    if (!desde && !hasta) {
+    if (!monthKey) {
       return { campanas_activas: s.campanas_activas, invertido_total: s.invertido_total, leads: s.leads, alcance_combinado: s.alcance_combinado, filtered: false };
     }
-    const lo = desde || '0000-01-01';
-    const hi = hasta || '9999-12-31';
     let invertido_total = 0;
     let leads = 0;
     let alcance_combinado = 0;
     data.campanas.forEach(c => {
-      const weeks = (c.tendencia_semanal || []).filter(w => w.desde && w.hasta && w.desde <= hi && w.hasta >= lo);
+      const weeks = (c.tendencia_semanal || []).filter(w => w.desde && w.desde.slice(0, 7) === monthKey);
       weeks.forEach(w => {
         invertido_total += Number(w.gasto || 0);
         alcance_combinado += Number(w.alcance || 0);
@@ -115,49 +108,57 @@
     return { campanas_activas: s.campanas_activas, invertido_total, leads, alcance_combinado, filtered: true };
   }
 
-  function renderSummary(data, desde, hasta) {
-    const s = computeSummary(data, desde, hasta);
+  function renderSummary(data, monthKey) {
+    const s = computeSummary(data, monthKey);
     document.getElementById('summary').innerHTML = `
       <div class="cell"><div class="label">Campañas activas</div><div class="value">${s.campanas_activas}</div></div>
-      <div class="cell"><div class="label">Invertido${s.filtered ? ' (período filtrado)' : ' (desde lanzamiento de cada una)'}</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div></div>
+      <div class="cell"><div class="label">Invertido${s.filtered ? ' (mes seleccionado)' : ' (desde lanzamiento de cada una)'}</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div></div>
       <div class="cell"><div class="label">Leads registrados</div><div class="value">${s.leads} <small>solo camp. de conversión</small></div></div>
       <div class="cell"><div class="label">Alcance combinado</div><div class="value">${(s.alcance_combinado/1000).toFixed(1)}K <small>personas</small></div></div>
     `;
     const statusEl = document.getElementById('filter-status');
     if (statusEl) {
-      statusEl.textContent = s.filtered ? 'Mostrando totales del período seleccionado' : 'Mostrando totales acumulados de cada campaña';
+      statusEl.textContent = s.filtered ? 'Mostrando totales del mes seleccionado' : 'Mostrando totales acumulados de cada campaña';
     }
   }
 
-  function fullDateRange(data) {
-    let min = null, max = null;
-    data.campanas.forEach(c => {
-      (c.tendencia_semanal || []).forEach(w => {
-        if (w.desde) { if (!min || w.desde < min) min = w.desde; }
-        if (w.hasta) { if (!max || w.hasta > max) max = w.hasta; }
-      });
-    });
-    return { min, max };
+  function monthLabel(monthKey) {
+    const [year, month] = monthKey.split('-');
+    const name = MONTH_NAMES[Number(month) - 1];
+    return name.charAt(0).toUpperCase() + name.slice(1) + ' ' + year;
   }
 
-  function setupDateFilter(data) {
-    const desdeInput = document.getElementById('filter-desde');
-    const hastaInput = document.getElementById('filter-hasta');
-    const resetBtn = document.getElementById('filter-reset');
-    const { min, max } = fullDateRange(data);
-    if (min) desdeInput.min = min;
-    if (max) desdeInput.max = max;
-    if (min) hastaInput.min = min;
-    if (max) hastaInput.max = max;
-
-    const rerender = () => renderSummary(data, desdeInput.value, hastaInput.value);
-    desdeInput.addEventListener('change', rerender);
-    hastaInput.addEventListener('change', rerender);
-    resetBtn.addEventListener('click', () => {
-      desdeInput.value = '';
-      hastaInput.value = '';
-      rerender();
+  // Lista de meses (YYYY-MM) presentes en las semanas de todas las campañas, en orden cronológico.
+  function availableMonths(data) {
+    const keys = new Set();
+    data.campanas.forEach(c => {
+      (c.tendencia_semanal || []).forEach(w => {
+        if (w.desde) keys.add(w.desde.slice(0, 7));
+      });
     });
+    return Array.from(keys).sort();
+  }
+
+  function setupMonthFilter(data) {
+    const tabsEl = document.getElementById('month-filter-tabs');
+    const months = availableMonths(data);
+
+    function draw() {
+      const allBtn = `<button type="button" class="month-tab${ACTIVE_MONTH === null ? ' active' : ''}" data-month="">Todo el período</button>`;
+      const monthBtns = months.map(m =>
+        `<button type="button" class="month-tab${ACTIVE_MONTH === m ? ' active' : ''}" data-month="${m}">${monthLabel(m)}</button>`
+      ).join('');
+      tabsEl.innerHTML = allBtn + monthBtns;
+      tabsEl.querySelectorAll('.month-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          ACTIVE_MONTH = btn.dataset.month || null;
+          draw();
+          renderSummary(data, ACTIVE_MONTH);
+        });
+      });
+    }
+
+    draw();
   }
 
   // Bird's-eye week-over-week costo-por-resultado comparison across every
@@ -257,8 +258,8 @@
       const data = await res.json();
       DASHBOARD_DATA = data;
       renderLiveBadge(data.modo);
-      renderSummary(data);
-      setupDateFilter(data);
+      renderSummary(data, ACTIVE_MONTH);
+      setupMonthFilter(data);
       renderCompare(data);
       renderMiniCampaigns(data);
     } catch (e) {
