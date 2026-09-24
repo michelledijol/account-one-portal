@@ -123,33 +123,46 @@
   }
 
   function monthLabel(monthKey) {
-    const [year, month] = monthKey.split('-');
+    const [, month] = monthKey.split('-');
     const name = MONTH_NAMES[Number(month) - 1];
-    return name.charAt(0).toUpperCase() + name.slice(1) + ' ' + year;
+    return name.charAt(0).toUpperCase() + name.slice(1);
   }
 
-  // Lista de meses (YYYY-MM) presentes en las semanas de todas las campañas, en orden cronológico.
-  function availableMonths(data) {
+  // Meses (YYYY-MM) que sí tienen datos en tendencia_semanal, para saber cuáles habilitar.
+  function monthsWithData(data) {
     const keys = new Set();
     data.campanas.forEach(c => {
       (c.tendencia_semanal || []).forEach(w => {
         if (w.desde) keys.add(w.desde.slice(0, 7));
       });
     });
-    return Array.from(keys).sort();
+    return keys;
+  }
+
+  // Los 12 meses del año en que corre la cuenta (tomado de las semanas con datos,
+  // o del año actual si todavía no hay ninguna).
+  function allMonthsOfYear(data) {
+    const withData = monthsWithData(data);
+    let year = new Date().getFullYear();
+    const first = Array.from(withData).sort()[0];
+    if (first) year = Number(first.slice(0, 4));
+    return Array.from({ length: 12 }, (_, i) => `${year}-${String(i + 1).padStart(2, '0')}`);
   }
 
   function setupMonthFilter(data) {
     const tabsEl = document.getElementById('month-filter-tabs');
-    const months = availableMonths(data);
+    const months = allMonthsOfYear(data);
+    const withData = monthsWithData(data);
 
     function draw() {
       const allBtn = `<button type="button" class="month-tab${ACTIVE_MONTH === null ? ' active' : ''}" data-month="">Todo el período</button>`;
-      const monthBtns = months.map(m =>
-        `<button type="button" class="month-tab${ACTIVE_MONTH === m ? ' active' : ''}" data-month="${m}">${monthLabel(m)}</button>`
-      ).join('');
+      const monthBtns = months.map(m => {
+        const hasData = withData.has(m);
+        const cls = 'month-tab' + (ACTIVE_MONTH === m ? ' active' : '') + (hasData ? '' : ' no-data');
+        return `<button type="button" class="${cls}" data-month="${m}"${hasData ? '' : ' disabled'}>${monthLabel(m)}</button>`;
+      }).join('');
       tabsEl.innerHTML = allBtn + monthBtns;
-      tabsEl.querySelectorAll('.month-tab').forEach(btn => {
+      tabsEl.querySelectorAll('.month-tab:not([disabled])').forEach(btn => {
         btn.addEventListener('click', () => {
           ACTIVE_MONTH = btn.dataset.month || null;
           draw();
