@@ -19,7 +19,7 @@ const SNAPSHOT = {
     {
       id: "120252328774890560",
       nombre: "Campaña Septiembre-Webinar",
-      estado: "ACTIVE",
+      estado: "PAUSED",
       objetivo: "Leads (registro al webinar del 29 de septiembre)",
       inicio: "2026-09-19",
       presupuesto_diario: 5,
@@ -59,7 +59,7 @@ const SNAPSHOT = {
       objetivo: "Leads (etapa 3 — Ready to Buy del funnel FE)",
       inicio: "2026-09-11",
       presupuesto_diario: null,
-      presupuesto_mensual: { sep: 358.40, oct: 537.60 },
+      presupuesto_cerrado: { monto: 358.40, cierre: "10 oct 2026" },
       ventana: "Desde su lanzamiento (11 sep 2026) hasta hoy",
       metricas: {
         gasto: 239.61,
@@ -97,7 +97,7 @@ const SNAPSHOT = {
       objetivo: "Leads (etapa 2 — Consideración del funnel FE)",
       inicio: "2026-09-04",
       presupuesto_diario: null,
-      presupuesto_mensual: { sep: 358.40, oct: 537.60 },
+      presupuesto_cerrado: { monto: 350.00, cierre: "26 oct 2026" },
       ventana: "Desde su lanzamiento (4 sep 2026) hasta hoy",
       metricas: {
         gasto: 253.03,
@@ -174,7 +174,7 @@ const SNAPSHOT = {
       objetivo: "Reconocimiento de marca (etapa 1 del funnel FE)",
       inicio: "2026-08-20",
       presupuesto_diario: null,
-      presupuesto_mensual: { sep: 179.20, oct: 268.80 },
+      presupuesto_cerrado: { monto: 179.20, cierre: "30 sep 2026 (ya cerrada, presupuesto agotado)" },
       ventana: "Desde su lanzamiento (20 ago 2026) hasta hoy",
       metricas: {
         gasto: 183.77,
@@ -280,6 +280,7 @@ const SNAPSHOT = {
       "Se refrescaron métricas, tendencia semanal y recomendaciones con datos reales al 27 de septiembre. Hallazgos clave: el Webinar (es mañana) ya suma 47 registros confirmados con \"Imagen 2\" consolidada como el anuncio más eficiente (24 registros a $0.74 c/u). Ready to Buy y Consideración sumaron una cita más cada una (9 y 10 respectivamente). Contabilidad sigue estancada en 6 citas por segundo refresco seguido pese a más gasto — la señal más clara hasta ahora de que necesita creativos nuevos, no solo más presupuesto.",
       "Se refrescaron métricas, tendencia semanal y recomendaciones con datos reales al 28 de septiembre. Hallazgos clave: el Webinar (mañana) llegó a 57 registros confirmados (49 según el píxel de Meta), con \"Imagen 2\" ampliando su liderazgo a 33 registros a $0.62 c/u. Ready to Buy y Consideración volvieron a sumar una cita más cada una (10 y 11 respectivamente). Contabilidad quedó fija en 6 citas por tercer refresco seguido pese a más gasto — el estancamiento más claro que ha mostrado el portal hasta ahora.",
       "Se refrescaron métricas, tendencia semanal y recomendaciones con datos reales al 29 de septiembre — día del webinar. Hallazgos clave: el Webinar cerró con 97 registros confirmados (62 según el píxel de Meta) a $0.84 por registro, el más eficiente de toda la campaña; \"Imagen 2\" terminó liderando con 41 registros a $0.63 c/u. Ready to Buy y Consideración se mantuvieron estables en 10 y 11 citas respectivamente. Contabilidad llegó a un cuarto refresco seguido sin sumar ninguna cita nueva — el estancamiento más largo que ha mostrado el portal en ninguna campaña, ahora la prioridad número uno.",
+      "Se corrigieron los presupuestos de Reconocimiento, Consideración y Ready to Buy en el portal (1 oct 2026): el \"sep→oct\" que se venía mostrando era del plan original de Félix, pero nunca se configuró así en Meta. Verificado directo en Meta Ads Manager: son presupuestos cerrados (lifetime) fijos, sin aumento en octubre — Reconocimiento $179.20 (ya cerrada, agotada el 30 sep), Consideración $350.00 (cierra 26 oct, no $358.40/$537.60 como decía antes), Ready to Buy $358.40 (cierra 10 oct). También se actualizó el estado de la campaña del Webinar a PAUSADA, ya que se pausó sola al terminar el webinar del 29 de septiembre.",
     ],
     pendientes: [
       "Contabilidad lleva 4 refrescos seguidos sin sumar ninguna cita nueva pese a más gasto semana a semana — meterle 1-2 artes estáticas ya no es un \"nice to have\", es la acción más urgente de todo el portal en este momento. Sigue siendo 100% video con los mismos 6 creativos desde que se armó.",
@@ -340,14 +341,16 @@ for (const c of SNAPSHOT.campanas) {
   }
 }
 
-// Fixed monthly budgets agreed with Félix for the 3-stage FE funnel
-// ("Plan Funnel FE Septiembre 2026") — not derivable from the API since
-// budget is set at ad-set level and this is the plan figure, not the
-// account's live daily_budget. Same map used in snapshot and live mode.
+// Real closed (lifetime) budgets as configured on each campaign in Meta Ads
+// Manager, confirmed directly against the account on Oct 1 2026 — these are
+// NOT monthly figures (the original "Plan Funnel FE Septiembre 2026" draft
+// used a sep→oct monthly split that was never actually set up in Meta this
+// way; campaigns were configured with a single closed lifetime budget and a
+// stop_time instead). Same map used in snapshot and live mode.
 const FE_PRESUPUESTOS = {
-  "120251858423240560": { sep: 179.20, oct: 268.80 }, // Reconocimiento (20%)
-  "120252085024140560": { sep: 358.40, oct: 537.60 }, // Consideración (40%)
-  "120252187070040560": { sep: 358.40, oct: 537.60 }  // Ready to Buy (40%)
+  "120251858423240560": { monto: 179.20, cierre: "30 sep 2026 (ya cerrada, presupuesto agotado)" }, // Reconocimiento (20%)
+  "120252085024140560": { monto: 350.00, cierre: "26 oct 2026" }, // Consideración (40%)
+  "120252187070040560": { monto: 358.40, cierre: "10 oct 2026" }  // Ready to Buy (40%)
 };
 
 // Best-effort mapping from Meta's "actions" array to a human result label.
@@ -464,7 +467,7 @@ async function fetchLive(token, adAccountId) {
         objetivo: c.objective || null,
         inicio: since,
         presupuesto_diario: c.daily_budget ? Number(c.daily_budget) / 100 : null,
-        presupuesto_mensual: FE_PRESUPUESTOS[c.id] || null,
+        presupuesto_cerrado: FE_PRESUPUESTOS[c.id] || null,
         ventana: `Desde su lanzamiento (${fmtFechaEs(since)}) hasta hoy`,
         metricas: {
           gasto: Number(row.spend || 0),
