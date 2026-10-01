@@ -247,7 +247,10 @@
       }).join('');
 
       const p = c.presupuesto_mensual;
-      const budgetHtml = p
+      const pc = c.presupuesto_cerrado;
+      const budgetHtml = pc
+        ? `Presupuesto cerrado: <b>${fmtMoney(pc.monto)}</b> · cierra el ${pc.cierre} · gastado hasta hoy: <b>${fmtMoney(m.gasto)}</b>`
+        : p
         ? `Presupuesto: <b>${fmtMoney(p.sep)}/mes</b> (sept) → ${fmtMoney(p.oct)}/mes en oct · gastado hasta hoy: <b>${fmtMoney(m.gasto)}</b>`
         : `Gastado hasta hoy: <b>${fmtMoney(m.gasto)}</b>`;
 
