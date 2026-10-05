@@ -251,7 +251,7 @@
         <a class="mini-card" href="campanas.html#campaign-${c.id}">
           <div class="mini-left">
             <span class="mini-name">${c.nombre}</span>
-            <span class="pill active">Activa</span>
+            ${estadoPill(c.estado)}
           </div>
           <div class="mini-stats">
             <span><span class="l">Gasto</span>${fmtMoney(m.gasto)}</span>
