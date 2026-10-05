@@ -4,6 +4,15 @@ const fmtMoney = n => n == null ? '—' : '$' + Number(n).toFixed(2);
 const fmtInt = n => n == null ? '—' : Number(n).toLocaleString('es-DO');
 const fmtPct = n => n == null ? '—' : Number(n).toFixed(2) + '%';
 
+// Status pill for a campaign card, driven by the real estado from the data
+// (ACTIVE / PAUSED / CLOSED) instead of a hardcoded "Activa".
+function estadoPill(estado) {
+  if (estado === 'ACTIVE') return '<span class="pill active">Activa</span>';
+  if (estado === 'CLOSED') return '<span class="pill paused">Cerrada</span>';
+  if (estado === 'PAUSED') return '<span class="pill paused">Pausada</span>';
+  return '<span class="pill paused">' + (estado ? String(estado).toLowerCase() : 'Sin estado') + '</span>';
+}
+
 function daysSince(dateStr) {
   const start = new Date(dateStr + 'T00:00:00');
   const now = new Date();
