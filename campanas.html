@@ -120,7 +120,7 @@
           <div class="card-head" onclick="toggleCampaign('${c.id}')">
             <div class="card-title-row">
               <h3>${c.nombre}</h3>
-              <span class="pill active">Activa</span>
+              ${estadoPill(c.estado)}
               <span class="pill days">${days} día${days === 1 ? '' : 's'} publicada</span>
             </div>
             <span class="objective">Objetivo: ${c.objetivo}</span>
