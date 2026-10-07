@@ -6,7 +6,7 @@
 <title>Account One · Dashboard</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2328368D%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22>A1</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,11 +16,12 @@
       <div class="mark" aria-hidden="true"></div>
       <div class="brand-text">
         <div class="eyebrow">Portal de campañas</div>
-        <h1>Account One</h1>
+        <h1>Account<span class="one">One</span></h1>
       </div>
     </div>
     <div class="meta">
       <div id="live-badge-wrap"><span class="live-badge snapshot"><span class="dot"></span>Cargando…</span></div>
+      <span class="updated" id="updated-at"></span>
       Gestionado por Michelle Dijool — Automatización Digital
     </div>
   </header>
@@ -34,6 +35,7 @@
 
   <section class="panel">
     <div class="highlight-box">
+      <div class="highlight-icon" data-icon="users" data-size="26"></div>
       <div class="highlight-label">Dato importante</div>
       <div class="highlight-value">97 <span>registros al webinar</span></div>
     </div>
@@ -46,23 +48,26 @@
     <div id="summary" class="summary"></div>
     <div id="compare-section"></div>
 
-    <h2 class="section-title">Ir a</h2>
+    <h2 class="section-title"><span class="ti" data-icon="route"></span>Ir a</h2>
     <div class="quick-links">
       <a class="quick-link" href="campanas.html">
+        <span class="ql-ico" data-icon="megaphone" data-size="20"></span>
         <span class="ql-title">Campañas activas</span>
         <span class="ql-desc">Detalle completo por campaña, tendencia semanal y anuncios</span>
       </a>
       <a class="quick-link" href="funnel-roadmap.html">
+        <span class="ql-ico" data-icon="funnel" data-size="20"></span>
         <span class="ql-title">Funnel &amp; Roadmap</span>
         <span class="ql-desc">Embudo FE, estado de GHL, pendientes y próximos pasos</span>
       </a>
       <a class="quick-link" href="historico.html">
+        <span class="ql-ico" data-icon="history" data-size="20"></span>
         <span class="ql-title">Histórico</span>
         <span class="ql-desc">Campañas pausadas y temporadas anteriores</span>
       </a>
     </div>
 
-    <h2 class="section-title">Campañas activas ahora</h2>
+    <h2 class="section-title"><span class="ti" data-icon="activity"></span>Campañas ahora</h2>
     <div id="mini-campaign-list" class="mini-list"><div class="loading">Cargando campañas…</div></div>
   </section>
 
@@ -111,10 +116,10 @@
   function renderSummary(data, monthKey) {
     const s = computeSummary(data, monthKey);
     document.getElementById('summary').innerHTML = `
-      <div class="cell"><div class="label">Campañas activas</div><div class="value">${s.campanas_activas}</div></div>
-      <div class="cell"><div class="label">Invertido${s.filtered ? ' (mes seleccionado)' : ' (desde lanzamiento de cada una)'}</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div></div>
-      <div class="cell"><div class="label">Leads registrados</div><div class="value">${s.leads} <small>solo camp. de conversión</small></div></div>
-      <div class="cell"><div class="label">Alcance combinado</div><div class="value">${(s.alcance_combinado/1000).toFixed(1)}K <small>personas</small></div></div>
+      <div class="cell"><span class="kpi-ico">${icon('megaphone', 20)}</span><div class="label">Campañas activas</div><div class="value">${s.campanas_activas}</div></div>
+      <div class="cell"><span class="kpi-ico">${icon('wallet', 20)}</span><div class="label">Invertido${s.filtered ? ' (mes seleccionado)' : ' (desde lanzamiento de cada una)'}</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div></div>
+      <div class="cell"><span class="kpi-ico">${icon('target', 20)}</span><div class="label">Leads registrados</div><div class="value">${s.leads} <small>solo camp. de conversión</small></div></div>
+      <div class="cell"><span class="kpi-ico">${icon('eye', 20)}</span><div class="label">Alcance combinado</div><div class="value">${(s.alcance_combinado/1000).toFixed(1)}K <small>personas</small></div></div>
     `;
     const statusEl = document.getElementById('filter-status');
     if (statusEl) {
@@ -233,7 +238,7 @@
 
     target.innerHTML = `
       <div class="compare-wrap">
-        <h2 class="section-title">Comparación semanal — costo por resultado</h2>
+        <h2 class="section-title"><span class="ti">${icon('trend', 18)}</span>Comparación semanal — costo por resultado</h2>
         <table class="compare-table">
           <thead><tr><th>Campaña</th>${headCells}</tr></thead>
           <tbody>${bodyRows}</tbody>
@@ -253,12 +258,13 @@
             <span class="mini-name">${c.nombre}</span>
             ${estadoPill(c.estado)}
           </div>
+          ${sparkline((c.tendencia_semanal || []).map(w => w.gasto))}
           <div class="mini-stats">
             <span><span class="l">Gasto</span>${fmtMoney(m.gasto)}</span>
             ${m.resultado_nombre ? `<span><span class="l">${m.resultado_nombre}</span>${fmtInt(m.resultado_valor)}</span>` : ''}
             <span><span class="l">CTR</span>${fmtPct(m.ctr)}</span>
           </div>
-          <span class="mini-arrow">→</span>
+          <span class="mini-arrow">${icon('arrow', 18)}</span>
         </a>
       `;
     }).join('');
@@ -270,7 +276,7 @@
       const res = await fetch('/api/campaigns');
       const data = await res.json();
       DASHBOARD_DATA = data;
-      renderLiveBadge(data.modo);
+      renderLiveBadge(data.modo, data.actualizado);
       renderSummary(data, ACTIVE_MONTH);
       setupMonthFilter(data);
       renderCompare(data);

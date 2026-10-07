@@ -6,7 +6,7 @@
 <title>Account One · Funnel &amp; Roadmap</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2328368D%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22>A1</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,11 +16,12 @@
       <div class="mark" aria-hidden="true"></div>
       <div class="brand-text">
         <div class="eyebrow">Portal de campañas</div>
-        <h1>Account One</h1>
+        <h1>Account<span class="one">One</span></h1>
       </div>
     </div>
     <div class="meta">
       <div id="live-badge-wrap"><span class="live-badge snapshot"><span class="dot"></span>Cargando…</span></div>
+      <span class="updated" id="updated-at"></span>
       Gestionado por Michelle Dijool — Automatización Digital
     </div>
   </header>
@@ -33,10 +34,10 @@
   </nav>
 
   <section class="panel">
-    <h2 class="section-title">Estado del funnel / GHL</h2>
+    <h2 class="section-title"><span class="ti" data-icon="plug"></span>Estado del funnel / GHL</h2>
     <div id="funnel-status"><div class="loading">Verificando conexión…</div></div>
 
-    <h2 class="section-title" style="margin-top:32px;">Roadmap</h2>
+    <h2 class="section-title" style="margin-top:32px;"><span class="ti" data-icon="route"></span>Roadmap</h2>
     <div id="roadmap" class="roadmap-grid"><div class="loading">Cargando…</div></div>
   </section>
 
@@ -48,36 +49,42 @@
 
 <script src="common.js"></script>
 <script>
+  const VISIBLE_ITEMS = 3;
+
+  function roadmapCard(cls, ico, title, items) {
+    if (!items || !items.length) return '';
+    const lis = items.map((i, idx) => `<li${idx >= VISIBLE_ITEMS ? ' class="more"' : ''}>${i}</li>`).join('');
+    const extra = items.length - VISIBLE_ITEMS;
+    return `
+      <div class="roadmap-card ${cls}">
+        <h3><span class="roadmap-icon">${icon(ico, 16)}</span>${title}<span class="count">${items.length}</span></h3>
+        <ul>${lis}</ul>
+        ${extra > 0 ? `<button type="button" class="roadmap-toggle" onclick="toggleRoadmap(this)" data-extra="${extra}">Ver ${extra} más</button>` : ''}
+      </div>`;
+  }
+
+  function toggleRoadmap(btn) {
+    const card = btn.closest('.roadmap-card');
+    const open = card.classList.toggle('expanded');
+    btn.textContent = open ? 'Ver menos' : 'Ver ' + btn.dataset.extra + ' más';
+  }
+  window.toggleRoadmap = toggleRoadmap;
+
   function renderRoadmap(data) {
     const r = data.roadmap;
     if (!r) { document.getElementById('roadmap').innerHTML = ''; return; }
-    const list = items => items.map(i => `<li>${i}</li>`).join('');
-    document.getElementById('roadmap').innerHTML = `
-      ${r.completado ? `
-      <div class="roadmap-card completado">
-        <h3><span class="roadmap-icon">✓</span>Hecho esta semana</h3>
-        <ul>${list(r.completado)}</ul>
-      </div>` : ''}
-      <div class="roadmap-card pendientes">
-        <h3><span class="roadmap-icon">!</span>Pendientes</h3>
-        <ul>${list(r.pendientes)}</ul>
-      </div>
-      <div class="roadmap-card artes">
-        <h3><span class="roadmap-icon">✎</span>Próximas artes de campañas</h3>
-        <ul>${list(r.proximas_artes)}</ul>
-      </div>
-      <div class="roadmap-card pasos">
-        <h3><span class="roadmap-icon">→</span>Próximos pasos</h3>
-        <ul>${list(r.proximos_pasos)}</ul>
-      </div>
-    `;
+    document.getElementById('roadmap').innerHTML =
+      roadmapCard('pendientes', 'alert', 'Pendientes', r.pendientes) +
+      roadmapCard('completado', 'check', 'Hecho esta semana', r.completado ? r.completado.slice().reverse() : r.completado) +
+      roadmapCard('pasos', 'arrow', 'Próximos pasos', r.proximos_pasos) +
+      roadmapCard('artes', 'pen', 'Próximas artes de campañas', r.proximas_artes);
   }
 
   async function loadRoadmap() {
     try {
       const res = await fetch('/api/campaigns');
       const data = await res.json();
-      renderLiveBadge(data.modo);
+      renderLiveBadge(data.modo, data.actualizado);
       renderRoadmap(data);
     } catch (e) {
       document.getElementById('roadmap').innerHTML = `<div class="loading">No se pudo cargar (${e.message}).</div>`;

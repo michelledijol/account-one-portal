@@ -6,7 +6,7 @@
 <title>Account One · Histórico</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2328368D%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22>A1</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,11 +16,12 @@
       <div class="mark" aria-hidden="true"></div>
       <div class="brand-text">
         <div class="eyebrow">Portal de campañas</div>
-        <h1>Account One</h1>
+        <h1>Account<span class="one">One</span></h1>
       </div>
     </div>
     <div class="meta">
       <div id="live-badge-wrap"><span class="live-badge snapshot"><span class="dot"></span>Cargando…</span></div>
+      <span class="updated" id="updated-at"></span>
       Gestionado por Michelle Dijool — Automatización Digital
     </div>
   </header>
@@ -33,7 +34,7 @@
   </nav>
 
   <section class="panel">
-    <h2 class="section-title">Histórico de campañas</h2>
+    <h2 class="section-title"><span class="ti" data-icon="history"></span>Histórico de campañas</h2>
     <div id="historico"><div class="loading">Cargando…</div></div>
   </section>
 
@@ -58,7 +59,7 @@
     try {
       const res = await fetch('/api/campaigns');
       const data = await res.json();
-      renderLiveBadge(data.modo);
+      renderLiveBadge(data.modo, data.actualizado);
       renderHistorico(data);
     } catch (e) {
       document.getElementById('historico').innerHTML = `<div class="loading">No se pudo cargar (${e.message}).</div>`;
