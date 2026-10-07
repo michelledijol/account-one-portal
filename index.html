@@ -6,7 +6,7 @@
 <title>Account One · Dashboard</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2328368D%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22>A1</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -48,7 +48,7 @@
     <div id="summary" class="summary"></div>
     <div id="compare-section"></div>
 
-    <h2 class="section-title"><span class="ti" data-icon="route"></span>Ir a</h2>
+    <h2 class="section-title"><span class="ti" data-icon="route"></span>Ir <em>a</em></h2>
     <div class="quick-links">
       <a class="quick-link" href="campanas.html">
         <span class="ql-ico" data-icon="megaphone" data-size="20"></span>
@@ -67,7 +67,7 @@
       </a>
     </div>
 
-    <h2 class="section-title"><span class="ti" data-icon="activity"></span>Campañas ahora</h2>
+    <h2 class="section-title"><span class="ti" data-icon="activity"></span>Campañas <em>ahora</em></h2>
     <div id="mini-campaign-list" class="mini-list"><div class="loading">Cargando campañas…</div></div>
   </section>
 
@@ -238,7 +238,7 @@
 
     target.innerHTML = `
       <div class="compare-wrap">
-        <h2 class="section-title"><span class="ti">${icon('trend', 18)}</span>Comparación semanal — costo por resultado</h2>
+        <h2 class="section-title"><span class="ti">${icon('trend', 18)}</span>Comparación semanal — costo por <em>resultado</em></h2>
         <table class="compare-table">
           <thead><tr><th>Campaña</th>${headCells}</tr></thead>
           <tbody>${bodyRows}</tbody>

@@ -26,7 +26,10 @@ function renderLiveBadge(modo, actualizado) {
   if (upd && actualizado) {
     const d = new Date(actualizado);
     if (!isNaN(d)) {
-      upd.textContent = 'Actualizado: ' + d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' });
+      const dia = d.toLocaleDateString('es-ES', { day: 'numeric', timeZone: 'Europe/Madrid' });
+      const mes = d.toLocaleDateString('es-ES', { month: 'short', timeZone: 'Europe/Madrid' }).replace('.', '');
+      upd.innerHTML = '<span class="st-top">act.</span><b>' + dia + '</b><span class="st-bot">' + mes + '</span>';
+      upd.title = 'Actualizado: ' + d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' });
     }
   }
   if (modo === 'live') {
