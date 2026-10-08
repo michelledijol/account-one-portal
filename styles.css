@@ -812,3 +812,7 @@ h2.section-title .ti { display: inline-grid; vertical-align: middle; margin: -4p
   nav.tabs a .ico { display: none; }
   h2.section-title { font-size: 20px; }
 }
+
+/* Capa 5 · desglose por mes */
+.trend-table tr.total-row td { border-top: 1.5px solid var(--line, #0c0f3e); font-weight: 600; background: rgba(36,81,230,.06); }
+.trend-table tr.total-row td.week-cell { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .05em; font-size: 11px; }
