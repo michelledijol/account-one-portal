@@ -8,12 +8,12 @@ const GRAPH_VERSION = "v20.0";
 
 const SNAPSHOT = {
   modo: "snapshot",
-  actualizado: "2026-10-08T14:30:00+02:00",
+  actualizado: "2026-10-08T16:40:00+02:00",
   resumen: {
     campanas_activas: 5,
-    invertido_total: 1340.19,
-    leads: 35,
-    alcance_combinado: 685223
+    invertido_total: 1345.97,
+    leads: 37,
+    alcance_combinado: 685624
   },
   campanas: [
     {
@@ -25,15 +25,15 @@ const SNAPSHOT = {
       presupuesto_diario: 5,
       ventana: "Desde su lanzamiento (19 sep 2026) hasta hoy",
       metricas: {
-        gasto: 89.88,
-        impresiones: 57802,
-        clicks: 2055,
-        clics_enlace: 1207,
-        vistas_landing: 890,
+        gasto: 90.72,
+        impresiones: 58150,
+        clicks: 2071,
+        clics_enlace: 1217,
+        vistas_landing: 898,
         ctr: 3.56,
         cpc: 0.04,
-        cpm: 1.55,
-        alcance: 28407,
+        cpm: 1.56,
+        alcance: 28534,
         resultado_nombre: "Registros al webinar",
         resultado_valor: 69
       },
@@ -43,6 +43,10 @@ const SNAPSHOT = {
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 20.75, impresiones: 9459, alcance: 7386, resultado_valor: 14 },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 35.08, impresiones: 25948, alcance: 16336, resultado_valor: 55 },
         { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 33.50, impresiones: 22240, alcance: 14721, resultado_valor: null }
+      ],
+      por_mes: [
+        { mes: "Septiembre 2026", desde: "2026-09-19", hasta: "2026-09-30", gasto: 55.83, impresiones: 35407, alcance: 20335, resultado_valor: 69 },
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-08", gasto: 34.89, impresiones: 22743, alcance: 14990, resultado_valor: 0 }
       ],
       ads: [
         { nombre: "No habrá prórroga", gasto: 38.55, impresiones: 32310, clicks: 433, ctr: 1.34, cpc: 0.09, cpm: 1.19, resultado_nombre: "Registros al webinar", resultado_valor: 45 },
@@ -65,15 +69,15 @@ const SNAPSHOT = {
       presupuesto_cerrado: { monto: 358.40, cierre: "10 oct 2026" },
       ventana: "Desde su lanzamiento (11 sep 2026) hasta hoy",
       metricas: {
-        gasto: 338.42,
-        impresiones: 53491,
-        clicks: 1306,
-        clics_enlace: 817,
-        vistas_landing: 541,
-        ctr: 2.44,
+        gasto: 341.24,
+        impresiones: 53850,
+        clicks: 1311,
+        clics_enlace: 819,
+        vistas_landing: 542,
+        ctr: 2.43,
         cpc: 0.26,
-        cpm: 6.33,
-        alcance: 22454,
+        cpm: 6.34,
+        alcance: 22476,
         resultado_nombre: "Citas agendadas",
         resultado_valor: 10
       },
@@ -84,6 +88,10 @@ const SNAPSHOT = {
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 90.56, impresiones: 15210, alcance: 7877, resultado_valor: 5 },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 88.53, impresiones: 14068, alcance: 9405, resultado_valor: 3 },
         { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 76.88, impresiones: 12082, alcance: 8373, resultado_valor: 3 }
+      ],
+      por_mes: [
+        { mes: "Septiembre 2026", desde: "2026-09-11", hasta: "2026-09-30", gasto: 260.20, impresiones: 41202, alcance: 18125, resultado_valor: 10 },
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-08", gasto: 81.04, impresiones: 12648, alcance: 8632, resultado_valor: 3 }
       ],
       ads: [
         { nombre: "Faltan 180,000 empresas", gasto: 181.12, impresiones: 27744, clicks: 720, ctr: 2.60, cpc: 0.25, cpm: 6.53, resultado_nombre: "Citas agendadas", resultado_valor: 7 },
@@ -104,15 +112,15 @@ const SNAPSHOT = {
       presupuesto_cerrado: { monto: 350.00, cierre: "26 oct 2026" },
       ventana: "Desde su lanzamiento (4 sep 2026) hasta hoy",
       metricas: {
-        gasto: 301.38,
-        impresiones: 33541,
-        clicks: 928,
-        clics_enlace: 569,
-        vistas_landing: 386,
+        gasto: 302.60,
+        impresiones: 33659,
+        clicks: 932,
+        clics_enlace: 571,
+        vistas_landing: 388,
         ctr: 2.77,
         cpc: 0.32,
         cpm: 8.99,
-        alcance: 13371,
+        alcance: 13417,
         resultado_nombre: "Citas agendadas",
         resultado_valor: 11
       },
@@ -124,6 +132,10 @@ const SNAPSHOT = {
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 67.54, impresiones: 8378, alcance: 5564, resultado_valor: 1 },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 48.37, impresiones: 4978, alcance: 3305, resultado_valor: 2 },
         { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 38.54, impresiones: 4179, alcance: 2505, resultado_valor: 1 }
+      ],
+      por_mes: [
+        { mes: "Septiembre 2026", desde: "2026-09-04", hasta: "2026-09-30", gasto: 261.66, impresiones: 29286, alcance: 12476, resultado_valor: 11 },
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-08", gasto: 40.94, impresiones: 4373, alcance: 2613, resultado_valor: 1 }
       ],
       ads: [
         { nombre: "Operando a ciegas", gasto: 245.86, impresiones: 26882, clicks: 728, ctr: 2.71, cpc: 0.34, cpm: 9.15, resultado_nombre: "Citas agendadas", resultado_valor: 12 },
@@ -164,6 +176,11 @@ const SNAPSHOT = {
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 40.87, impresiones: 6889, alcance: 4186, resultado_valor: 1 },
         { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 37.11, impresiones: 5824, alcance: 3357, resultado_valor: null }
       ],
+      por_mes: [
+        { mes: "Agosto 2026", desde: "2026-08-27", hasta: "2026-08-31", gasto: 28.66, impresiones: 9676, alcance: 5928, resultado_valor: 1 },
+        { mes: "Septiembre 2026", desde: "2026-09-01", hasta: "2026-09-30", gasto: 179.17, impresiones: 36729, alcance: 15285, resultado_valor: 6 },
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-08", gasto: 37.11, impresiones: 5824, alcance: 3357, resultado_valor: 0 }
+      ],
       ads: [
         { nombre: "Dia 1 llevando Account One de 30 a 100", gasto: 140.28, impresiones: 30533, clicks: 1301, ctr: 4.26, cpc: 0.11, cpm: 4.59, resultado_nombre: "Citas agendadas", resultado_valor: 6 },
         { nombre: "Comparativo Contadores", gasto: 41.05, impresiones: 9605, clicks: 497, ctr: 5.17, cpc: 0.08, cpm: 4.27, resultado_nombre: "Citas agendadas", resultado_valor: 1 },
@@ -182,22 +199,25 @@ const SNAPSHOT = {
       presupuesto_diario: 4,
       ventana: "Desde su lanzamiento (7 oct 2026) hasta hoy",
       metricas: {
-        gasto: 5.90,
-        impresiones: 513,
-        clicks: 86,
-        clics_enlace: 91,
-        vistas_landing: 53,
-        ctr: 16.76,
+        gasto: 6.67,
+        impresiones: 578,
+        clicks: 97,
+        clics_enlace: 104,
+        vistas_landing: 59,
+        ctr: 16.78,
         cpc: 0.07,
-        cpm: 11.50,
-        alcance: 379,
+        cpm: 11.54,
+        alcance: 423,
         resultado_nombre: "Leads",
         resultado_valor: 3
       },
       recomendacion:
-        "Campaña nueva, creada el 7 de octubre para relanzar el anuncio \"Yo se que todavia usas excel (nuevo)\" por separado de la campaña de Contabilidad anterior, con $4 diarios. En su primer día y medio lleva $5.90, 3 leads por el píxel de Meta a $1.97 cada uno y un CTR de 16.76%, el más alto de toda la cuenta, aunque con solo 513 impresiones todavía es una muestra muy chica. Ojo: Meta marca un aviso de diagnóstico de señal en su conjunto de anuncios \"Videos 3% etapa 3\"; conviene revisar que el píxel y los eventos estén disparando bien antes de escalar presupuesto.",
+        "Campaña nueva, creada el 7 de octubre para relanzar el anuncio \"Yo se que todavia usas excel (nuevo)\" por separado de la campaña de Contabilidad anterior, con $4 diarios. En su primer día y medio lleva $6.67, 5 leads por el píxel de Meta a $1.33 cada uno y un CTR de 16.78%, el más alto de toda la cuenta, aunque con solo 578 impresiones todavía es una muestra muy chica. Ojo: Meta marca un aviso de diagnóstico de señal en su conjunto de anuncios \"Videos 3% etapa 3\"; conviene revisar que el píxel y los eventos estén disparando bien antes de escalar presupuesto.",
       tendencia_semanal: [
         { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 4.09, impresiones: 376, alcance: 286, resultado_valor: 3 }
+      ],
+      por_mes: [
+        { mes: "Octubre 2026 (desde el 7)", desde: "2026-10-07", hasta: "2026-10-08", gasto: 6.67, impresiones: 578, alcance: 423, resultado_valor: 5 }
       ],
       ads: [
         { nombre: "Yo se que todavia usas excel (nuevo)", gasto: 5.90, impresiones: 513, clicks: 86, ctr: 16.76, cpc: 0.07, cpm: 11.50, resultado_nombre: "Leads", resultado_valor: 3 }
@@ -213,15 +233,15 @@ const SNAPSHOT = {
       presupuesto_cerrado: { monto: 240.00, cierre: "28 oct 2026" },
       ventana: "Desde su lanzamiento (20 ago 2026) hasta hoy",
       metricas: {
-        gasto: 186.18,
-        impresiones: 566682,
-        clicks: 4000,
-        clics_enlace: 794,
-        vistas_landing: 173,
+        gasto: 186.31,
+        impresiones: 567396,
+        clicks: 4004,
+        clics_enlace: 795,
+        vistas_landing: 174,
         ctr: 0.71,
         cpc: 0.05,
         cpm: 0.33,
-        alcance: 254561,
+        alcance: 254723,
         resultado_nombre: null,
         resultado_valor: null
       },
@@ -235,6 +255,11 @@ const SNAPSHOT = {
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 11.65, impresiones: 22541, alcance: 21120, resultado_valor: null },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 10.00, impresiones: 19980, alcance: 18848, resultado_valor: null },
         { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 1.17, impresiones: 7362, alcance: 6324, resultado_valor: null }
+      ],
+      por_mes: [
+        { mes: "Agosto 2026", desde: "2026-08-20", hasta: "2026-08-31", gasto: 127.93, impresiones: 416250, alcance: 196897, resultado_valor: null },
+        { mes: "Septiembre 2026", desde: "2026-09-01", hasta: "2026-09-30", gasto: 56.98, impresiones: 142456, alcance: 102145, resultado_valor: null },
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-08", gasto: 1.40, impresiones: 8690, alcance: 7214, resultado_valor: null }
       ],
       ads: [
         { nombre: "La llamada", gasto: 120.77, impresiones: 242451, clicks: 3267, ctr: 1.35, cpc: 0.04, cpm: 0.50, resultado_nombre: "Reproducciones", resultado_valor: 67516 },
@@ -261,6 +286,8 @@ const SNAPSHOT = {
         gasto: 173.49,
         impresiones: 459522,
         clicks: 4020,
+        clics_enlace: 494,
+        vistas_landing: 1,
         ctr: 0.87,
         cpc: 0.04,
         cpm: 0.38,
@@ -282,6 +309,11 @@ const SNAPSHOT = {
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 27.51, impresiones: 73120, alcance: 66343, resultado_valor: null },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 27.75, impresiones: 72232, alcance: 67261, resultado_valor: null },
         { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 5.98, impresiones: 17824, alcance: 17305, resultado_valor: null }
+      ],
+      por_mes: [
+        { mes: "Agosto 2026 (desde el 20)", desde: "2026-08-20", hasta: "2026-08-31", gasto: 48.96, impresiones: 125610, alcance: 113189, resultado_valor: null },
+        { mes: "Septiembre 2026", desde: "2026-09-01", hasta: "2026-09-30", gasto: 118.55, impresiones: 316088, alcance: 255966, resultado_valor: null },
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-08", gasto: 5.98, impresiones: 17824, alcance: 17305, resultado_valor: null }
       ],
       ads: [
         { nombre: "Como es tener un negocio en RD", gasto: 136.19, impresiones: 369338, clicks: 2473, ctr: 0.67, cpc: 0.06, cpm: 0.37, resultado_nombre: "Reproducciones completas", resultado_valor: 106579 },
@@ -384,6 +416,10 @@ for (const c of SNAPSHOT.campanas) {
   for (const w of c.tendencia_semanal || []) {
     w.costo_resultado = cprOf(w.gasto, w.resultado_valor);
   }
+  // Same for the monthly breakdown (which month each cita/lead came in).
+  for (const m of c.por_mes || []) {
+    m.costo_resultado = cprOf(m.gasto, m.resultado_valor);
+  }
 }
 
 // Real closed (lifetime) budgets as configured on each campaign in Meta Ads
@@ -393,7 +429,7 @@ for (const c of SNAPSHOT.campanas) {
 // way; campaigns were configured with a single closed lifetime budget and a
 // stop_time instead). Same map used in snapshot and live mode.
 const FE_PRESUPUESTOS = {
-  "120251858423240560": { monto: 179.20, cierre: "30 sep 2026 (ya cerrada, presupuesto agotado)" }, // Reconocimiento (20%)
+  "120251858423240560": { monto: 240.00, cierre: "28 oct 2026" }, // Reconocimiento (20%): 2 conjuntos, $150 + $90, reactivados hasta el 28 oct
   "120252085024140560": { monto: 350.00, cierre: "26 oct 2026" }, // Consideración (40%)
   "120252187070040560": { monto: 358.40, cierre: "10 oct 2026" }  // Ready to Buy (40%)
 };
