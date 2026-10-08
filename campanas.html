@@ -104,6 +104,30 @@
       `;
       }).join('');
 
+      const meses = c.por_mes || [];
+      const esCita = m.resultado_nombre === 'Citas agendadas';
+      const resLabel = esCita ? 'Citas' : (m.resultado_nombre || 'Resultado');
+      const cprLabel = esCita ? 'Costo por cita' : 'Costo/Resultado';
+      const hasRes = meses.some(x => x.resultado_valor !== null && x.resultado_valor !== undefined);
+      const mesGasto = meses.reduce((a, x) => a + x.gasto, 0);
+      const mesRes = meses.reduce((a, x) => a + (x.resultado_valor || 0), 0);
+      const mesRows = meses.map(x => `
+        <tr>
+          <td class="week-cell">${x.mes}</td>
+          <td>${fmtMoney(x.gasto)}</td>
+          <td>${fmtInt(x.impresiones)}</td>
+          <td>${fmtInt(x.alcance)}</td>
+          <td>${hasRes ? (x.resultado_valor !== null && x.resultado_valor !== undefined ? `<b>${fmtInt(x.resultado_valor)}</b>` : '—') : '—'}</td>
+          <td>${hasRes && x.costo_resultado ? `<span class="cpr-cell">${fmtMoney(x.costo_resultado)}</span>` : '<span class="cpr-cell na">—</span>'}</td>
+        </tr>`).join('');
+      const mesTotal = (meses.length > 1 && hasRes) ? `
+        <tr class="total-row">
+          <td class="week-cell">Total</td>
+          <td><b>${fmtMoney(mesGasto)}</b></td><td></td><td></td>
+          <td><b>${fmtInt(mesRes)}</b></td>
+          <td>${mesRes ? `<span class="cpr-cell">${fmtMoney(mesGasto / mesRes)}</span>` : '<span class="cpr-cell na">—</span>'}</td>
+        </tr>` : '';
+
       const adRows = ads.map(ad => `
         <tr>
           <td class="name-cell">${ad.nombre}${ad.nombre === topSpendId ? '<span class="top-badge">Mayor gasto</span>' : ''}</td>
@@ -145,12 +169,22 @@
           </div>` : ''}
           <div class="reco"><span class="tag">Recomendación</span><span>${c.recomendacion}</span></div>
           <div class="ad-table-wrap">
-            ${trend.length ? `
+            ${meses.length ? `
             <div class="trend-wrap">
-              <p class="section-label">Tendencia semanal</p>
+              <p class="section-label">Por mes${hasRes ? ' · en qué mes entró cada ' + (esCita ? 'cita' : 'resultado') : ''}</p>
               <table class="trend-table">
                 <thead><tr>
-                  <th>Semana</th><th>Gasto</th><th>Impr.</th><th>Alcance</th><th>${m.resultado_nombre || 'Resultado'}</th><th>Costo/Resultado</th>
+                  <th>Mes</th><th>Gasto</th><th>Impr.</th><th>Alcance</th><th>${resLabel}</th><th>${cprLabel}</th>
+                </tr></thead>
+                <tbody>${mesRows}${mesTotal}</tbody>
+              </table>
+            </div>` : ''}
+            ${trend.length ? `
+            <div class="trend-wrap">
+              <p class="section-label">Por semana</p>
+              <table class="trend-table">
+                <thead><tr>
+                  <th>Semana</th><th>Gasto</th><th>Impr.</th><th>Alcance</th><th>${resLabel}</th><th>${cprLabel}</th>
                 </tr></thead>
                 <tbody>${trendRows}</tbody>
               </table>
