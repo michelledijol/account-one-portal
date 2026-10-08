@@ -8,12 +8,12 @@ const GRAPH_VERSION = "v20.0";
 
 const SNAPSHOT = {
   modo: "snapshot",
-  actualizado: "2026-10-08T13:10:00+02:00",
+  actualizado: "2026-10-08T14:30:00+02:00",
   resumen: {
-    campanas_activas: 3,
-    invertido_total: 1334.29,
-    leads: 32,
-    alcance_combinado: 684844
+    campanas_activas: 5,
+    invertido_total: 1340.19,
+    leads: 35,
+    alcance_combinado: 685223
   },
   campanas: [
     {
@@ -174,14 +174,43 @@ const SNAPSHOT = {
       ]
     },
     {
+      id: "120252595546730560",
+      nombre: "Campaña contabilidad: Yo sé que todavía usas excel",
+      estado: "ACTIVE",
+      objetivo: "Leads (contabilidad, formulario de contacto)",
+      inicio: "2026-10-07",
+      presupuesto_diario: 4,
+      ventana: "Desde su lanzamiento (7 oct 2026) hasta hoy",
+      metricas: {
+        gasto: 5.90,
+        impresiones: 513,
+        clicks: 86,
+        clics_enlace: 91,
+        vistas_landing: 53,
+        ctr: 16.76,
+        cpc: 0.07,
+        cpm: 11.50,
+        alcance: 379,
+        resultado_nombre: "Leads",
+        resultado_valor: 3
+      },
+      recomendacion:
+        "Campaña nueva, creada el 7 de octubre para relanzar el anuncio \"Yo se que todavia usas excel (nuevo)\" por separado de la campaña de Contabilidad anterior, con $4 diarios. En su primer día y medio lleva $5.90, 3 leads por el píxel de Meta a $1.97 cada uno y un CTR de 16.76%, el más alto de toda la cuenta, aunque con solo 513 impresiones todavía es una muestra muy chica. Ojo: Meta marca un aviso de diagnóstico de señal en su conjunto de anuncios \"Videos 3% etapa 3\"; conviene revisar que el píxel y los eventos estén disparando bien antes de escalar presupuesto.",
+      tendencia_semanal: [
+        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 4.09, impresiones: 376, alcance: 286, resultado_valor: 3 }
+      ],
+      ads: [
+        { nombre: "Yo se que todavia usas excel (nuevo)", gasto: 5.90, impresiones: 513, clicks: 86, ctr: 16.76, cpc: 0.07, cpm: 11.50, resultado_nombre: "Leads", resultado_valor: 3 }
+      ]
+    },
+    {
       id: "120251858423240560",
       nombre: "Campaña: Reconocimiento 80% FE",
-      estado: "CLOSED",
+      estado: "ACTIVE",
       objetivo: "Reconocimiento de marca (etapa 1 del funnel FE)",
       inicio: "2026-08-20",
       presupuesto_diario: null,
-      presupuesto_cerrado: { monto: 179.20, cierre: "30 sep 2026 (ya cerrada, presupuesto agotado)" },
-      // Meta la sigue marcando ACTIVE pero su presupuesto cerrado ya se agotó (0 gasto desde el 30 sep): el portal la muestra como CLOSED.
+      presupuesto_cerrado: { monto: 240.00, cierre: "28 oct 2026" },
       ventana: "Desde su lanzamiento (20 ago 2026) hasta hoy",
       metricas: {
         gasto: 186.18,
@@ -197,7 +226,7 @@ const SNAPSHOT = {
         resultado_valor: null
       },
       recomendacion:
-        "Cumplió su rol: su presupuesto cerrado de $179.20 se agotó el 30 de septiembre, aunque Meta la sigue marcando activa y reportó un gasto residual pequeño ($1.17 del 1 al 7 de octubre y $0.10 hoy). Dejó 254,561 personas alcanzadas a un CPM de $0.33 ($186.18 en total) como audiencia para el retargeting de Consideración y Ready to Buy. No hace falta reactivarla ahora; si se quiere seguir alimentando audiencia fría, habría que cargarle un presupuesto nuevo.",
+        "Está activa otra vez: sus dos conjuntos de anuncios tienen presupuesto cerrado hasta el 28 de octubre, \"Videos\" ($150, le quedan $24.60) y \"Carruseles y artes\" ($90, le quedan $29.22), así que quedan $53.82 por gastar. Tras agotar el presupuesto original el 30 de septiembre volvió a entregar (sumó $1.17 del 1 al 7 de octubre y $0.10 hoy). Acumula 254,561 personas alcanzadas a un CPM de $0.33 ($186.18 en total) como audiencia para el retargeting de Consideración y Ready to Buy. \"La llamada\" concentra el gasto ($120.77, 67,516 reproducciones completas).",
       tendencia_semanal: [
         { semana: "20–26 ago", desde: "2026-08-20", hasta: "2026-08-26", gasto: 92.95, impresiones: 282236, alcance: 154531, resultado_valor: null },
         { semana: "27 ago–2 sep", desde: "2026-08-27", hasta: "2026-09-02", gasto: 44.89, impresiones: 180088, alcance: 94738, resultado_valor: null },
@@ -293,7 +322,8 @@ const SNAPSHOT = {
       "Se corrigieron los presupuestos de Reconocimiento, Consideración y Ready to Buy en el portal (1 oct 2026): el \"sep→oct\" que se venía mostrando era del plan original de Félix, pero nunca se configuró así en Meta. Verificado directo en Meta Ads Manager: son presupuestos cerrados (lifetime) fijos, sin aumento en octubre — Reconocimiento $179.20 (ya cerrada, agotada el 30 sep), Consideración $350.00 (cierra 26 oct, no $358.40/$537.60 como decía antes), Ready to Buy $358.40 (cierra 10 oct). También se actualizó el estado de la campaña del Webinar a PAUSADA, ya que se pausó sola al terminar el webinar del 29 de septiembre.",
       "Se refrescaron métricas, tendencia semanal y recomendaciones con datos reales al 5 de octubre. Hallazgos clave: la campaña del Webinar se reactivó el 1 de octubre (ahora \"Campaña Clase Gratuita\") con anuncios nuevos para el próximo webinar del 13 de octubre y ya suma 30 inscritos para el 13 de octubre en el formulario, aunque el píxel de Meta no atribuye ninguno a los $18.54 gastados en 5 días — conviene revisar el píxel. Contabilidad por fin rompió su estancamiento con la cita #7 (30 de septiembre), aunque en octubre vuelve a ir sin citas. Ready to Buy (10 citas) y Consideración (11) no suman citas desde finales de septiembre. Se pausó la campaña Awareness completa (\"Como es tener un negocio en RD\" y \"La vida es un video juego\") el 2 de octubre. Ready to Buy cierra el 10 de octubre con $48.50 por gastar. Además se corrigió el portal para que la etiqueta de estado de cada campaña (Activa / Pausada / Cerrada) salga del dato real — antes decía \"Activa\" en todas, incluso en las pausadas.",
       "Se refrescaron métricas, tendencia semanal y recomendaciones con datos reales al 7 de octubre. Hallazgos clave: Ready to Buy subió a 13 citas (3 nuevas en octubre, $25.49 por cita) y cierra el 10 de octubre; Consideración sumó su cita #12; Contabilidad aparece pausada en Meta con 7 citas; la Campaña Clase Gratuita suma $85.04 y el webinar del 13 de octubre ya tiene 30 inscritos, aunque el píxel de Meta no atribuye registros nuevos desde el 1 de octubre.",
-      "Se refrescaron métricas, tendencia semanal y recomendaciones con datos reales al 8 de octubre. Hallazgos clave: Ready to Buy y Consideración se mantienen en 13 y 12 citas (sin citas nuevas hoy); Ready to Buy cierra en 2 días con $19.98 por gastar; Contabilidad sigue pausada con 7 citas; la Campaña Clase Gratuita suma $89.88 y el píxel sigue sin atribuir registros nuevos, con el webinar del 13 de octubre en 30 inscritos. Reconocimiento reporta un gasto residual mínimo aunque su presupuesto ya estaba agotado."
+      "Se refrescaron métricas, tendencia semanal y recomendaciones con datos reales al 8 de octubre. Hallazgos clave: Ready to Buy y Consideración se mantienen en 13 y 12 citas (sin citas nuevas hoy); Ready to Buy cierra en 2 días con $19.98 por gastar; Contabilidad sigue pausada con 7 citas; la Campaña Clase Gratuita suma $89.88 y el píxel sigue sin atribuir registros nuevos, con el webinar del 13 de octubre en 30 inscritos. Reconocimiento reporta un gasto residual mínimo aunque su presupuesto ya estaba agotado.",
+      "Se sumaron al portal dos cambios hechos en Meta Ads: la nueva campaña \"Campaña contabilidad: Yo sé que todavía usas excel\" (creada el 7 de octubre, $4 diarios, ya con 3 leads a $1.97) y la reactivación de Reconocimiento con presupuesto cerrado hasta el 28 de octubre. Con ellas son 5 las campañas activas; Awareness sigue sin ningún anuncio encendido."
     ],
     pendientes: [
       "Contabilidad aparece pausada en Meta, con 7 citas y $37.11 gastados del 1 al 7 de octubre sin ninguna nueva. Si se reactiva, lo más urgente es meterle 1-2 artes estáticas: la campaña es 100% video con los mismos creativos desde que se armó, y \"Yo se que todavia usas excel (nuevo)\" llegó a $22.84 con un CPC 3 veces más alto que el resto y sin citas.",
