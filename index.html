@@ -34,6 +34,9 @@
   </nav>
 
   <section class="panel">
+    <div class="page-help"><span class="ph-tag">Qué estás viendo</span><p><strong>Esta es la página principal.</strong> Aquí ves, de un vistazo, cuánto se ha gastado, cuántas citas o registros han llegado y cómo va cada campaña. Si quieres más detalle de algo, usa los botones de abajo.</p></div>
+    <div class="jump-bar"><span class="jb-label">En esta página:</span><a href="#donde">¿Dónde está cada cosa?</a><a href="#resumen">Resumen</a><a href="#compare-section">Comparación semanal</a><a href="#budget-section">Presupuesto del mes</a><a href="#ahora">Campañas ahora</a><a href="#glosario">Palabras que verás</a></div>
+    <div id="donde" class="anchor"></div>
     <div class="highlight-box">
       <div class="highlight-icon" data-icon="users" data-size="26"></div>
       <div class="highlight-label">Dato importante</div>
@@ -41,6 +44,29 @@
       <div class="highlight-value">30 <span>inscritos al webinar del 13 oct</span></div>
     </div>
 
+    <h2 class="section-title"><span class="ti" data-icon="route"></span>¿Dónde está <em>cada cosa</em>?</h2>
+    <p class="sec-help">Además de esta página principal, el portal tiene 3 páginas más. Se abren con el menú azul de arriba. Esto es lo que encuentras en cada una:</p>
+    <div class="quick-links">
+      <a class="quick-link" href="campanas.html">
+        <span class="ql-ico" data-icon="megaphone" data-size="20"></span>
+        <span class="ql-title">Campañas activas</span>
+        <span class="ql-desc">Cada campaña por dentro: cuánto gastó, citas por mes, semana a semana y qué anuncio funciona mejor</span>
+      </a>
+      <a class="quick-link" href="funnel-roadmap.html">
+        <span class="ql-ico" data-icon="funnel" data-size="20"></span>
+        <span class="ql-title">Funnel &amp; Roadmap</span>
+        <span class="ql-desc">Qué falta por hacer, qué ya está hecho y qué decisiones necesito de ti</span>
+      </a>
+      <a class="quick-link" href="historico.html">
+        <span class="ql-ico" data-icon="history" data-size="20"></span>
+        <span class="ql-title">Histórico</span>
+        <span class="ql-desc">Campañas que ya terminaron o están apagadas, y trabajos de meses anteriores</span>
+      </a>
+    </div>
+
+    <div id="resumen" class="anchor"></div>
+    <h2 class="section-title"><span class="ti" data-icon="wallet"></span>Resumen <em>general</em></h2>
+    <p class="sec-help">Los cuatro números más importantes. Puedes filtrar por mes con los botones: si no eliges ninguno, ves todo lo acumulado.</p>
     <div class="month-filter-bar">
       <div id="month-filter-tabs" class="month-filter-tabs"></div>
       <span id="filter-status" class="filter-status"></span>
@@ -50,27 +76,13 @@
     <div id="compare-section"></div>
     <div id="budget-section"></div>
 
-    <h2 class="section-title"><span class="ti" data-icon="route"></span>Ir <em>a</em></h2>
-    <div class="quick-links">
-      <a class="quick-link" href="campanas.html">
-        <span class="ql-ico" data-icon="megaphone" data-size="20"></span>
-        <span class="ql-title">Campañas activas</span>
-        <span class="ql-desc">Detalle completo por campaña, tendencia semanal y anuncios</span>
-      </a>
-      <a class="quick-link" href="funnel-roadmap.html">
-        <span class="ql-ico" data-icon="funnel" data-size="20"></span>
-        <span class="ql-title">Funnel &amp; Roadmap</span>
-        <span class="ql-desc">Embudo FE, estado de GHL, pendientes y próximos pasos</span>
-      </a>
-      <a class="quick-link" href="historico.html">
-        <span class="ql-ico" data-icon="history" data-size="20"></span>
-        <span class="ql-title">Histórico</span>
-        <span class="ql-desc">Campañas pausadas y temporadas anteriores</span>
-      </a>
-    </div>
-
+    <div id="ahora" class="anchor"></div>
     <h2 class="section-title"><span class="ti" data-icon="activity"></span>Campañas <em>ahora</em></h2>
+    <p class="sec-help">Una fila por campaña. Verde "Activa" = está gastando dinero hoy; amarillo "Pausada" = apagada. Toca la flecha para ver el detalle completo.</p>
+
     <div id="mini-campaign-list" class="mini-list"><div class="loading">Cargando campañas…</div></div>
+    <div id="glosario" class="anchor"></div>
+    <div id="glossary-slot"></div>
   </section>
 
   <footer>
@@ -118,10 +130,10 @@
   function renderSummary(data, monthKey) {
     const s = computeSummary(data, monthKey);
     document.getElementById('summary').innerHTML = `
-      <div class="cell"><span class="kpi-ico">${icon('megaphone', 20)}</span><div class="label">Campañas activas</div><div class="value">${s.campanas_activas}</div></div>
-      <div class="cell"><span class="kpi-ico">${icon('wallet', 20)}</span><div class="label">Invertido${s.filtered ? ' (mes seleccionado)' : ' (desde lanzamiento de cada una)'}</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div></div>
-      <div class="cell"><span class="kpi-ico">${icon('target', 20)}</span><div class="label">Leads registrados</div><div class="value">${s.leads} <small>solo camp. de conversión</small></div></div>
-      <div class="cell"><span class="kpi-ico">${icon('eye', 20)}</span><div class="label">Alcance combinado</div><div class="value">${(s.alcance_combinado/1000).toFixed(1)}K <small>personas</small></div></div>
+      <div class="cell"><span class="kpi-ico">${icon('megaphone', 20)}</span><div class="label">Campañas activas</div><div class="value">${s.campanas_activas}</div><div class="kpi-help">Las que están gastando hoy</div></div>
+      <div class="cell"><span class="kpi-ico">${icon('wallet', 20)}</span><div class="label">Invertido${s.filtered ? ' (mes seleccionado)' : ' (desde lanzamiento de cada una)'}</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div><div class="kpi-help">Dinero gastado en anuncios</div></div>
+      <div class="cell"><span class="kpi-ico">${icon('target', 20)}</span><div class="label">Leads registrados</div><div class="value">${s.leads} <small>solo camp. de conversión</small></div><div class="kpi-help">Personas que dejaron sus datos o agendaron cita</div></div>
+      <div class="cell"><span class="kpi-ico">${icon('eye', 20)}</span><div class="label">Alcance combinado</div><div class="value">${(s.alcance_combinado/1000).toFixed(1)}K <small>personas</small></div><div class="kpi-help">Gente distinta que vio los anuncios</div></div>
     `;
     const statusEl = document.getElementById('filter-status');
     if (statusEl) {
@@ -239,8 +251,9 @@
     }).join('');
 
     target.innerHTML = `
-      <div class="compare-wrap">
+      <div id="compare-anchor" class="compare-wrap">
         <h2 class="section-title"><span class="ti">${icon('trend', 18)}</span>Comparación semanal — costo por <em>resultado</em></h2>
+        <p class="sec-help">Cuánto costó conseguir <strong>una cita o un registro</strong> cada semana (las semanas van de jueves a miércoles). <strong>Menos es mejor.</strong> Verde con flecha hacia abajo = mejoró, rojo con flecha hacia arriba = empeoró respecto a la semana anterior.</p>
         <table class="compare-table">
           <thead><tr><th>Campaña</th>${headCells}</tr></thead>
           <tbody>${bodyRows}</tbody>
@@ -304,7 +317,7 @@
     target.innerHTML = `
       <div class="compare-wrap budget-wrap">
         <h2 class="section-title"><span class="ti">${icon('wallet', 18)}</span>Presupuesto a fin de <em>mes</em></h2>
-        <p class="bud-intro">${mesNombre.charAt(0).toUpperCase() + mesNombre.slice(1)} · datos al ${b.ref.getDate()} · quedan <strong>${b.daysLeft} días</strong>. La proyección asume que cada campaña activa gasta su presupuesto diario (o lo que le quede del cerrado).</p>
+        <p class="bud-intro">${mesNombre.charAt(0).toUpperCase() + mesNombre.slice(1)} · datos al ${b.ref.getDate()} · quedan <strong>${b.daysLeft} días</strong>. <strong>Para qué sirve:</strong> te dice cuánto vamos a haber gastado al terminar el mes si todo sigue igual, y te deja calcular cuánto puedo gastar por día para no pasarme del total que quieras.</p>
         <div class="bud-kpis">
           <div><span class="l">Gastado en el mes</span><span class="v">${fmtMoney(b.gastado)}</span></div>
           <div><span class="l">Proyección a fin de mes</span><span class="v">${fmtMoney(b.proyeccion)}</span><small>con las campañas activas hoy</small></div>
@@ -312,7 +325,7 @@
           <div><span class="l">Máximo si se reactiva todo</span><span class="v">${fmtMoney(b.potencialTotal)}</span><small>incluye presupuestos cerrados</small></div>
         </div>
         <table class="compare-table bud-table">
-          <thead><tr><th>Campaña</th><th>Estado</th><th>Presupuesto</th><th>Gastado en el mes</th><th>Proyección fin de mes</th></tr></thead>
+          <thead><tr><th>Campaña</th><th>Estado</th><th>Presupuesto</th><th>Gastado en el mes</th><th>Cuánto llevará a fin de mes</th></tr></thead>
           <tbody>${body}<tr class="total-row"><td class="name-cell">Total</td><td></td><td></td><td>${fmtMoney(b.gastado)}</td><td>${fmtMoney(b.proyeccion)}</td></tr></tbody>
         </table>
         <div class="bud-calc">
