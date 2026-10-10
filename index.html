@@ -41,7 +41,7 @@
       <div class="highlight-icon" data-icon="users" data-size="26"></div>
       <div class="highlight-label">Dato importante</div>
       <div class="highlight-value">97 <span>registros al webinar del 29 sep</span></div>
-      <div class="highlight-value">30 <span>inscritos al webinar del 13 oct</span></div>
+      <div class="highlight-value">47 <span>inscritos al webinar del 13 oct</span></div>
     </div>
 
     <h2 class="section-title"><span class="ti" data-icon="route"></span>¿Dónde está <em>cada cosa</em>?</h2>
@@ -50,7 +50,7 @@
       <a class="quick-link" href="campanas.html">
         <span class="ql-ico" data-icon="megaphone" data-size="20"></span>
         <span class="ql-title">Campañas activas</span>
-        <span class="ql-desc">Cada campaña por dentro: cuánto gastó, citas por mes, semana a semana y qué anuncio funciona mejor</span>
+        <span class="ql-desc">Las campañas activas por dentro: cuánto gastó, citas por mes, semana a semana y qué anuncio funciona mejor</span>
       </a>
       <a class="quick-link" href="funnel-roadmap.html">
         <span class="ql-ico" data-icon="funnel" data-size="20"></span>
@@ -60,7 +60,7 @@
       <a class="quick-link" href="historico.html">
         <span class="ql-ico" data-icon="history" data-size="20"></span>
         <span class="ql-title">Histórico</span>
-        <span class="ql-desc">Campañas que ya terminaron o están apagadas, y trabajos de meses anteriores</span>
+        <span class="ql-desc">Las campañas pausadas (con todo su detalle) y trabajos de meses anteriores</span>
       </a>
     </div>
 
@@ -78,7 +78,7 @@
 
     <div id="ahora" class="anchor"></div>
     <h2 class="section-title"><span class="ti" data-icon="activity"></span>Campañas <em>ahora</em></h2>
-    <p class="sec-help">Una fila por campaña. Verde "Activa" = está gastando dinero hoy; amarillo "Pausada" = apagada. Toca la flecha para ver el detalle completo.</p>
+    <p class="sec-help">Solo las campañas que están gastando dinero hoy. Toca una para ver su detalle completo. Las campañas pausadas están en la página Histórico.</p>
 
     <div id="mini-campaign-list" class="mini-list"><div class="loading">Cargando campañas…</div></div>
     <div id="glosario" class="anchor"></div>
@@ -197,7 +197,7 @@
   // campaign that has one, so trends are visible without opening each campaign.
   function renderCompare(data) {
     const target = document.getElementById('compare-section');
-    const rows = data.campanas.filter(c => (c.tendencia_semanal || []).some(w => w.costo_resultado != null));
+    const rows = data.campanas.filter(c => c.estado === 'ACTIVE' && (c.tendencia_semanal || []).some(w => w.costo_resultado != null));
     if (!rows.length) { target.innerHTML = ''; return; }
 
     const maxWeeks = Math.max(...rows.map(c => c.tendencia_semanal.length));
@@ -306,7 +306,19 @@
     const target = document.getElementById('budget-section');
     const b = budgetModel(data);
     const mesNombre = b.ref.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
-    const body = b.rows.map(r => `
+    const activeRows = b.rows.filter(r => r.activa);
+    const pausedRows = b.rows.filter(r => !r.activa);
+    const pausedGasto = pausedRows.reduce((a, r) => a + r.gastoMes, 0);
+    const pausedPot = pausedRows.reduce((a, r) => a + r.potencial, 0);
+    const pausedTr = pausedRows.length ? `
+      <tr>
+        <td class="name-cell">${pausedRows.length} campañas pausadas</td>
+        <td>${estadoPill('PAUSED')}</td>
+        <td><a href="historico.html">Ver en Histórico</a></td>
+        <td>${fmtMoney(pausedGasto)}</td>
+        <td>${fmtMoney(pausedGasto)}${pausedPot > 0 ? `<small class="bud-sub">+${fmtMoney(pausedPot)} si se reactivan</small>` : ''}</td>
+      </tr>` : '';
+    const body = activeRows.map(r => `
       <tr>
         <td class="name-cell">${r.c.nombre}</td>
         <td>${estadoPill(r.c.estado)}</td>
@@ -326,7 +338,7 @@
         </div>
         <table class="compare-table bud-table">
           <thead><tr><th>Campaña</th><th>Estado</th><th>Presupuesto</th><th>Gastado en el mes</th><th>Cuánto llevará a fin de mes</th></tr></thead>
-          <tbody>${body}<tr class="total-row"><td class="name-cell">Total</td><td></td><td></td><td>${fmtMoney(b.gastado)}</td><td>${fmtMoney(b.proyeccion)}</td></tr></tbody>
+          <tbody>${body}${pausedTr}<tr class="total-row"><td class="name-cell">Total</td><td></td><td></td><td>${fmtMoney(b.gastado)}</td><td>${fmtMoney(b.proyeccion)}</td></tr></tbody>
         </table>
         <div class="bud-calc">
           <label for="bud-target">¿Cuánto quieres gastar en total este mes? (USD)</label>
@@ -358,7 +370,9 @@
 
   // Compact, link-out version of the campaign cards — full detail lives on campanas.html.
   function renderMiniCampaigns(data) {
-    const html = data.campanas.map(c => {
+    const activas = data.campanas.filter(c => c.estado === 'ACTIVE');
+    const pausadas = data.campanas.length - activas.length;
+    const html = activas.map(c => {
       const m = c.metricas;
       return `
         <a class="mini-card" href="campanas.html#campaign-${c.id}">
@@ -376,7 +390,7 @@
         </a>
       `;
     }).join('');
-    document.getElementById('mini-campaign-list').innerHTML = html;
+    document.getElementById('mini-campaign-list').innerHTML = (html || '<div class="loading">No hay campañas activas ahora mismo.</div>') + (pausadas ? `<a class="paused-link" href="historico.html">${pausadas} campañas pausadas — ver en Histórico →</a>` : '');
   }
 
   async function loadDashboard() {
