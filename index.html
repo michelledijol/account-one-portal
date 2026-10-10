@@ -270,44 +270,83 @@
     const m = /(\d{1,2})\s+([a-z]{3})\w*\s+(\d{4})/i.exec(str || '');
     return m ? new Date(Number(m[3]), MESES_ES[m[2].toLowerCase()], Number(m[1])) : null;
   }
-  function budgetModel(data) {
+  const MES_LARGO = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+  let BUD_KEY = null;
+
+  function curKey(data) {
     const ref = data.actualizado ? new Date(data.actualizado) : new Date();
-    const y = ref.getFullYear(), mo = ref.getMonth();
-    const key = y + '-' + String(mo + 1).padStart(2, '0');
-    const dim = new Date(y, mo + 1, 0).getDate();
-    const daysLeft = Math.max(0, dim - ref.getDate());
-    const monthEnd = new Date(y, mo, dim);
+    return { ref, key: ref.getFullYear() + '-' + String(ref.getMonth() + 1).padStart(2, '0') };
+  }
+  function nextKey(key) {
+    const [y, m] = key.split('-').map(Number);
+    return m === 12 ? (y + 1) + '-01' : y + '-' + String(m + 1).padStart(2, '0');
+  }
+  function keyLabel(key) { const [y, m] = key.split('-').map(Number); return cap(MES_LARGO[m - 1]) + ' ' + y; }
+
+  function budgetModel(data, key) {
+    const { ref, key: cur } = curKey(data);
+    const [y, mo1] = key.split('-').map(Number);
+    const dim = new Date(y, mo1, 0).getDate();
+    const modo = key < cur ? 'pasado' : key > cur ? 'futuro' : 'actual';
+    const daysLeft = modo === 'pasado' ? 0 : modo === 'futuro' ? dim : Math.max(0, dim - ref.getDate());
+    const monthEnd = new Date(y, mo1 - 1, dim);
     const rows = data.campanas.map(c => {
       const pm = (c.por_mes || []).find(r => (r.desde || '').slice(0, 7) === key);
       const gastoMes = pm ? Number(pm.gasto) || 0 : 0;
       const activa = c.estado === 'ACTIVE';
-      let diario = c.presupuesto_diario || null, quedaCerrado = null, nota = '', futuro = 0, potencial = 0;
+      let diario = c.presupuesto_diario || null, nota = '', futuro = 0, potencial = 0;
       const pc = c.presupuesto_cerrado;
-      if (diario) {
-        potencial = diario * daysLeft;
-      } else if (pc) {
-        quedaCerrado = Math.max(0, Number(pc.monto) - Number(c.metricas.gasto || 0));
-        potencial = quedaCerrado;
-        const cierre = parseCierre(pc.cierre);
-        nota = 'Presupuesto cerrado ' + fmtMoney(pc.monto) + ' hasta ' + pc.cierre + ' · quedan ' + fmtMoney(quedaCerrado);
-        if (cierre && cierre < monthEnd && cierre < ref) potencial = 0;
+      if (modo !== 'pasado') {
+        if (diario) potencial = diario * daysLeft;
+        else if (pc) {
+          const queda = Math.max(0, Number(pc.monto) - Number(c.metricas.gasto || 0));
+          potencial = queda;
+          const cierre = parseCierre(pc.cierre);
+          nota = 'Presupuesto cerrado ' + fmtMoney(pc.monto) + ' hasta ' + pc.cierre + ' · quedan ' + fmtMoney(queda);
+          if (cierre && (cierre < ref || (modo === 'futuro' && cierre < new Date(y, mo1 - 1, 1)))) potencial = 0;
+        }
       }
       if (diario) nota = fmtMoney(diario) + '/día';
       futuro = activa ? potencial : 0;
       return { c, gastoMes, activa, diario, nota, futuro, potencial };
-    }).filter(r => r.gastoMes > 0 || r.activa || r.potencial > 0);
+    }).filter(r => modo === 'pasado' ? r.gastoMes > 0 : (r.gastoMes > 0 || r.activa || r.potencial > 0));
     const gastado = rows.reduce((a, r) => a + r.gastoMes, 0);
     const proyeccion = gastado + rows.reduce((a, r) => a + r.futuro, 0);
     const potencialTotal = gastado + rows.reduce((a, r) => a + r.potencial, 0);
     const diarioActivo = rows.filter(r => r.activa && r.diario).reduce((a, r) => a + r.diario, 0);
-    return { key, ref, dim, daysLeft, rows, gastado, proyeccion, potencialTotal, diarioActivo };
+    return { key, ref, dim, daysLeft, modo, rows, gastado, proyeccion, potencialTotal, diarioActivo };
   }
+
+  function budgetMonths(data) {
+    const { key: cur } = curKey(data);
+    const set = new Set([cur, nextKey(cur)]);
+    data.campanas.forEach(c => (c.por_mes || []).forEach(r => { if (r.desde) set.add(r.desde.slice(0, 7)); }));
+    return [...set].sort();
+  }
+
   function renderBudget(data) {
     const target = document.getElementById('budget-section');
-    const b = budgetModel(data);
-    const mesNombre = b.ref.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
-    const activeRows = b.rows.filter(r => r.activa);
-    const pausedRows = b.rows.filter(r => !r.activa);
+    const { key: cur } = curKey(data);
+    if (!BUD_KEY) BUD_KEY = cur;
+    const months = budgetMonths(data);
+    const totals = {};
+    months.forEach(k => { const m = budgetModel(data, k); totals[k] = m.modo === 'pasado' ? m.gastado : m.proyeccion; });
+    const b = budgetModel(data, BUD_KEY);
+    const mesNombre = keyLabel(b.key);
+    const maxT = Math.max(...Object.values(totals), 1);
+    const tabs = months.map(k => `<button type="button" class="month-tab${k === BUD_KEY ? ' active' : ''}" data-bkey="${k}">${keyLabel(k).replace(/ 20\d\d$/, '')}${k === cur ? ' (hoy)' : ''}</button>`).join('');
+    const chart = months.map(k => {
+      const mm = budgetModel(data, k);
+      const lbl = mm.modo === 'pasado' ? 'cerró en' : 'proyección';
+      return `<div class="bud-bar${k === BUD_KEY ? ' sel' : ''}${mm.modo === 'futuro' ? ' fut' : ''}" data-bkey="${k}" title="${keyLabel(k)}: ${lbl} ${fmtMoney(totals[k])}">
+        <span class="bb-val">${fmtMoney(totals[k])}</span>
+        <span class="bb-col"><i style="height:${Math.max(4, Math.round(totals[k] / maxT * 100))}%"></i></span>
+        <span class="bb-lbl">${cap(MES_LARGO[Number(k.slice(5)) - 1]).slice(0, 3)}</span></div>`;
+    }).join('');
+
+    const activeRows = b.modo === 'pasado' ? b.rows : b.rows.filter(r => r.activa);
+    const pausedRows = b.modo === 'pasado' ? [] : b.rows.filter(r => !r.activa);
     const pausedGasto = pausedRows.reduce((a, r) => a + r.gastoMes, 0);
     const pausedPot = pausedRows.reduce((a, r) => a + r.potencial, 0);
     const pausedTr = pausedRows.length ? `
@@ -322,37 +361,57 @@
       <tr>
         <td class="name-cell">${r.c.nombre}</td>
         <td>${estadoPill(r.c.estado)}</td>
-        <td>${r.nota || '—'}</td>
+        <td>${b.modo === 'pasado' ? '—' : (r.nota || '—')}</td>
         <td>${fmtMoney(r.gastoMes)}</td>
-        <td>${r.activa ? fmtMoney(r.gastoMes + r.futuro) : fmtMoney(r.gastoMes)}${!r.activa && r.potencial > 0 ? `<small class="bud-sub">+${fmtMoney(r.potencial)} si se reactiva</small>` : ''}</td>
+        <td>${fmtMoney(r.gastoMes + r.futuro)}</td>
       </tr>`).join('');
+
+    const intro = b.modo === 'pasado'
+      ? `<strong>${mesNombre} ya terminó.</strong> Esto es lo que se gastó de verdad en cada campaña y cómo cerró el presupuesto del mes. Escribe el total que querías gastar ese mes y te digo si te pasaste o te sobró.`
+      : b.modo === 'futuro'
+      ? `<strong>${mesNombre} todavía no empieza.</strong> Es una proyección: cuánto se gastaría el mes completo si las campañas activas hoy siguen con el mismo presupuesto diario.`
+      : `${mesNombre} · datos al ${b.ref.getDate()} · quedan <strong>${b.daysLeft} días</strong>. <strong>Para qué sirve:</strong> te dice cuánto vamos a haber gastado al terminar el mes si todo sigue igual, y te deja calcular cuánto puedo gastar por día para no pasarme del total que quieras.`;
+    const k1 = b.modo === 'pasado' ? ['Cerró el mes en', fmtMoney(b.gastado), 'gasto real total'] : ['Gastado en el mes', fmtMoney(b.gastado), ''];
+    const k2 = b.modo === 'pasado' ? ['Promedio por día', fmtMoney(b.gastado / b.dim), b.dim + ' días del mes'] : [b.modo === 'futuro' ? 'Proyección del mes' : 'Proyección a fin de mes', fmtMoney(b.proyeccion), 'con las campañas activas hoy'];
+    const kpis = b.modo === 'pasado'
+      ? `<div><span class="l">${k1[0]}</span><span class="v">${k1[1]}</span><small>${k1[2]}</small></div><div><span class="l">${k2[0]}</span><span class="v">${k2[1]}</span><small>${k2[2]}</small></div><div><span class="l">Campañas con gasto</span><span class="v">${b.rows.length}</span><small>ese mes</small></div>`
+      : `<div><span class="l">${k1[0]}</span><span class="v">${k1[1]}</span></div><div><span class="l">${k2[0]}</span><span class="v">${k2[1]}</span><small>${k2[2]}</small></div><div><span class="l">Gasto diario activo</span><span class="v">${fmtMoney(b.diarioActivo)}</span><small>solo presupuestos diarios</small></div><div><span class="l">Máximo si se reactiva todo</span><span class="v">${fmtMoney(b.potencialTotal)}</span><small>incluye presupuestos cerrados</small></div>`;
+    const colHead = b.modo === 'pasado' ? 'Gasto final del mes' : 'Cuánto llevará a fin de mes';
+
     target.innerHTML = `
       <div class="compare-wrap budget-wrap">
         <h2 class="section-title"><span class="ti">${icon('wallet', 18)}</span>Presupuesto a fin de <em>mes</em></h2>
-        <p class="bud-intro">${mesNombre.charAt(0).toUpperCase() + mesNombre.slice(1)} · datos al ${b.ref.getDate()} · quedan <strong>${b.daysLeft} días</strong>. <strong>Para qué sirve:</strong> te dice cuánto vamos a haber gastado al terminar el mes si todo sigue igual, y te deja calcular cuánto puedo gastar por día para no pasarme del total que quieras.</p>
-        <div class="bud-kpis">
-          <div><span class="l">Gastado en el mes</span><span class="v">${fmtMoney(b.gastado)}</span></div>
-          <div><span class="l">Proyección a fin de mes</span><span class="v">${fmtMoney(b.proyeccion)}</span><small>con las campañas activas hoy</small></div>
-          <div><span class="l">Gasto diario activo</span><span class="v">${fmtMoney(b.diarioActivo)}</span><small>solo presupuestos diarios</small></div>
-          <div><span class="l">Máximo si se reactiva todo</span><span class="v">${fmtMoney(b.potencialTotal)}</span><small>incluye presupuestos cerrados</small></div>
-        </div>
+        <div class="month-filter-tabs bud-tabs">${tabs}</div>
+        <div class="bud-chart" aria-label="Gasto por mes">${chart}</div>
+        <p class="bud-chart-note">Barras: lo que se gastó en cada mes (los meses ya cerrados) o se proyecta gastar (este mes y el siguiente, más claras). Toca un mes para ver su detalle.</p>
+        <p class="bud-intro">${intro}</p>
+        <div class="bud-kpis">${kpis}</div>
         <table class="compare-table bud-table">
-          <thead><tr><th>Campaña</th><th>Estado</th><th>Presupuesto</th><th>Gastado en el mes</th><th>Cuánto llevará a fin de mes</th></tr></thead>
+          <thead><tr><th>Campaña</th><th>Estado</th><th>Presupuesto</th><th>Gastado en el mes</th><th>${colHead}</th></tr></thead>
           <tbody>${body}${pausedTr}<tr class="total-row"><td class="name-cell">Total</td><td></td><td></td><td>${fmtMoney(b.gastado)}</td><td>${fmtMoney(b.proyeccion)}</td></tr></tbody>
         </table>
         <div class="bud-calc">
-          <label for="bud-target">¿Cuánto quieres gastar en total este mes? (USD)</label>
+          <label for="bud-target">¿Cuánto ${b.modo === 'pasado' ? 'querías gastar' : 'quieres gastar'} en total en ${mesNombre.toLowerCase()}? (USD)</label>
           <input id="bud-target" type="number" min="0" step="10" inputmode="decimal" placeholder="Ej. 800">
           <div id="bud-result" class="bud-result"></div>
         </div>
       </div>`;
+    target.querySelectorAll('[data-bkey]').forEach(el => el.addEventListener('click', () => { BUD_KEY = el.dataset.bkey; renderBudget(data); }));
     const input = document.getElementById('bud-target');
     try { const v = localStorage.getItem('ao_bud_target_' + b.key); if (v) input.value = v; } catch (e) {}
     const calc = () => {
       const t = parseFloat(input.value);
       try { localStorage.setItem('ao_bud_target_' + b.key, input.value); } catch (e) {}
       const out = document.getElementById('bud-result');
-      if (!(t > 0)) { out.innerHTML = '<em>Escribe un total y te calculo cuánto queda por día.</em>'; return; }
+      if (!(t > 0)) { out.innerHTML = '<em>Escribe un total y te lo calculo.</em>'; return; }
+      if (b.modo === 'pasado') {
+        const d = t - b.gastado;
+        out.innerHTML = `
+          <div><span class="l">Querías gastar</span><span class="v">${fmtMoney(t)}</span></div>
+          <div><span class="l">Gasto real</span><span class="v">${fmtMoney(b.gastado)}</span></div>
+          <div><span class="l">Resultado</span><span class="v ${d >= 0 ? 'ok' : 'bad'}">${d >= 0 ? 'sobraron ' + fmtMoney(d) : 'te pasaste por ' + fmtMoney(-d)}</span></div>`;
+        return;
+      }
       const resto = t - b.gastado;
       if (resto <= 0) { out.innerHTML = `<span class="bad">Ya llevas ${fmtMoney(b.gastado)}, que supera o iguala ese total. Habría que pausar todo.</span>`; return; }
       const porDia = b.daysLeft ? resto / b.daysLeft : resto;
