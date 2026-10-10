@@ -35,9 +35,9 @@
 
   <section class="panel">
     <a class="back-link" href="index.html">← Volver al dashboard</a>
-    <div class="page-help"><span class="ph-tag">Qué estás viendo</span><p><strong>Aquí están las campañas que ya no están activas.</strong> Sirve para consultar lo que se hizo antes y cuánto rindió. No necesitas hacer nada aquí; es solo para revisar.</p></div>
+    <div class="page-help"><span class="ph-tag">Qué estás viendo</span><p><strong>Aquí están las campañas pausadas.</strong> Sirve para consultar lo que se hizo antes y cuánto rindió. No necesitas hacer nada aquí; es solo para revisar.</p></div>
     <h2 class="section-title"><span class="ti" data-icon="history"></span>Histórico de <em>campañas</em></h2>
-    <p class="sec-help">Cada bloque es una campaña o temporada pasada, con lo que se gastó y los resultados que dejó.</p>
+    <p class="sec-help">Aquí se guardan las campañas que ya no están activas, con lo que se gastó y los resultados que dejaron.</p>
     <div id="historico"><div class="loading">Cargando…</div></div>
     <div id="glosario" class="anchor"></div>
     <div id="glossary-slot"></div>
@@ -53,11 +53,17 @@
 <script>
   function renderHistorico(data) {
     const h = data.historico;
+    const pausadas = (data.campanas || []).filter(c => c.estado !== 'ACTIVE');
     document.getElementById('historico').innerHTML = `
+      <h3 class="hist-sub">Campañas <em>pausadas</em> (${pausadas.length})</h3>
+      <p class="sec-help">Estas campañas están apagadas en Meta y no gastan dinero. Toca una para ver cómo le fue: sus números, citas por mes, semana a semana y sus anuncios.</p>
+      <div id="paused-list">${pausadas.length ? '' : '<div class="loading">No hay campañas pausadas ahora mismo.</div>'}</div>
+      <h3 class="hist-sub" style="margin-top:28px;">Cuentas y temporadas <em>anteriores</em></h3>
       <div class="paused-summary">
-        <strong>${h.campanas_pausadas} campañas pausadas</strong> en el historial de la cuenta (${h.rango}). Este portal se enfoca en lo que está activo hoy; podemos añadir una tabla completa del histórico si es útil para comparar temporadas.
+        <strong>${h.campanas_pausadas} campañas pausadas</strong> más en el historial de la cuenta (${h.rango}), de trabajos anteriores a este portal.
       </div>
     `;
+    if (pausadas.length) renderCampaigns(pausadas, 'paused-list');
   }
 
   async function loadHistorico() {
