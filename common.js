@@ -121,3 +121,30 @@ function hydrateIcons(root) {
   });
   hydrateIcons();
 })();
+
+// ---- Glosario en lenguaje simple (se inserta en #glossary-slot de cada página) ----
+(function () {
+  const T = [
+    ['Cita agendada', 'Una persona que dejó sus datos y reservó una llamada o reunión. Es el resultado que más nos importa en las campañas de Facturación Electrónica.'],
+    ['Lead / registro', 'Alguien interesado que dejó su nombre y contacto (por ejemplo, para el webinar o la clase gratuita).'],
+    ['Costo por resultado', 'Cuánto dinero costó conseguir una cita o un registro. Menos es mejor.'],
+    ['Gasto / invertido', 'El dinero que se ha pagado a Meta (Facebook e Instagram) por mostrar los anuncios.'],
+    ['Alcance', 'Cuántas personas distintas vieron el anuncio al menos una vez.'],
+    ['Impresiones', 'Cuántas veces se mostró el anuncio. Una misma persona puede verlo varias veces, por eso es mayor que el alcance.'],
+    ['CTR', 'De cada 100 veces que se mostró el anuncio, cuántas personas hicieron clic. Más alto = el anuncio llama más la atención.'],
+    ['CPC', 'Lo que cuesta cada clic. Menos es mejor.'],
+    ['CPM', 'Lo que cuesta mostrar el anuncio 1,000 veces. Sirve para comparar qué tan caro es llegar a la gente.'],
+    ['Presupuesto diario', 'El máximo que la campaña puede gastar cada día.'],
+    ['Presupuesto cerrado', 'Un total fijo para toda la campaña hasta una fecha. Cuando se acaba, la campaña deja de gastar sola.'],
+    ['Activa / Pausada', 'Activa = está gastando y mostrando anuncios hoy. Pausada = está apagada y no gasta nada.'],
+    ['Semana', 'En este portal las semanas van de jueves a miércoles.'],
+    ['Creativo', 'Cada anuncio individual (la imagen o video con su texto).']
+  ];
+  function draw() {
+    const el = document.getElementById('glossary-slot');
+    if (!el) return;
+    el.innerHTML = '<details class="glossary"><summary>Palabras que verás en el portal (qué significa cada una)</summary><dl>' +
+      T.map(t => '<dt>' + t[0] + '</dt><dd>' + t[1] + '</dd>').join('') + '</dl></details>';
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', draw); else draw();
+})();
