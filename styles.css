@@ -816,3 +816,23 @@ h2.section-title .ti { display: inline-grid; vertical-align: middle; margin: -4p
 /* Capa 5 · desglose por mes */
 .trend-table tr.total-row td { border-top: 1.5px solid var(--line, #0c0f3e); font-weight: 600; background: rgba(36,81,230,.06); }
 .trend-table tr.total-row td.week-cell { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .05em; font-size: 11px; }
+
+/* Capa 6 · presupuesto a fin de mes */
+.budget-wrap { margin-top: 0; }
+.bud-intro { font-size: 13px; line-height: 1.55; margin: 0 0 16px; color: var(--ink-muted); }
+.bud-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+.bud-kpis > div, .bud-result > div { background: var(--surface-sunken, #f6f1e3); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; }
+.bud-kpis .l, .bud-result .l { font-family: 'DM Mono', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; }
+.bud-kpis .v, .bud-result .v { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 22px; }
+.bud-kpis small, .bud-sub { font-size: 11.5px; opacity: .7; }
+.bud-sub { display: block; }
+.bud-table td { white-space: nowrap; } .bud-table th { white-space: normal; }
+.bud-table td:first-child { white-space: normal; }
+.bud-table tr.total-row td { border-top: 1.5px solid var(--line,#0c0f3e); font-weight: 700; background: rgba(36,81,230,.06); }
+.bud-calc { margin-top: 22px; padding-top: 18px; border-top: 1.5px dashed var(--line,#0c0f3e); display: flex; flex-direction: column; gap: 10px; }
+.bud-calc label { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px; }
+.bud-calc input { max-width: 220px; font: inherit; font-size: 18px; padding: 10px 14px; border: 1.5px solid var(--line,#0c0f3e); border-radius: 12px; background: #fff; }
+.bud-result { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.bud-result p, .bud-result > em, .bud-result > span { grid-column: 1 / -1; margin: 0; font-size: 13px; line-height: 1.55; }
+.bud-result .ok { color: #0b7a3b; } .bud-result .bad { color: #c4202f; }
+@media (max-width: 720px) { .bud-kpis, .bud-result { grid-template-columns: 1fr 1fr; } }
