@@ -863,3 +863,14 @@ h2.section-title .ti { display: inline-grid; vertical-align: middle; margin: -4p
 .paused-link { display:block; margin-top:12px; font-weight:700; font-size:14px; color:var(--line,#0c0f3e); text-decoration:none; border:1.5px dashed var(--line,#0c0f3e); border-radius:14px; padding:14px 18px; background:#fff; }
 .paused-link:hover { background:var(--line,#0c0f3e); color:#fff; }
 .bud-table a { color:var(--line,#0c0f3e); font-weight:600; }
+
+/* Capa 8 · presupuesto por meses */
+.bud-tabs { margin: 0 0 14px; }
+.bud-chart { display:flex; align-items:flex-end; gap:14px; height:150px; padding:6px 4px 0; }
+.bud-bar { flex:1; max-width:110px; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:4px; cursor:pointer; }
+.bb-col { width:100%; flex:1; display:flex; align-items:flex-end; }
+.bb-col i { display:block; width:100%; background:var(--blue,#2451e6); border:1.5px solid var(--line,#0c0f3e); border-radius:8px 8px 0 0; }
+.bud-bar.fut .bb-col i { background:repeating-linear-gradient(45deg,#c9d6fb,#c9d6fb 6px,#e4ebfd 6px,#e4ebfd 12px); }
+.bud-bar.sel .bb-col i { background:var(--yellow,#ffc928); }
+.bb-val { font-size:12px; font-weight:700; } .bb-lbl { font-family:'DM Mono',monospace; font-size:11px; text-transform:uppercase; }
+.bud-chart-note { font-size:12px; opacity:.7; margin:6px 0 16px; }
