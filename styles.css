@@ -856,3 +856,10 @@ h2.section-title .ti { display: inline-grid; vertical-align: middle; margin: -4p
 .glossary dl { margin:0 0 12px; display:grid; grid-template-columns: 190px 1fr; gap:8px 18px; font-size:13.5px; line-height:1.5; }
 .glossary dt { font-weight:700; } .glossary dd { margin:0; }
 @media (max-width:720px){ .glossary dl{grid-template-columns:1fr; gap:2px;} .glossary dd{margin-bottom:10px;} .page-help{flex-direction:column; gap:8px;} }
+
+.hist-sub { font-family:'Poppins',sans-serif; font-weight:800; font-size:20px; margin:8px 0 6px; }
+.hist-sub em { font-family:'Instrument Serif',serif; font-weight:400; }
+
+.paused-link { display:block; margin-top:12px; font-weight:700; font-size:14px; color:var(--line,#0c0f3e); text-decoration:none; border:1.5px dashed var(--line,#0c0f3e); border-radius:14px; padding:14px 18px; background:#fff; }
+.paused-link:hover { background:var(--line,#0c0f3e); color:#fff; }
+.bud-table a { color:var(--line,#0c0f3e); font-weight:600; }
