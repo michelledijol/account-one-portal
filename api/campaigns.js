@@ -22,7 +22,7 @@ const SNAPSHOT = {
       estado: "ACTIVE",
       objetivo: "Leads (registro a la clase gratuita de Facturación Electrónica)",
       inicio: "2026-09-19",
-      presupuesto_diario: 5,
+      presupuesto_diario: 8,
       ventana: "Desde su lanzamiento (19 sep 2026) hasta hoy",
       metricas: {
         gasto: 100.42,
