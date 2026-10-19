@@ -198,7 +198,15 @@
   function renderCompare(data) {
     const target = document.getElementById('compare-section');
     const rows = data.campanas.filter(c => c.estado === 'ACTIVE' && (c.tendencia_semanal || []).some(w => w.costo_resultado != null));
-    if (!rows.length) { target.innerHTML = ''; return; }
+    if (!rows.length) {
+      const act = data.campanas.filter(c => c.estado === 'ACTIVE');
+      target.innerHTML = act.length ? `
+      <div class="compare-wrap">
+        <h2 class="section-title"><span class="ti">${icon('trend', 18)}</span>Comparación semanal — costo por <em>resultado</em></h2>
+        <p class="sec-help">Todavía no hay una comparación semanal: las campañas activas empezaron hace muy poco y aún no tienen citas agendadas. Cuando entren las primeras citas, aquí verás cuánto cuesta cada una semana a semana.</p>
+      </div>` : '';
+      return;
+    }
 
     const maxWeeks = Math.max(...rows.map(c => c.tendencia_semanal.length));
 
@@ -295,26 +303,34 @@
       const pm = (c.por_mes || []).find(r => (r.desde || '').slice(0, 7) === key);
       const gastoMes = pm ? Number(pm.gasto) || 0 : 0;
       const activa = c.estado === 'ACTIVE';
-      let diario = c.presupuesto_diario || null, nota = '', futuro = 0, potencial = 0;
+      let diario = c.presupuesto_diario || null, nota = '', futuro = 0, potencial = 0, ritmo = diario || 0;
       const pc = c.presupuesto_cerrado;
+      const DAY = 86400000;
       if (modo !== 'pasado') {
         if (diario) potencial = diario * daysLeft;
         else if (pc) {
           const queda = Math.max(0, Number(pc.monto) - Number(c.metricas.gasto || 0));
-          potencial = queda;
-          const cierre = parseCierre(pc.cierre);
           nota = 'Presupuesto cerrado ' + fmtMoney(pc.monto) + ' hasta ' + pc.cierre + ' · quedan ' + fmtMoney(queda);
-          if (cierre && (cierre < ref || (modo === 'futuro' && cierre < new Date(y, mo1 - 1, 1)))) potencial = 0;
+          const cierre = parseCierre(pc.cierre);
+          const from = new Date(Math.max(new Date(ref.getFullYear(), ref.getMonth(), ref.getDate() + 1).getTime(), new Date(y, mo1 - 1, 1).getTime()));
+          const tomorrow = new Date(ref.getFullYear(), ref.getMonth(), ref.getDate() + 1);
+          if (cierre && cierre >= tomorrow) {
+            const totalDays = Math.round((cierre - tomorrow) / DAY) + 1;
+            const end = new Date(Math.min(cierre.getTime(), monthEnd.getTime()));
+            const monthDays = Math.max(0, Math.round((end - from) / DAY) + 1);
+            ritmo = queda / totalDays;
+            potencial = queda * monthDays / totalDays;
+          }
         }
       }
       if (diario) nota = fmtMoney(diario) + '/día';
       futuro = activa ? potencial : 0;
-      return { c, gastoMes, activa, diario, nota, futuro, potencial };
+      return { c, gastoMes, activa, diario, nota, futuro, potencial, ritmo };
     }).filter(r => modo === 'pasado' ? r.gastoMes > 0 : (r.gastoMes > 0 || r.activa || r.potencial > 0));
     const gastado = rows.reduce((a, r) => a + r.gastoMes, 0);
     const proyeccion = gastado + rows.reduce((a, r) => a + r.futuro, 0);
     const potencialTotal = gastado + rows.reduce((a, r) => a + r.potencial, 0);
-    const diarioActivo = rows.filter(r => r.activa && r.diario).reduce((a, r) => a + r.diario, 0);
+    const diarioActivo = rows.filter(r => r.activa).reduce((a, r) => a + r.ritmo, 0);
     return { key, ref, dim, daysLeft, modo, rows, gastado, proyeccion, potencialTotal, diarioActivo };
   }
 
@@ -375,7 +391,7 @@
     const k2 = b.modo === 'pasado' ? ['Promedio por día', fmtMoney(b.gastado / b.dim), b.dim + ' días del mes'] : [b.modo === 'futuro' ? 'Proyección del mes' : 'Proyección a fin de mes', fmtMoney(b.proyeccion), 'con las campañas activas hoy'];
     const kpis = b.modo === 'pasado'
       ? `<div><span class="l">${k1[0]}</span><span class="v">${k1[1]}</span><small>${k1[2]}</small></div><div><span class="l">${k2[0]}</span><span class="v">${k2[1]}</span><small>${k2[2]}</small></div><div><span class="l">Campañas con gasto</span><span class="v">${b.rows.length}</span><small>ese mes</small></div>`
-      : `<div><span class="l">${k1[0]}</span><span class="v">${k1[1]}</span></div><div><span class="l">${k2[0]}</span><span class="v">${k2[1]}</span><small>${k2[2]}</small></div><div><span class="l">Gasto diario activo</span><span class="v">${fmtMoney(b.diarioActivo)}</span><small>solo presupuestos diarios</small></div><div><span class="l">Máximo si se reactiva todo</span><span class="v">${fmtMoney(b.potencialTotal)}</span><small>incluye presupuestos cerrados</small></div>`;
+      : `<div><span class="l">${k1[0]}</span><span class="v">${k1[1]}</span></div><div><span class="l">${k2[0]}</span><span class="v">${k2[1]}</span><small>${k2[2]}</small></div><div><span class="l">Ritmo diario activo</span><span class="v">${fmtMoney(b.diarioActivo)}</span><small>lo que gastan por día las activas</small></div><div><span class="l">Máximo si se reactiva todo</span><span class="v">${fmtMoney(b.potencialTotal)}</span><small>incluye presupuestos cerrados</small></div>`;
     const colHead = b.modo === 'pasado' ? 'Gasto final del mes' : 'Cuánto llevará a fin de mes';
 
     target.innerHTML = `
