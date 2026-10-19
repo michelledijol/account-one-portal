@@ -8,57 +8,203 @@ const GRAPH_VERSION = "v20.0";
 
 const SNAPSHOT = {
   modo: "snapshot",
-  actualizado: "2026-10-10T13:30:00+02:00",
+  actualizado: "2026-10-19T13:30:00+02:00",
   resumen: {
-    campanas_activas: 2,
-    invertido_total: 1398.34,
+    campanas_activas: 3,
+    invertido_total: 1649.72,
     leads: 42,
-    alcance_combinado: 697454
+    alcance_combinado: 751625
   },
   campanas: [
     {
+      id: "120252758005220560",
+      nombre: "Oct 2026 - Citas Contabilidad Félix",
+      estado: "ACTIVE",
+      objetivo: "Citas agendadas (contabilidad, campaña de Félix)",
+      inicio: "2026-10-17",
+      presupuesto_diario: null,
+      presupuesto_cerrado: { monto: 250.00, cierre: "15 nov 2026" },
+      ventana: "Desde su lanzamiento (17 oct 2026) hasta hoy",
+      metricas: {
+        gasto: 18.38,
+        impresiones: 2758,
+        clicks: 113,
+        clics_enlace: 45,
+        vistas_landing: 34,
+        ctr: 4.1,
+        cpc: 0.16,
+        cpm: 6.66,
+        alcance: 2175,
+        resultado_nombre: "Citas agendadas",
+        resultado_valor: 0
+      },
+      recomendacion:
+        "Campaña nueva con presupuesto cerrado de $250 hasta el 15 de noviembre, encendida el 17 de octubre. Lleva $18.38 gastados en 3 días (unos $8.70 por día), 113 clics a $0.16 y 0 citas agendadas todavía, lo normal con tan poco tiempo. Tiene 4 anuncios: \"CO-1 - Empresarios de RD respóndanme esto\" concentra casi la mitad del gasto ($8.74, 3.71% de CTR) y \"CO-2 - Tu sistema de contabilidad dice que ganaste dinero\" tiene el mejor CTR (6.08%) con solo $3.43. Conviene esperar al menos 7 días antes de juzgar el costo por cita.",
+      tendencia_semanal: [
+        { semana: "15–19 oct", desde: "2026-10-15", hasta: "2026-10-19", gasto: 18.38, impresiones: 2758, alcance: 2175, resultado_valor: 0 }
+      ],
+      por_mes: [
+        { mes: "Octubre 2026 (desde el 17)", desde: "2026-10-17", hasta: "2026-10-19", gasto: 18.38, impresiones: 2758, alcance: 2175, resultado_valor: 0 }
+      ],
+      ads: [
+        { nombre: "CO-1 - Empresarios de RD respóndanme esto - Video", gasto: 8.74, impresiones: 1403, clicks: 52, ctr: 3.71, cpc: 0.17, cpm: 6.23, resultado_nombre: null, resultado_valor: null },
+        { nombre: "CO-3 - Yo sé que todavía usas Excel - Video", gasto: 3.58, impresiones: 429, clicks: 20, ctr: 4.66, cpc: 0.18, cpm: 8.34, resultado_nombre: null, resultado_valor: null },
+        { nombre: "CO-2 - Tu sistema de contabilidad dice que ganaste dinero - Video", gasto: 3.43, impresiones: 576, clicks: 35, ctr: 6.08, cpc: 0.1, cpm: 5.95, resultado_nombre: null, resultado_valor: null },
+        { nombre: "CO-4 - Carrusel Empresarios de RD respóndanme esto", gasto: 2.63, impresiones: 350, clicks: 6, ctr: 1.71, cpc: 0.44, cpm: 7.51, resultado_nombre: null, resultado_valor: null }
+      ]
+    },
+    {
+      id: "120252757568140560",
+      nombre: "Oct 2026 - Citas FE Félix",
+      estado: "ACTIVE",
+      objetivo: "Citas agendadas (Facturación Electrónica, campaña de Félix)",
+      inicio: "2026-10-17",
+      presupuesto_diario: null,
+      presupuesto_cerrado: { monto: 500.00, cierre: "15 nov 2026" },
+      ventana: "Desde su lanzamiento (17 oct 2026) hasta hoy",
+      metricas: {
+        gasto: 34.38,
+        impresiones: 5317,
+        clicks: 211,
+        clics_enlace: 85,
+        vistas_landing: 54,
+        ctr: 3.97,
+        cpc: 0.16,
+        cpm: 6.47,
+        alcance: 4166,
+        resultado_nombre: "Citas agendadas",
+        resultado_valor: 0
+      },
+      recomendacion:
+        "Campaña nueva de Facturación Electrónica con presupuesto cerrado de $500 hasta el 15 de noviembre, encendida el 17 de octubre. Lleva $34.38 gastados en 3 días, 211 clics a $0.16 y 0 citas agendadas todavía. \"FE-1 - Te quedan 30 días o menos\" se lleva la mitad del gasto ($17.18, 4.33% de CTR); \"FE-3 - No es la firma de DocuSign\" tiene el mejor CTR (4.65%) con $6.55, y el carrusel \"FE-4\" es el más flojo (1.21% de CTR). Es muy pronto para decidir: lo razonable es esperar 7 días y recién ahí comparar costo por cita.",
+      tendencia_semanal: [
+        { semana: "15–19 oct", desde: "2026-10-15", hasta: "2026-10-19", gasto: 34.38, impresiones: 5317, alcance: 4166, resultado_valor: 0 }
+      ],
+      por_mes: [
+        { mes: "Octubre 2026 (desde el 17)", desde: "2026-10-17", hasta: "2026-10-19", gasto: 34.38, impresiones: 5317, alcance: 4166, resultado_valor: 0 }
+      ],
+      ads: [
+        { nombre: "FE-1 - Te quedan 30 días o menos - Video", gasto: 17.18, impresiones: 3045, clicks: 132, ctr: 4.33, cpc: 0.13, cpm: 5.64, resultado_nombre: null, resultado_valor: null },
+        { nombre: "FE-3 - No es la firma de DocuSign - Video", gasto: 6.55, impresiones: 795, clicks: 37, ctr: 4.65, cpc: 0.18, cpm: 8.24, resultado_nombre: null, resultado_valor: null },
+        { nombre: "FE-2 - Así se ve FE - Video", gasto: 6.31, impresiones: 814, clicks: 34, ctr: 4.18, cpc: 0.19, cpm: 7.75, resultado_nombre: null, resultado_valor: null },
+        { nombre: "FE-4 - Carrusel Quedan menos de 30 días", gasto: 4.34, impresiones: 663, clicks: 8, ctr: 1.21, cpc: 0.54, cpm: 6.55, resultado_nombre: null, resultado_valor: null }
+      ]
+    },
+    {
+      id: "120252755221670560",
+      nombre: "Oct 2026 - Citas Retargeting Clases Félix",
+      estado: "ACTIVE",
+      objetivo: "Citas agendadas (retargeting a asistentes e interesados en las clases de FE)",
+      inicio: "2026-10-17",
+      presupuesto_diario: null,
+      presupuesto_cerrado: { monto: 250.00, cierre: "15 nov 2026" },
+      ventana: "Desde su lanzamiento (17 oct 2026) hasta hoy",
+      metricas: {
+        gasto: 17.48,
+        impresiones: 2173,
+        clicks: 42,
+        clics_enlace: 21,
+        vistas_landing: 11,
+        ctr: 1.93,
+        cpc: 0.42,
+        cpm: 8.04,
+        alcance: 631,
+        resultado_nombre: "Citas agendadas",
+        resultado_valor: 0
+      },
+      recomendacion:
+        "Campaña de retargeting con presupuesto cerrado de $250 hasta el 15 de noviembre, encendida el 17 de octubre. Lleva $17.48 gastados en 3 días, pero solo alcanzó a 631 personas (CPM de $8.04), lo que muestra que la audiencia de asistentes e interesados en las clases es pequeña y se satura rápido. \"RT-2 - No pagues dos veces por lo mismo\" concentra el 78% del gasto ($13.62, 2.13% de CTR). Sin citas todavía. Vigilar la frecuencia en los próximos días: con tan poca gente, el mismo anuncio se repite mucho.",
+      tendencia_semanal: [
+        { semana: "15–19 oct", desde: "2026-10-15", hasta: "2026-10-19", gasto: 17.48, impresiones: 2173, alcance: 631, resultado_valor: 0 }
+      ],
+      por_mes: [
+        { mes: "Octubre 2026 (desde el 17)", desde: "2026-10-17", hasta: "2026-10-19", gasto: 17.48, impresiones: 2173, alcance: 631, resultado_valor: 0 }
+      ],
+      ads: [
+        { nombre: "RT-2 - No pagues dos veces por lo mismo", gasto: 13.62, impresiones: 1597, clicks: 34, ctr: 2.13, cpc: 0.4, cpm: 8.53, resultado_nombre: null, resultado_valor: null },
+        { nombre: "RT-1 - Te quitamos la facturación electrónica de tu plato", gasto: 2.01, impresiones: 291, clicks: 3, ctr: 1.03, cpc: 0.67, cpm: 6.91, resultado_nombre: null, resultado_valor: null },
+        { nombre: "RT-3 - Quedan 30 días o menos", gasto: 1.85, impresiones: 285, clicks: 5, ctr: 1.75, cpc: 0.37, cpm: 6.49, resultado_nombre: null, resultado_valor: null }
+      ]
+    },
+    {
+      id: "120252646153720560",
+      nombre: "Oct 2026 - 2 Webinar Oct. 2026 (comenta la palabra)",
+      estado: "CLOSED",
+      objetivo: "Registros al webinar del 13 de octubre (anuncio de reel, \"comenta la palabra\")",
+      inicio: "2026-10-10",
+      presupuesto_diario: null,
+      presupuesto_cerrado: { monto: 100.00, cierre: "13 oct 2026" },
+      ventana: "Del 10 al 13 de octubre de 2026",
+      metricas: {
+        gasto: 99.81,
+        impresiones: 47068,
+        clicks: 1759,
+        clics_enlace: 1107,
+        vistas_landing: 907,
+        ctr: 3.74,
+        cpc: 0.06,
+        cpm: 2.12,
+        alcance: 35579,
+        resultado_nombre: "Registros al webinar",
+        resultado_valor: 145
+      },
+      recomendacion:
+        "Campaña corta con presupuesto cerrado de $100 que corrió del 10 al 13 de octubre (día del webinar). Gastó $99.81 con un solo anuncio (\"Quedan menos de 30 días\", un reel existente) y el píxel de Meta atribuyó 145 registros a $0.69 cada uno, el costo más bajo de todas las campañas de registros del portal. Alcanzó a 35,579 personas. Meta todavía la marca como activa pero el presupuesto está agotado y su fecha de cierre pasó, por eso aparece como cerrada. Vale la pena repetir este formato para los webinars del 29 de octubre y el 12 de noviembre.",
+      tendencia_semanal: [
+        { semana: "8–14 oct", desde: "2026-10-08", hasta: "2026-10-14", gasto: 99.81, impresiones: 47068, alcance: 35579, resultado_valor: 145 }
+      ],
+      por_mes: [
+        { mes: "Octubre 2026 (desde el 10)", desde: "2026-10-10", hasta: "2026-10-13", gasto: 99.81, impresiones: 47068, alcance: 35579, resultado_valor: 145 }
+      ],
+      ads: [
+        { nombre: "Quedan menos de 30 días (reel)", gasto: 99.81, impresiones: 47068, clicks: 1759, ctr: 3.74, cpc: 0.06, cpm: 2.12, resultado_nombre: "Registros al webinar", resultado_valor: 145 }
+      ]
+    },
+    {
       id: "120252328774890560",
       nombre: "Campaña Clase Gratuita",
-      estado: "ACTIVE",
+      estado: "PAUSED",
       objetivo: "Leads (registro a la clase gratuita de Facturación Electrónica)",
       inicio: "2026-09-19",
       presupuesto_diario: 8,
       ventana: "Desde su lanzamiento (19 sep 2026) hasta hoy",
       metricas: {
-        gasto: 108.44,
-        impresiones: 64392,
-        clicks: 2342,
-        clics_enlace: 1378,
-        vistas_landing: 1012,
-        ctr: 3.64,
+        gasto: 161.46,
+        impresiones: 84504,
+        clicks: 3210,
+        clics_enlace: 1907,
+        vistas_landing: 1403,
+        ctr: 3.8,
         cpc: 0.05,
-        cpm: 1.68,
-        alcance: 31596,
+        cpm: 1.91,
+        alcance: 39168,
         resultado_nombre: "Registros al webinar",
-        resultado_valor: 73
+        resultado_valor: 109
       },
       recomendacion:
-        "Es una de las 2 campañas activas, ahora con $8 diarios (subió desde $5 el 9 de octubre). Acumula 73 registros según el píxel de Meta a $1.49 c/u ($108.44 en total; el 29 de septiembre se confirmaron 97 en el formulario). El webinar del 13 de octubre (7pm) tiene 47 inscritos confirmados en el formulario, pero desde el 1 de octubre lleva $52.61 gastados y el píxel solo atribuyó 4 registros; conviene revisar que el píxel esté disparando en la página de confirmación. \"No habrá prórroga\" sigue siendo el anuncio más eficiente ($0.86 por registro, 45 registros), seguido de \"Video 1\" ($1.16) y \"Video 2\" ($1.64). \"Si tu negocio todavía no está en facturación electrónica\" ($20.68) lleva solo 2 registros a $10.34 cada uno, el más caro de la campaña.",
+        "Meta la muestra pausada (llegó a correr con $8 diarios). Acumula 109 registros según el píxel de Meta a $1.48 c/u ($161.46 en total). En octubre gastó $105.63 y sumó 40 registros ($2.64 c/u), 36 de ellos entre el 8 y el 14 de octubre, la semana del webinar del 13. El webinar tuvo 47 inscritos confirmados en el formulario. \"Si tu negocio todavía no está en facturación electrónica\" es el anuncio con más gasto ($42.20, 19 registros a $2.22); \"No habrá prórroga\" sigue siendo el más eficiente ($0.87 por registro, 45 registros), seguido de \"Video 1\" ($1.08, 28 registros) y \"Video 2\" ($1.70, 12). Los anuncios de retargeting casi no dieron registros.",
       tendencia_semanal: [
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 20.75, impresiones: 9459, alcance: 7386, resultado_valor: 14 },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 35.08, impresiones: 25948, alcance: 16336, resultado_valor: 55 },
-        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 33.50, impresiones: 22240, alcance: 14721, resultado_valor: null }
+        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 33.50, impresiones: 22240, alcance: 14721, resultado_valor: null },
+        { semana: "8–14 oct", desde: "2026-10-08", hasta: "2026-10-14", gasto: 61.98, impresiones: 22685, alcance: 15429, resultado_valor: 36 },
+        { semana: "15–19 oct", desde: "2026-10-15", hasta: "2026-10-19", gasto: 10.14, impresiones: 4166, alcance: 3396, resultado_valor: 4 }
       ],
       por_mes: [
         { mes: "Septiembre 2026", desde: "2026-09-19", hasta: "2026-09-30", gasto: 55.83, impresiones: 35407, alcance: 20335, resultado_valor: 69 },
-        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-10", gasto: 52.61, impresiones: 28985, alcance: 18718, resultado_valor: 4 }
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-19", gasto: 105.63, impresiones: 49097, alcance: 27478, resultado_valor: 40 }
       ],
       ads: [
-        { nombre: "No habrá prórroga", gasto: 38.67, impresiones: 32393, clicks: 438, ctr: 1.35, cpc: 0.09, cpm: 1.19, resultado_nombre: "Registros al webinar", resultado_valor: 45 },
-        { nombre: "Si tu negocio todavía no está en facturación electrónica", gasto: 20.68, impresiones: 10699, clicks: 468, ctr: 4.37, cpc: 0.04, cpm: 1.93, resultado_nombre: "Registros al webinar", resultado_valor: 2 },
-        { nombre: "Video 2", gasto: 19.68, impresiones: 8866, clicks: 776, ctr: 8.75, cpc: 0.03, cpm: 2.22, resultado_nombre: "Registros al webinar", resultado_valor: 12 },
-        { nombre: "Video 1", gasto: 13.9, impresiones: 5685, clicks: 227, ctr: 3.99, cpc: 0.06, cpm: 2.45, resultado_nombre: "Registros al webinar", resultado_valor: 12 },
-        { nombre: "La DGII tiene las pilas puestas", gasto: 9.64, impresiones: 4649, clicks: 375, ctr: 8.07, cpc: 0.03, cpm: 2.07, resultado_nombre: null, resultado_valor: null },
-        { nombre: "RT - Video 1", gasto: 3.32, impresiones: 658, clicks: 20, ctr: 3.04, cpc: 0.17, cpm: 5.05, resultado_nombre: "Registros al webinar", resultado_valor: 1 },
-        { nombre: "Quedan 45 días", gasto: 1.24, impresiones: 708, clicks: 19, ctr: 2.68, cpc: 0.07, cpm: 1.75, resultado_nombre: null, resultado_valor: null },
-        { nombre: "180,000 empresas", gasto: 0.72, impresiones: 487, clicks: 9, ctr: 1.85, cpc: 0.08, cpm: 1.48, resultado_nombre: "Registros al webinar", resultado_valor: 1 },
-        { nombre: "La fecha esta cerca y muchos todavía en el aire", gasto: 0.55, impresiones: 230, clicks: 9, ctr: 3.91, cpc: 0.06, cpm: 2.39, resultado_nombre: null, resultado_valor: null },
-        { nombre: "RT - No habrá prórroga", gasto: 0.04, impresiones: 17, clicks: 1, ctr: 5.88, cpc: 0.04, cpm: 2.35, resultado_nombre: null, resultado_valor: null }
+        { nombre: "Si tu negocio todavía no está en facturación electrónica", gasto: 42.2, impresiones: 20906, clicks: 959, ctr: 4.59, cpc: 0.04, cpm: 2.02, resultado_nombre: "Registros al webinar", resultado_valor: 19 },
+        { nombre: "No habrá prórroga", gasto: 39.28, impresiones: 32651, clicks: 454, ctr: 1.39, cpc: 0.09, cpm: 1.2, resultado_nombre: "Registros al webinar", resultado_valor: 45 },
+        { nombre: "Video 1", gasto: 30.28, impresiones: 11573, clicks: 471, ctr: 4.07, cpc: 0.06, cpm: 2.62, resultado_nombre: "Registros al webinar", resultado_valor: 28 },
+        { nombre: "Video 2", gasto: 20.42, impresiones: 9112, clicks: 786, ctr: 8.63, cpc: 0.03, cpm: 2.24, resultado_nombre: "Registros al webinar", resultado_valor: 12 },
+        { nombre: "RT - Video 1", gasto: 13.83, impresiones: 2973, clicks: 87, ctr: 2.93, cpc: 0.16, cpm: 4.65, resultado_nombre: "Registros al webinar", resultado_valor: 1 },
+        { nombre: "La DGII tiene las pilas puestas", gasto: 9.64, impresiones: 4649, clicks: 375, ctr: 8.07, cpc: 0.03, cpm: 2.07, resultado_nombre: "Registros al webinar", resultado_valor: 2 },
+        { nombre: "La fecha esta cerca y muchos todavía en el aire", gasto: 2.16, impresiones: 934, clicks: 36, ctr: 3.85, cpc: 0.06, cpm: 2.31, resultado_nombre: "Registros al webinar", resultado_valor: 1 },
+        { nombre: "Quedan 45 días", gasto: 1.42, impresiones: 784, clicks: 23, ctr: 2.93, cpc: 0.06, cpm: 1.81, resultado_nombre: null, resultado_valor: null },
+        { nombre: "RT - No habrá prórroga", gasto: 1.37, impresiones: 318, clicks: 6, ctr: 1.89, cpc: 0.23, cpm: 4.31, resultado_nombre: null, resultado_valor: null },
+        { nombre: "180,000 empresas", gasto: 0.86, impresiones: 604, clicks: 13, ctr: 2.15, cpc: 0.07, cpm: 1.42, resultado_nombre: "Registros al webinar", resultado_valor: 1 }
       ]
     },
     {
@@ -89,11 +235,12 @@ const SNAPSHOT = {
         { semana: "10–16 sep", desde: "2026-09-10", hasta: "2026-09-16", gasto: 81.11, impresiones: 11924, alcance: 6481, resultado_valor: 2 },
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 90.56, impresiones: 15210, alcance: 7877, resultado_valor: 5 },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 88.53, impresiones: 14068, alcance: 9405, resultado_valor: 3 },
-        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 76.88, impresiones: 12082, alcance: 8373, resultado_valor: 3 }
+        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 76.88, impresiones: 12082, alcance: 8373, resultado_valor: 3 },
+        { semana: "8–14 oct", desde: "2026-10-08", hasta: "2026-10-14", gasto: 21.13, impresiones: 2987, alcance: 2505, resultado_valor: 3 }
       ],
       por_mes: [
         { mes: "Septiembre 2026", desde: "2026-09-11", hasta: "2026-09-30", gasto: 260.20, impresiones: 41202, alcance: 18125, resultado_valor: 10 },
-        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-10", gasto: 98.01, impresiones: 15072, alcance: 9930, resultado_valor: 6 }
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-19", gasto: 98.01, impresiones: 15072, alcance: 9930, resultado_valor: 6 }
       ],
       ads: [
         { nombre: "Faltan 180,000 empresas", gasto: 191.92, impresiones: 29539, clicks: 768, ctr: 2.60, cpc: 0.25, cpm: 6.50, resultado_nombre: "Citas agendadas", resultado_valor: 8 },
@@ -133,11 +280,12 @@ const SNAPSHOT = {
         { semana: "10–16 sep", desde: "2026-09-10", hasta: "2026-09-16", gasto: 79.31, impresiones: 8122, alcance: 5230, resultado_valor: 6 },
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 67.54, impresiones: 8378, alcance: 5564, resultado_valor: 1 },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 48.37, impresiones: 4978, alcance: 3305, resultado_valor: 2 },
-        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 38.54, impresiones: 4179, alcance: 2505, resultado_valor: 1 }
+        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 38.54, impresiones: 4179, alcance: 2505, resultado_valor: 1 },
+        { semana: "8–14 oct", desde: "2026-10-08", hasta: "2026-10-14", gasto: 6.98, impresiones: 745, alcance: 669, resultado_valor: 0 }
       ],
       por_mes: [
         { mes: "Septiembre 2026", desde: "2026-09-04", hasta: "2026-09-30", gasto: 261.66, impresiones: 29286, alcance: 12476, resultado_valor: 11 },
-        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-10", gasto: 45.52, impresiones: 4924, alcance: 2961, resultado_valor: 1 }
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-19", gasto: 45.52, impresiones: 4924, alcance: 2961, resultado_valor: 1 }
       ],
       ads: [
         { nombre: "Operando a ciegas", gasto: 251.61, impresiones: 27545, clicks: 746, ctr: 2.71, cpc: 0.34, cpm: 9.13, resultado_nombre: "Citas agendadas", resultado_valor: 12 },
@@ -176,12 +324,13 @@ const SNAPSHOT = {
         { semana: "10–16 sep", desde: "2026-09-10", hasta: "2026-09-16", gasto: 41.26, impresiones: 9220, alcance: 6111, resultado_valor: 2 },
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 42.87, impresiones: 8975, alcance: 5420, resultado_valor: 2 },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 40.87, impresiones: 6889, alcance: 4186, resultado_valor: 1 },
-        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 37.11, impresiones: 5824, alcance: 3357, resultado_valor: null }
+        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 37.11, impresiones: 5824, alcance: 3357, resultado_valor: null },
+        { semana: "8–14 oct", desde: "2026-10-08", hasta: "2026-10-14", gasto: 6.57, impresiones: 1173, alcance: 904, resultado_valor: 2 }
       ],
       por_mes: [
         { mes: "Agosto 2026", desde: "2026-08-27", hasta: "2026-08-31", gasto: 28.66, impresiones: 9676, alcance: 5928, resultado_valor: 1 },
         { mes: "Septiembre 2026", desde: "2026-09-01", hasta: "2026-09-30", gasto: 179.17, impresiones: 36729, alcance: 15285, resultado_valor: 6 },
-        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-10", gasto: 43.68, impresiones: 6997, alcance: 3921, resultado_valor: 2 }
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-19", gasto: 43.68, impresiones: 6997, alcance: 3921, resultado_valor: 2 }
       ],
       ads: [
         { nombre: "Dia 1 llevando Account One de 30 a 100", gasto: 140.28, impresiones: 30533, clicks: 1301, ctr: 4.26, cpc: 0.11, cpm: 4.59, resultado_nombre: "Citas agendadas", resultado_valor: 6 },
@@ -195,34 +344,36 @@ const SNAPSHOT = {
     {
       id: "120252595546730560",
       nombre: "Campaña contabilidad: Yo sé que todavía usas excel",
-      estado: "ACTIVE",
+      estado: "PAUSED",
       objetivo: "Leads (contabilidad, formulario de contacto)",
       inicio: "2026-10-07",
       presupuesto_diario: 4,
       ventana: "Desde su lanzamiento (7 oct 2026) hasta hoy",
       metricas: {
-        gasto: 10.47,
-        impresiones: 959,
-        clicks: 151,
-        clics_enlace: 160,
-        vistas_landing: 93,
-        ctr: 15.75,
-        cpc: 0.07,
-        cpm: 10.92,
-        alcance: 674,
+        gasto: 38.78,
+        impresiones: 6803,
+        clicks: 317,
+        clics_enlace: 231,
+        vistas_landing: 131,
+        ctr: 4.66,
+        cpc: 0.12,
+        cpm: 5.7,
+        alcance: 4722,
         resultado_nombre: "Leads",
         resultado_valor: 5
       },
       recomendacion:
-        "Campaña nueva, creada el 7 de octubre para relanzar el anuncio \"Yo se que todavia usas excel (nuevo)\" por separado de la campaña de Contabilidad anterior, con $4 diarios. Lleva $10.47 gastados, 5 leads por el píxel de Meta a $2.09 cada uno y un CTR de 15.75%, el más alto de toda la cuenta, aunque con solo 959 impresiones todavía es una muestra muy chica. Ojo: Meta marcó un aviso de diagnóstico de señal en su conjunto de anuncios \"Videos 3% etapa 3\"; conviene revisar que el píxel y los eventos estén disparando bien antes de escalar presupuesto.",
+        "Meta la muestra pausada. Alcanzó 5 leads por el píxel de Meta con $38.78 gastados ($7.76 cada uno, subió desde $2.02 cuando llevaba $10) y un CTR de 4.66%. Los 5 leads llegaron en los primeros días: las dos semanas siguientes ($34.69 gastados) no sumaron ninguno nuevo, y ese gasto se fue casi todo entre el 8 y el 19 de octubre. El mismo anuncio (\"Yo se que todavia usas excel (nuevo)\") ahora también corre dentro de la campaña nueva de Contabilidad de Félix como \"CO-3\". Pendiente revisar el aviso de diagnóstico de señal de su conjunto \"Videos 3% etapa 3\".",
       tendencia_semanal: [
-        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 4.09, impresiones: 376, alcance: 286, resultado_valor: 3 }
+        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 4.09, impresiones: 376, alcance: 286, resultado_valor: 3 },
+        { semana: "8–14 oct", desde: "2026-10-08", hasta: "2026-10-14", gasto: 26.17, impresiones: 4674, alcance: 3405, resultado_valor: 2 },
+        { semana: "15–19 oct", desde: "2026-10-15", hasta: "2026-10-19", gasto: 8.52, impresiones: 1753, alcance: 1460, resultado_valor: null }
       ],
       por_mes: [
-        { mes: "Octubre 2026 (desde el 7)", desde: "2026-10-07", hasta: "2026-10-10", gasto: 10.47, impresiones: 959, alcance: 674, resultado_valor: 5 }
+        { mes: "Octubre 2026 (desde el 7)", desde: "2026-10-07", hasta: "2026-10-19", gasto: 38.78, impresiones: 6803, alcance: 4722, resultado_valor: 5 }
       ],
       ads: [
-        { nombre: "Yo se que todavia usas excel (nuevo)", gasto: 10.47, impresiones: 959, clicks: 151, ctr: 15.75, cpc: 0.07, cpm: 10.92, resultado_nombre: "Leads", resultado_valor: 5 }
+        { nombre: "Yo se que todavia usas excel (nuevo)", gasto: 38.78, impresiones: 6803, clicks: 317, ctr: 4.66, cpc: 0.12, cpm: 5.7, resultado_nombre: "Leads", resultado_valor: 5 }
       ]
     },
     {
@@ -256,12 +407,13 @@ const SNAPSHOT = {
         { semana: "10–16 sep", desde: "2026-09-10", hasta: "2026-09-16", gasto: 12.50, impresiones: 24980, alcance: 22210, resultado_valor: null },
         { semana: "17–23 sep", desde: "2026-09-17", hasta: "2026-09-23", gasto: 11.65, impresiones: 22541, alcance: 21120, resultado_valor: null },
         { semana: "24–30 sep", desde: "2026-09-24", hasta: "2026-09-30", gasto: 10.00, impresiones: 19980, alcance: 18848, resultado_valor: null },
-        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 1.17, impresiones: 7362, alcance: 6324, resultado_valor: null }
+        { semana: "1–7 oct", desde: "2026-10-01", hasta: "2026-10-07", gasto: 1.17, impresiones: 7362, alcance: 6324, resultado_valor: null },
+        { semana: "8–14 oct", desde: "2026-10-08", hasta: "2026-10-14", gasto: 2.95, impresiones: 16381, alcance: 13347, resultado_valor: null }
       ],
       por_mes: [
         { mes: "Agosto 2026", desde: "2026-08-20", hasta: "2026-08-31", gasto: 127.93, impresiones: 416250, alcance: 196897, resultado_valor: null },
         { mes: "Septiembre 2026", desde: "2026-09-01", hasta: "2026-09-30", gasto: 56.98, impresiones: 142456, alcance: 102145, resultado_valor: null },
-        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-10", gasto: 4.13, impresiones: 23773, alcance: 19092, resultado_valor: null }
+        { mes: "Octubre 2026", desde: "2026-10-01", hasta: "2026-10-19", gasto: 4.13, impresiones: 23773, alcance: 19092, resultado_valor: null }
       ],
       ads: [
         { nombre: "La llamada", gasto: 121.61, impresiones: 244600, clicks: 3304, ctr: 1.35, cpc: 0.04, cpm: 0.50, resultado_nombre: "Reproducciones", resultado_valor: 68044 },
@@ -359,17 +511,18 @@ const SNAPSHOT = {
       "Se refrescaron métricas, tendencia semanal y recomendaciones con datos reales al 8 de octubre. Hallazgos clave: Ready to Buy y Consideración se mantienen en 13 y 12 citas (sin citas nuevas hoy); Ready to Buy cierra en 2 días con $19.98 por gastar; Contabilidad sigue pausada con 7 citas; la Campaña Clase Gratuita suma $89.88 y el píxel sigue sin atribuir registros nuevos, con el webinar del 13 de octubre en 30 inscritos. Reconocimiento reporta un gasto residual mínimo aunque su presupuesto ya estaba agotado.",
       "Se sumaron al portal dos cambios hechos en Meta Ads: la nueva campaña \"Campaña contabilidad: Yo sé que todavía usas excel\" (creada el 7 de octubre, $4 diarios, ya con 3 leads a $1.97) y la reactivación de Reconocimiento con presupuesto cerrado hasta el 28 de octubre. Con ellas son 5 las campañas activas; Awareness sigue sin ningún anuncio encendido.",
       "Se refrescaron métricas y recomendaciones con datos reales al 9 de octubre. Hallazgos clave: Ready to Buy sumó 3 citas (16 en total, $22.37 por cita) y Contabilidad sumó la cita #8 con el anuncio de Excel; Consideración sigue en 12. Meta ya no muestra activas Ready to Buy, Consideración, Reconocimiento ni Contabilidad (Sept–Dic): solo Clase Gratuita y la campaña nueva de Contabilidad (Excel, 5 leads a $2.02).",
-      "Se refrescaron datos al 10 de octubre: Clase Gratuita subió a $8 diarios (73 registros, $108.44), el webinar del 13 de octubre ya tiene 47 inscritos, y las campañas pausadas pasaron al Histórico para que el dashboard muestre solo lo activo."
+      "Se refrescaron datos al 10 de octubre: Clase Gratuita subió a $8 diarios (73 registros, $108.44), el webinar del 13 de octubre ya tiene 47 inscritos, y las campañas pausadas pasaron al Histórico para que el dashboard muestre solo lo activo.",
+      "Se refrescaron datos al 19 de octubre: entraron 3 campañas nuevas de Citas de Félix (FE $500, Contabilidad $250 y Retargeting Clases $250, todas hasta el 15 de noviembre, activas desde el 17 de octubre) y la campaña \"comenta la palabra\" del webinar del 13 de octubre ($99.81, 145 registros a $0.69) quedó cerrada. Clase Gratuita y Excel quedaron pausadas. Se sumaron semanas del 8 al 14 y del 15 al 19 de octubre."
     ],
     pendientes: [
       "Contabilidad aparece pausada en Meta, con 8 citas (la #8 llegó entre el 8 y el 9 de octubre) y $43.68 gastados en octubre. Si se reactiva, lo más urgente es meterle 1-2 artes estáticas: la campaña es 100% video con los mismos creativos desde que se armó, y \"Yo se que todavia usas excel (nuevo)\" llegó a $22.84 con un CPC 3 veces más alto que el resto y sin citas.",
       "Sacar 2-3 anuncios de Consideración (los con algo de CTR, como \"Hay empresarios\") a un ad set nuevo con presupuesto propio, para que Félix vea más variedad de creativos sin depender del algoritmo — pendiente de confirmar con Félix cuáles anuncios y cuánto presupuesto asignarles. \"Scrolling (17%) - Copy\" ya lleva cuatro semanas seguidas recibiendo más gasto cada vez (subió de $0.35 a $1.45), señal cada vez más clara de que el algoritmo lo está probando en serio.",
-      "Webinar del 13 de octubre: ya hay 47 inscritos en el formulario, pero la campaña ($52.61 en 10 días) casi no muestra registros atribuidos en Meta (solo 4). Verificar que el píxel dispare en la página de confirmación del registro, y crear la sesión de Zoom de ese día (también quedan por crear las del 29 de octubre y el 12 de noviembre).",
+      "Webinar del 13 de octubre: ya se realizó, con 47 inscritos en el formulario. La campaña de registros atribuyó 109 + 145 registros en Meta (campaña principal + la de \"comenta la palabra\"), más de los 47 del formulario, así que conviene reconciliar cuántos de esos registros de píxel son inscripciones reales. Siguen pendientes las sesiones de Zoom del 29 de octubre y el 12 de noviembre.",
       "Regla creativa nueva: no hacer más artes basados solo en una cifra grande (tipo \"180,000 empresas\" o \"Quedan 45 días\"). A los que ya están corriendo con números, pegarles recortes de noticias reales para que se vean más serios y creíbles. Pendiente además pausar los videos con t-shirt que corren en la otra cuenta publicitaria de Account One (408193953213566, dominio accountone.com.do), que todavía no se puede gestionar desde el portal, y confirmar si \"Operando a ciegas\" (el de mejor desempeño de Consideración) entra en esa pausa.",
       "El webinar del 29 de septiembre ya cerró con 97 registros confirmados — capturar qué hizo que \"Imagen 2\" dominara esta ronda (41 de 62 registros vía píxel) para replicarlo en los próximos 3 webinars (13 oct, 29 oct, 12 nov).",
       "Todavía no hay visibilidad de ventas/contratos cerrados — los leads/citas agendadas del funnel FE + Contabilidad son lo máximo que mide Meta Ads (llega hasta la cita agendada). Falta que Félix comparta desde su CRM/GHL cuántas de esas citas se convirtieron en cliente, para poder medir el resultado real del negocio y no solo el volumen de leads.",
       "Hallazgo de Naomi (monitoreo de leads): está llegando un volumen notable de negocios de retail y restaurantes preguntando específicamente si el servicio se conecta con su punto de venta (POS) — para ese perfil de negocio, la Facturación Electrónica tiene que salir integrada directo de la caja/POS, no como trámite aparte. Decidir con Félix: (1) si Account One ofrece o puede conectar con integración de POS, vale crear un ángulo de anuncio específico para retail/restaurantes mencionándolo, porque hay demanda represada ahí; (2) si no la ofrece, aclarar esto en la landing o en el primer mensaje de contacto para evitar leads mal calificados que entran esperando algo que no se les puede dar. Corto plazo: pedirle a Naomi que cuantifique cuántos leads mencionan POS para dimensionar el segmento.",
-      "Ready to Buy, Consideración, Reconocimiento y Contabilidad (Sept–Dic) aparecen pausadas en Meta desde el 9 de octubre y solo siguen activas Clase Gratuita y la campaña nueva de Contabilidad (Excel). Confirmar con Félix si fue intencional: Ready to Buy tiene $22.79 sin gastar (16 citas), a Consideración le quedan $42.82 y a Reconocimiento $50.96.",
+      "Tres campañas nuevas de Citas de Félix (FE, Contabilidad y Retargeting Clases) están activas desde el 17 de octubre, con presupuestos cerrados de $500, $250 y $250 hasta el 15 de noviembre, y aún no tienen citas. Esperar al menos 7 días (hasta el 24 de octubre) antes de comparar costo por cita contra las campañas anteriores. Las campañas del embudo anterior (Ready to Buy, Consideración, Reconocimiento, Contabilidad Sept–Dic), Clase Gratuita y Excel están pausadas.",
       "Pausar el anuncio de la oferta 25%/B-01 el 30 de septiembre — después de esa fecha el precio y el dato de comprobantes B-01 dejan de ser exactos y hay que revisar el copy.",
       "Completar la verificación de negocio (Business Verification) en el Business Manager de Meta para desbloquear el acceso a datos en vivo del portal.",
       "Poner a correr el reel viral (instagram.com/reel/DdRpN3zuQu7, cuenta @themoneycoachrd) como anuncio nuevo e independiente — decidido, pendiente de ejecutar.",
@@ -435,7 +588,10 @@ for (const c of SNAPSHOT.campanas) {
 const FE_PRESUPUESTOS = {
   "120251858423240560": { monto: 240.00, cierre: "28 oct 2026" }, // Reconocimiento (20%): 2 conjuntos, $150 + $90, reactivados hasta el 28 oct
   "120252085024140560": { monto: 350.00, cierre: "26 oct 2026" }, // Consideración (40%)
-  "120252187070040560": { monto: 381.00, cierre: "10 oct 2026" }  // Ready to Buy (40%)
+  "120252187070040560": { monto: 381.00, cierre: "10 oct 2026" },  // Ready to Buy (40%)
+  "120252758005220560": { monto: 250.00, cierre: "15 nov 2026" }, // Oct 2026 - Citas Contabilidad Félix
+  "120252757568140560": { monto: 500.00, cierre: "15 nov 2026" }, // Oct 2026 - Citas FE Félix
+  "120252755221670560": { monto: 250.00, cierre: "15 nov 2026" }  // Oct 2026 - Citas Retargeting Clases Félix
 };
 
 // Best-effort mapping from Meta's "actions" array to a human result label.
