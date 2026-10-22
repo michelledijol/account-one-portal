@@ -34,55 +34,24 @@
   </nav>
 
   <section class="panel">
-    <div class="page-help"><span class="ph-tag">Qué estás viendo</span><p><strong>Esta es la página principal.</strong> Aquí ves, de un vistazo, cuánto se ha gastado, cuántas citas o registros han llegado y cómo va cada campaña. Si quieres más detalle de algo, usa los botones de abajo.</p></div>
-    <div class="jump-bar"><span class="jb-label">En esta página:</span><a href="#donde">¿Dónde está cada cosa?</a><a href="#resumen">Resumen</a><a href="#compare-section">Comparación semanal</a><a href="#budget-section">Presupuesto del mes</a><a href="#ahora">Campañas ahora</a><a href="#glosario">Palabras que verás</a></div>
-    <div id="donde" class="anchor"></div>
     <div class="highlight-box">
       <div class="highlight-icon" data-icon="users" data-size="26"></div>
-      <div class="highlight-label">Dato importante</div>
-      <div class="highlight-value">97 <span>registros al webinar del 29 sep</span></div>
+      <div class="highlight-label">Webinars</div>
+      <div class="highlight-value"><span id="hl-reg">36</span> <span>registros al webinar del 28 oct (según Meta)</span></div>
       <div class="highlight-value">47 <span>inscritos al webinar del 13 oct</span></div>
     </div>
 
-    <h2 class="section-title"><span class="ti" data-icon="route"></span>¿Dónde está <em>cada cosa</em>?</h2>
-    <p class="sec-help">Además de esta página principal, el portal tiene 3 páginas más. Se abren con el menú azul de arriba. Esto es lo que encuentras en cada una:</p>
-    <div class="quick-links">
-      <a class="quick-link" href="campanas.html">
-        <span class="ql-ico" data-icon="megaphone" data-size="20"></span>
-        <span class="ql-title">Campañas activas</span>
-        <span class="ql-desc">Las campañas activas por dentro: cuánto gastó, citas por mes, semana a semana y qué anuncio funciona mejor</span>
-      </a>
-      <a class="quick-link" href="funnel-roadmap.html">
-        <span class="ql-ico" data-icon="funnel" data-size="20"></span>
-        <span class="ql-title">Funnel &amp; Roadmap</span>
-        <span class="ql-desc">Qué falta por hacer, qué ya está hecho y qué decisiones necesito de ti</span>
-      </a>
-      <a class="quick-link" href="historico.html">
-        <span class="ql-ico" data-icon="history" data-size="20"></span>
-        <span class="ql-title">Histórico</span>
-        <span class="ql-desc">Las campañas pausadas (con todo su detalle) y trabajos de meses anteriores</span>
-      </a>
-    </div>
-
-    <div id="resumen" class="anchor"></div>
-    <h2 class="section-title"><span class="ti" data-icon="wallet"></span>Resumen <em>general</em></h2>
-    <p class="sec-help">Los cuatro números más importantes. Puedes filtrar por mes con los botones: si no eliges ninguno, ves todo lo acumulado.</p>
-    <div class="month-filter-bar">
-      <div id="month-filter-tabs" class="month-filter-tabs"></div>
-      <span id="filter-status" class="filter-status"></span>
-    </div>
-
     <div id="summary" class="summary"></div>
-    <div id="compare-section"></div>
-    <div id="budget-section"></div>
+    <div style="display:none"><div id="month-filter-tabs"></div><span id="filter-status"></span></div>
 
     <div id="ahora" class="anchor"></div>
-    <h2 class="section-title"><span class="ti" data-icon="activity"></span>Campañas <em>ahora</em></h2>
-    <p class="sec-help">Solo las campañas que están gastando dinero hoy. Toca una para ver su detalle completo. Las campañas pausadas están en la página Histórico.</p>
-
+    <h2 class="section-title"><span class="ti" data-icon="activity"></span>Campañas <em>activas hoy</em></h2>
+    <p class="sec-help">Agrupadas por tipo. Toca una para ver su detalle.</p>
     <div id="mini-campaign-list" class="mini-list"><div class="loading">Cargando campañas…</div></div>
-    <div id="glosario" class="anchor"></div>
-    <div id="glossary-slot"></div>
+
+    <details class="fold"><summary><span>Presupuesto del mes</span><em>cuánto llevamos gastado y cuánto llegaremos a gastar</em></summary><div id="budget-section"></div></details>
+    <details class="fold"><summary><span>Comparación semanal</span><em>cuánto cuesta cada cita, semana a semana</em></summary><div id="compare-section"></div></details>
+    <details class="fold"><summary><span>Palabras que verás</span><em>qué significa cada término</em></summary><div id="glossary-slot"></div></details>
   </section>
 
   <footer>
@@ -131,7 +100,7 @@
     const s = computeSummary(data, monthKey);
     document.getElementById('summary').innerHTML = `
       <div class="cell"><span class="kpi-ico">${icon('megaphone', 20)}</span><div class="label">Campañas activas</div><div class="value">${s.campanas_activas}</div><div class="kpi-help">Las que están gastando hoy</div></div>
-      <div class="cell"><span class="kpi-ico">${icon('wallet', 20)}</span><div class="label">Invertido${s.filtered ? ' (mes seleccionado)' : ' (desde lanzamiento de cada una)'}</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div><div class="kpi-help">Dinero gastado en anuncios</div></div>
+      <div class="cell"><span class="kpi-ico">${icon('wallet', 20)}</span><div class="label">Invertido en total</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div><div class="kpi-help">Dinero gastado en anuncios</div></div>
       <div class="cell"><span class="kpi-ico">${icon('target', 20)}</span><div class="label">Leads registrados</div><div class="value">${s.leads} <small>solo camp. de conversión</small></div><div class="kpi-help">Personas que dejaron sus datos o agendaron cita</div></div>
       <div class="cell"><span class="kpi-ico">${icon('eye', 20)}</span><div class="label">Alcance combinado</div><div class="value">${(s.alcance_combinado/1000).toFixed(1)}K <small>personas</small></div><div class="kpi-help">Gente distinta que vio los anuncios</div></div>
     `;
@@ -447,25 +416,33 @@
   function renderMiniCampaigns(data) {
     const activas = data.campanas.filter(c => c.estado === 'ACTIVE');
     const pausadas = data.campanas.length - activas.length;
-    const html = activas.map(c => {
+    const GROUPS = [
+      { t: 'Citas de Félix', d: 'Campañas nuevas, activas hasta el 15 de noviembre', ids: ['120252758005220560', '120252757568140560', '120252755221670560'] },
+      { t: 'Embudo de Facturación Electrónica', d: 'Reconocimiento, Consideración y Ready to Buy, cierran el 28 de octubre', ids: ['120251858423240560', '120252085024140560', '120252187070040560'] },
+      { t: 'Webinar y leads', d: 'Registros al webinar y formulario de leads calificados', ids: [] }
+    ];
+    const used = new Set(GROUPS.flatMap(g => g.ids));
+    const card = c => {
       const m = c.metricas;
       return `
         <a class="mini-card" href="campanas.html#campaign-${c.id}">
-          <div class="mini-left">
-            <span class="mini-name">${c.nombre}</span>
-            ${estadoPill(c.estado)}
-          </div>
-          ${sparkline((c.tendencia_semanal || []).map(w => w.gasto))}
+          <div class="mini-left"><span class="mini-name">${c.nombre}</span></div>
           <div class="mini-stats">
             <span><span class="l">Gasto</span>${fmtMoney(m.gasto)}</span>
             ${m.resultado_nombre ? `<span><span class="l">${m.resultado_nombre}</span>${fmtInt(m.resultado_valor)}</span>` : ''}
-            <span><span class="l">CTR</span>${fmtPct(m.ctr)}</span>
           </div>
           <span class="mini-arrow">${icon('arrow', 18)}</span>
-        </a>
-      `;
+        </a>`;
+    };
+    const html = GROUPS.map(g => {
+      const list = g.ids.length ? activas.filter(c => g.ids.includes(c.id)) : activas.filter(c => !used.has(c.id));
+      if (!list.length) return '';
+      const gasto = list.reduce((x, c) => x + c.metricas.gasto, 0);
+      return `<div class="grp"><div class="grp-head"><div><h3>${g.t}</h3><p>${g.d}</p></div><div class="grp-tot"><span class="l">Gastado</span>${fmtMoney(gasto)}</div></div>${list.map(card).join('')}</div>`;
     }).join('');
-    document.getElementById('mini-campaign-list').innerHTML = (html || '<div class="loading">No hay campañas activas ahora mismo.</div>') + (pausadas ? `<a class="paused-link" href="historico.html">${pausadas} campañas pausadas — ver en Histórico →</a>` : '');
+    document.getElementById('mini-campaign-list').innerHTML = (html || '<div class="loading">No hay campañas activas ahora mismo.</div>') + (pausadas ? `<a class="paused-link" href="historico.html">${pausadas} campañas pausadas o cerradas — ver en Histórico →</a>` : '');
+    const w = data.campanas.find(c => c.id === '120252791735110560');
+    if (w) { const el = document.getElementById('hl-reg'); if (el) el.textContent = w.metricas.resultado_valor; }
   }
 
   async function loadDashboard() {
