@@ -874,3 +874,19 @@ h2.section-title .ti { display: inline-grid; vertical-align: middle; margin: -4p
 .bud-bar.sel .bb-col i { background:var(--yellow,#ffc928); }
 .bb-val { font-size:12px; font-weight:700; } .bb-lbl { font-family:'DM Mono',monospace; font-size:11px; text-transform:uppercase; }
 .bud-chart-note { font-size:12px; opacity:.7; margin:6px 0 16px; }
+
+/* ---------- Simplificación (22 oct) ---------- */
+.grp { margin-bottom: 26px; display: flex; flex-direction: column; gap: 10px; }
+.grp-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 0 4px 2px; }
+.grp-head h3 { font-family: var(--font-head); font-weight: 800; font-size: 17px; margin: 0; color: var(--navy); }
+.grp-head p { margin: 2px 0 0; font-size: 12.5px; color: var(--ink-muted); }
+.grp-tot { text-align: right; font-family: var(--font-head); font-weight: 800; font-size: 16px; }
+.grp-tot .l { display: block; font-family: var(--font-body); font-weight: 500; font-size: 11.5px; color: var(--ink-muted); }
+.fold { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); margin: 14px 0; }
+.fold > summary { cursor: pointer; list-style: none; padding: 18px 22px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.fold > summary::-webkit-details-marker { display: none; }
+.fold > summary::after { content: "Abrir ▾"; margin-left: auto; font-size: 12.5px; font-weight: 700; color: var(--navy); }
+.fold[open] > summary::after { content: "Cerrar ▴"; }
+.fold > summary span { font-family: var(--font-head); font-weight: 800; font-size: 16px; }
+.fold > summary em { font-style: normal; font-size: 13px; color: var(--ink-muted); }
+.fold > div { padding: 0 22px 22px; }
