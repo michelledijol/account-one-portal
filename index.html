@@ -34,12 +34,7 @@
   </nav>
 
   <section class="panel">
-    <div class="highlight-box">
-      <div class="highlight-icon" data-icon="users" data-size="26"></div>
-      <div class="highlight-label">Webinars</div>
-      <div class="highlight-value"><span id="hl-reg">36</span> <span>registros al webinar del 28 oct (según Meta)</span></div>
-      <div class="highlight-value">47 <span>inscritos al webinar del 13 oct</span></div>
-    </div>
+    <p class="plain-note">Webinars: <strong><span id="hl-reg">36</span> registros</strong> para el del 28 de octubre (según Meta) · <strong>47 inscritos</strong> para el del 13 de octubre.</p>
 
     <div id="summary" class="summary"></div>
     <div style="display:none"><div id="month-filter-tabs"></div><span id="filter-status"></span></div>
@@ -55,7 +50,7 @@
   </section>
 
   <footer>
-    <span>Cuenta publicitaria: Account One (677439744786765) · Meta Ads</span>
+    <span>Datos de Meta Ads · Account One</span>
     <span id="footer-mode">—</span>
   </footer>
 </div>
@@ -99,10 +94,9 @@
   function renderSummary(data, monthKey) {
     const s = computeSummary(data, monthKey);
     document.getElementById('summary').innerHTML = `
-      <div class="cell"><span class="kpi-ico">${icon('megaphone', 20)}</span><div class="label">Campañas activas</div><div class="value">${s.campanas_activas}</div><div class="kpi-help">Las que están gastando hoy</div></div>
-      <div class="cell"><span class="kpi-ico">${icon('wallet', 20)}</span><div class="label">Invertido en total</div><div class="value">${fmtMoney(s.invertido_total)} <small>USD</small></div><div class="kpi-help">Dinero gastado en anuncios</div></div>
-      <div class="cell"><span class="kpi-ico">${icon('target', 20)}</span><div class="label">Leads registrados</div><div class="value">${s.leads} <small>solo camp. de conversión</small></div><div class="kpi-help">Personas que dejaron sus datos o agendaron cita</div></div>
-      <div class="cell"><span class="kpi-ico">${icon('eye', 20)}</span><div class="label">Alcance combinado</div><div class="value">${(s.alcance_combinado/1000).toFixed(1)}K <small>personas</small></div><div class="kpi-help">Gente distinta que vio los anuncios</div></div>
+      <div class="cell"><div class="label">Campañas activas hoy</div><div class="value">${s.campanas_activas}</div></div>
+      <div class="cell"><div class="label">Dinero gastado en total</div><div class="value">${fmtMoney(s.invertido_total)}</div></div>
+      <div class="cell"><div class="label">Citas y leads conseguidos</div><div class="value">${s.leads}</div></div>
     `;
     const statusEl = document.getElementById('filter-status');
     if (statusEl) {
