@@ -8,12 +8,12 @@ const GRAPH_VERSION = "v20.0";
 
 const SNAPSHOT = {
   "modo": "snapshot",
-  "actualizado": "2026-10-22T13:30:00+02:00",
+  "actualizado": "2026-10-24T13:30:00+02:00",
   "resumen": {
     "campanas_activas": 8,
-    "invertido_total": 1840.56,
-    "leads": 46,
-    "alcance_combinado": 784346
+    "invertido_total": 1977.26,
+    "leads": 53,
+    "alcance_combinado": 808779
   },
   "campanas": [
     {
@@ -29,19 +29,19 @@ const SNAPSHOT = {
       },
       "ventana": "Desde su lanzamiento (19 oct 2026) hasta hoy",
       "metricas": {
-        "gasto": 28.64,
-        "impresiones": 17005,
-        "clicks": 747,
-        "clics_enlace": 416,
-        "vistas_landing": 336,
-        "ctr": 4.39,
+        "gasto": 44.55,
+        "impresiones": 24530,
+        "clicks": 1039,
+        "clics_enlace": 594,
+        "vistas_landing": 488,
+        "ctr": 4.24,
         "cpc": 0.04,
-        "cpm": 1.68,
-        "alcance": 13576,
+        "cpm": 1.82,
+        "alcance": 18432,
         "resultado_nombre": "Registros al webinar",
-        "resultado_valor": 36
+        "resultado_valor": 55
       },
-      "recomendacion": "Campaña nueva de registros para el webinar del 28 de octubre, con presupuesto cerrado de $100 hasta el 29 de octubre, encendida el 19 de octubre. Lleva $28.64 gastados ($71.36 por gastar) y el píxel atribuye 36 registros a $0.80 cada uno, con 747 clics a $0.04 y 4.39% de CTR. Usa el mismo anuncio que funcionó en el webinar del 13 de octubre (\"Quedan menos de 30 días\"). Ese webinar costó $0.69 por registro, así que este va algo más caro pero en el mismo rango. Conviene reconciliar los registros del píxel con los inscritos reales del formulario.",
+      "recomendacion": "Campaña de registros para el webinar del 28 de octubre, con presupuesto cerrado de $100 hasta el 29 de octubre, encendida el 19 de octubre. Lleva $44.55 gastados ($55.45 por gastar) y el píxel atribuye 55 registros a $0.81 cada uno, con 1,039 clics a $0.04 y 4.24% de CTR. Mantiene el costo de la campaña del 13 de octubre ($0.69 por registro, 145 registros) a un ritmo de unos 15 registros al día. Con el cierre el 29 de octubre y $55.45 por gastar, a este ritmo lo normal es que llegue a unos 100 registros en el píxel. Falta reconciliarlos con los inscritos reales del formulario.",
       "tendencia_semanal": [
         {
           "semana": "19–21 oct",
@@ -51,30 +51,39 @@ const SNAPSHOT = {
           "impresiones": 15247,
           "alcance": 12314,
           "resultado_valor": 35
+        },
+        {
+          "semana": "22–24 oct",
+          "desde": "2026-10-22",
+          "hasta": "2026-10-24",
+          "gasto": 19.46,
+          "impresiones": 9275,
+          "alcance": 7844,
+          "resultado_valor": 20
         }
       ],
       "por_mes": [
         {
           "mes": "Octubre 2026 (desde el 19)",
           "desde": "2026-10-19",
-          "hasta": "2026-10-22",
-          "gasto": 28.64,
-          "impresiones": 17005,
-          "alcance": 13576,
-          "resultado_valor": 36
+          "hasta": "2026-10-24",
+          "gasto": 44.55,
+          "impresiones": 24530,
+          "alcance": 18432,
+          "resultado_valor": 55
         }
       ],
       "ads": [
         {
           "nombre": "Quedan menos de 30 días (reel)",
-          "gasto": 28.64,
-          "impresiones": 17005,
-          "clicks": 747,
-          "ctr": 4.39,
+          "gasto": 44.55,
+          "impresiones": 24530,
+          "clicks": 1039,
+          "ctr": 4.24,
           "cpc": 0.04,
-          "cpm": 1.68,
+          "cpm": 1.82,
           "resultado_nombre": "Registros al webinar",
-          "resultado_valor": 36
+          "resultado_valor": 55
         }
       ]
     },
@@ -91,19 +100,19 @@ const SNAPSHOT = {
       },
       "ventana": "Desde su lanzamiento (21 oct 2026) hasta hoy",
       "metricas": {
-        "gasto": 3.71,
-        "impresiones": 938,
-        "clicks": 48,
-        "clics_enlace": 29,
+        "gasto": 18.09,
+        "impresiones": 3148,
+        "clicks": 124,
+        "clics_enlace": 70,
         "vistas_landing": 0,
-        "ctr": 5.12,
-        "cpc": 0.08,
-        "cpm": 3.96,
-        "alcance": 820,
+        "ctr": 3.94,
+        "cpc": 0.15,
+        "cpm": 5.75,
+        "alcance": 2336,
         "resultado_nombre": "Leads",
-        "resultado_valor": 0
+        "resultado_valor": 1
       },
-      "recomendacion": "Campaña nueva con formulario instantáneo de Meta para captar leads de Facturación Electrónica con preguntas de calificación. Presupuesto cerrado de $100 hasta el 4 de noviembre, encendida el 21 de octubre. Lleva $3.71 gastados, 48 clics a $0.08 y 5.12% de CTR, aún sin leads (muy pronto). Tiene 2 anuncios: \"Operando a ciegas (control de números)\" ($2.37, 6.06% de CTR) y \"Ya comparaste, ya cotizaste (llave en mano)\" ($1.34, 3.61%). Esperar unos días antes de juzgar el costo por lead.",
+      "recomendacion": "Campaña con formulario instantáneo de Meta para captar leads de Facturación Electrónica con preguntas de calificación. Presupuesto cerrado de $100 hasta el 4 de noviembre, encendida el 21 de octubre. Lleva $18.09 gastados ($81.91 por gastar), 124 clics a $0.15 y 1 lead ($18.09 por lead), que llegó el 22 de octubre con el anuncio \"Operando a ciegas (control de números)\". \"Ya comparaste, ya cotizaste (llave en mano)\" gastó más ($10.66) y todavía no tiene leads. Muy pronto para juzgar: conviene esperar a tener al menos 5 leads antes de comparar los dos anuncios.",
       "tendencia_semanal": [
         {
           "semana": "21 oct",
@@ -113,41 +122,50 @@ const SNAPSHOT = {
           "impresiones": 753,
           "alcance": 661,
           "resultado_valor": 0
+        },
+        {
+          "semana": "22–24 oct",
+          "desde": "2026-10-22",
+          "hasta": "2026-10-24",
+          "gasto": 15.32,
+          "impresiones": 2391,
+          "alcance": 1861,
+          "resultado_valor": 1
         }
       ],
       "por_mes": [
         {
           "mes": "Octubre 2026 (desde el 21)",
           "desde": "2026-10-21",
-          "hasta": "2026-10-22",
-          "gasto": 3.71,
-          "impresiones": 938,
-          "alcance": 820,
-          "resultado_valor": 0
+          "hasta": "2026-10-24",
+          "gasto": 18.09,
+          "impresiones": 3148,
+          "alcance": 2336,
+          "resultado_valor": 1
         }
       ],
       "ads": [
         {
-          "nombre": "Instaform - Operando a ciegas (control de números)",
-          "gasto": 2.37,
-          "impresiones": 578,
-          "clicks": 35,
-          "ctr": 6.06,
-          "cpc": 0.07,
-          "cpm": 4.1,
+          "nombre": "Instaform - Ya comparaste Ya cotizaste (llave en mano)",
+          "gasto": 10.66,
+          "impresiones": 1915,
+          "clicks": 64,
+          "ctr": 3.34,
+          "cpc": 0.17,
+          "cpm": 5.57,
           "resultado_nombre": "Leads",
           "resultado_valor": 0
         },
         {
-          "nombre": "Instaform - Ya comparaste Ya cotizaste (llave en mano)",
-          "gasto": 1.34,
-          "impresiones": 360,
-          "clicks": 13,
-          "ctr": 3.61,
-          "cpc": 0.1,
-          "cpm": 3.72,
+          "nombre": "Instaform - Operando a ciegas (control de números)",
+          "gasto": 7.43,
+          "impresiones": 1233,
+          "clicks": 60,
+          "ctr": 4.87,
+          "cpc": 0.12,
+          "cpm": 6.03,
           "resultado_nombre": "Leads",
-          "resultado_valor": 0
+          "resultado_valor": 1
         }
       ]
     },
@@ -164,19 +182,19 @@ const SNAPSHOT = {
       },
       "ventana": "Desde su lanzamiento (17 oct 2026) hasta hoy",
       "metricas": {
-        "gasto": 44.63,
-        "impresiones": 6049,
-        "clicks": 197,
-        "clics_enlace": 89,
-        "vistas_landing": 64,
-        "ctr": 3.26,
-        "cpc": 0.23,
-        "cpm": 7.38,
-        "alcance": 4167,
+        "gasto": 61.03,
+        "impresiones": 7984,
+        "clicks": 241,
+        "clics_enlace": 114,
+        "vistas_landing": 87,
+        "ctr": 3.02,
+        "cpc": 0.25,
+        "cpm": 7.64,
+        "alcance": 5294,
         "resultado_nombre": "Citas agendadas",
         "resultado_valor": 1
       },
-      "recomendacion": "Campaña nueva con presupuesto cerrado de $250 hasta el 15 de noviembre, encendida el 17 de octubre. Lleva $44.63 gastados ($205.37 por gastar), 197 clics a $0.23 y su primera cita agendada ($44.63 por cita), que vino del anuncio \"CO-3 - Yo sé que todavía usas Excel\". \"CO-1 - Empresarios de RD respóndanme esto\" concentra la mitad del gasto ($22.09, 3.32% de CTR); \"CO-2\" tiene el mejor CTR (4.78%) con $7.67 y el carrusel CO-4 es el más flojo (1.44%). Con una sola cita todavía es pronto para comparar anuncios: conviene esperar a tener más citas.",
+      "recomendacion": "Campaña con presupuesto cerrado de $250 hasta el 15 de noviembre, encendida el 17 de octubre. Lleva $61.03 gastados ($188.97 por gastar), 241 clics a $0.25 y 1 cita agendada ($61.03 por cita), la misma del 20 de octubre: en los últimos tres días no sumó citas con $19.45 de gasto. \"CO-1 - Empresarios de RD respóndanme esto\" concentra casi la mitad del gasto ($29.90, sin citas propias) y la única cita vino de \"CO-3 - Yo sé que todavía usas Excel\" ($10.84). Con $61 gastados y una sola cita es pronto para decidir, pero conviene mirar de nuevo con más citas antes de repartir presupuesto entre los anuncios.",
       "tendencia_semanal": [
         {
           "semana": "15–21 oct",
@@ -186,61 +204,70 @@ const SNAPSHOT = {
           "impresiones": 5681,
           "alcance": 3920,
           "resultado_valor": 1
+        },
+        {
+          "semana": "22–24 oct",
+          "desde": "2026-10-22",
+          "hasta": "2026-10-24",
+          "gasto": 19.45,
+          "impresiones": 2303,
+          "alcance": 1867,
+          "resultado_valor": 0
         }
       ],
       "por_mes": [
         {
           "mes": "Octubre 2026 (desde el 17)",
           "desde": "2026-10-17",
-          "hasta": "2026-10-22",
-          "gasto": 44.63,
-          "impresiones": 6049,
-          "alcance": 4167,
+          "hasta": "2026-10-24",
+          "gasto": 61.03,
+          "impresiones": 7984,
+          "alcance": 5294,
           "resultado_valor": 1
         }
       ],
       "ads": [
         {
           "nombre": "CO-1 - Empresarios de RD respóndanme esto - Video",
-          "gasto": 22.09,
-          "impresiones": 3016,
-          "clicks": 100,
-          "ctr": 3.32,
-          "cpc": 0.22,
-          "cpm": 7.32,
+          "gasto": 29.9,
+          "impresiones": 4075,
+          "clicks": 131,
+          "ctr": 3.21,
+          "cpc": 0.23,
+          "cpm": 7.34,
           "resultado_nombre": null,
           "resultado_valor": null
         },
         {
           "nombre": "CO-3 - Yo sé que todavía usas Excel - Video",
-          "gasto": 8.13,
-          "impresiones": 1030,
-          "clicks": 29,
-          "ctr": 2.82,
-          "cpc": 0.28,
-          "cpm": 7.89,
+          "gasto": 10.84,
+          "impresiones": 1363,
+          "clicks": 32,
+          "ctr": 2.35,
+          "cpc": 0.34,
+          "cpm": 7.95,
           "resultado_nombre": "Citas agendadas",
           "resultado_valor": 1
         },
         {
           "nombre": "CO-2 - Tu sistema de contabilidad dice que ganaste dinero - Video",
-          "gasto": 7.67,
-          "impresiones": 1172,
-          "clicks": 56,
-          "ctr": 4.78,
-          "cpc": 0.14,
-          "cpm": 6.54,
+          "gasto": 10.54,
+          "impresiones": 1508,
+          "clicks": 65,
+          "ctr": 4.31,
+          "cpc": 0.16,
+          "cpm": 6.99,
           "resultado_nombre": null,
           "resultado_valor": null
         },
         {
           "nombre": "CO-4 - Carrusel Empresarios de RD respóndanme esto",
-          "gasto": 6.74,
-          "impresiones": 831,
-          "clicks": 12,
-          "ctr": 1.44,
-          "cpc": 0.56,
-          "cpm": 8.11,
+          "gasto": 9.75,
+          "impresiones": 1038,
+          "clicks": 13,
+          "ctr": 1.25,
+          "cpc": 0.75,
+          "cpm": 9.39,
           "resultado_nombre": null,
           "resultado_valor": null
         }
@@ -259,19 +286,19 @@ const SNAPSHOT = {
       },
       "ventana": "Desde su lanzamiento (17 oct 2026) hasta hoy",
       "metricas": {
-        "gasto": 86.59,
-        "impresiones": 12122,
-        "clicks": 377,
-        "clics_enlace": 165,
-        "vistas_landing": 104,
-        "ctr": 3.11,
-        "cpc": 0.23,
-        "cpm": 7.14,
-        "alcance": 7659,
+        "gasto": 118.05,
+        "impresiones": 15620,
+        "clicks": 452,
+        "clics_enlace": 214,
+        "vistas_landing": 146,
+        "ctr": 2.89,
+        "cpc": 0.26,
+        "cpm": 7.56,
+        "alcance": 9372,
         "resultado_nombre": "Citas agendadas",
-        "resultado_valor": 0
+        "resultado_valor": 1
       },
-      "recomendacion": "Campaña de Facturación Electrónica con presupuesto cerrado de $500 hasta el 15 de noviembre, encendida el 17 de octubre. Lleva $86.59 gastados ($413.41 por gastar), 377 clics a $0.23 y 0 citas agendadas todavía en 6 días. \"FE-1 - Te quedan 30 días o menos\" concentra el 49% del gasto ($42.69, 3.28% de CTR); \"FE-3\" tiene el mejor CTR (3.79%) y el carrusel \"FE-4\" el más flojo (1.28%). Ya pasó la primera semana sin citas: vale revisar con Félix si la landing y el agendamiento reciben bien este tráfico (104 vistas de landing para 165 clics en el enlace).",
+      "recomendacion": "Campaña de Facturación Electrónica con presupuesto cerrado de $500 hasta el 15 de noviembre, encendida el 17 de octubre. Lleva $118.05 gastados ($381.95 por gastar), 452 clics a $0.26 y su primera cita agendada ($118.05 por cita), que llegó el 22 de octubre con el anuncio \"FE-1 - Te quedan 30 días o menos\" ($58.54, la mitad del gasto). Es el costo por cita más alto de las campañas activas (Ready to Buy está en $23.55 y Retargeting Clases en $18.05) y 146 de las 214 personas que hicieron clic en el enlace llegaron a ver la landing. Conviene esperar unos días más y, si sigue sin citas, revisar con Félix qué cambiar.",
       "tendencia_semanal": [
         {
           "semana": "15–21 oct",
@@ -281,61 +308,70 @@ const SNAPSHOT = {
           "impresiones": 11318,
           "alcance": 7263,
           "resultado_valor": 0
+        },
+        {
+          "semana": "22–24 oct",
+          "desde": "2026-10-22",
+          "hasta": "2026-10-24",
+          "gasto": 37.39,
+          "impresiones": 4301,
+          "alcance": 3354,
+          "resultado_valor": 1
         }
       ],
       "por_mes": [
         {
           "mes": "Octubre 2026 (desde el 17)",
           "desde": "2026-10-17",
-          "hasta": "2026-10-22",
-          "gasto": 86.59,
-          "impresiones": 12122,
-          "alcance": 7659,
-          "resultado_valor": 0
+          "hasta": "2026-10-24",
+          "gasto": 118.05,
+          "impresiones": 15620,
+          "alcance": 9372,
+          "resultado_valor": 1
         }
       ],
       "ads": [
         {
           "nombre": "FE-1 - Te quedan 30 días o menos - Video",
-          "gasto": 42.69,
-          "impresiones": 6637,
-          "clicks": 218,
-          "ctr": 3.28,
-          "cpc": 0.2,
-          "cpm": 6.43,
-          "resultado_nombre": null,
-          "resultado_valor": null
+          "gasto": 58.54,
+          "impresiones": 8601,
+          "clicks": 264,
+          "ctr": 3.07,
+          "cpc": 0.22,
+          "cpm": 6.81,
+          "resultado_nombre": "Citas agendadas",
+          "resultado_valor": 1
         },
         {
           "nombre": "FE-3 - No es la firma de DocuSign - Video",
-          "gasto": 15.59,
-          "impresiones": 1872,
-          "clicks": 71,
-          "ctr": 3.79,
-          "cpc": 0.22,
-          "cpm": 8.33,
+          "gasto": 21.44,
+          "impresiones": 2336,
+          "clicks": 85,
+          "ctr": 3.64,
+          "cpc": 0.25,
+          "cpm": 9.18,
           "resultado_nombre": null,
           "resultado_valor": null
         },
         {
           "nombre": "FE-2 - Así se ve FE - Video",
-          "gasto": 15.17,
-          "impresiones": 1890,
-          "clicks": 66,
-          "ctr": 3.49,
-          "cpc": 0.23,
-          "cpm": 8.03,
+          "gasto": 21.23,
+          "impresiones": 2524,
+          "clicks": 78,
+          "ctr": 3.09,
+          "cpc": 0.27,
+          "cpm": 8.41,
           "resultado_nombre": null,
           "resultado_valor": null
         },
         {
           "nombre": "FE-4 - Carrusel Quedan menos de 30 días",
-          "gasto": 13.14,
-          "impresiones": 1723,
-          "clicks": 22,
-          "ctr": 1.28,
-          "cpc": 0.6,
-          "cpm": 7.63,
+          "gasto": 16.84,
+          "impresiones": 2159,
+          "clicks": 25,
+          "ctr": 1.16,
+          "cpc": 0.67,
+          "cpm": 7.8,
           "resultado_nombre": null,
           "resultado_valor": null
         }
@@ -354,19 +390,19 @@ const SNAPSHOT = {
       },
       "ventana": "Desde su lanzamiento (17 oct 2026) hasta hoy",
       "metricas": {
-        "gasto": 58.38,
-        "impresiones": 6632,
-        "clicks": 112,
-        "clics_enlace": 53,
-        "vistas_landing": 32,
-        "ctr": 1.69,
-        "cpc": 0.52,
-        "cpm": 8.8,
-        "alcance": 2122,
+        "gasto": 72.19,
+        "impresiones": 8681,
+        "clicks": 156,
+        "clics_enlace": 75,
+        "vistas_landing": 46,
+        "ctr": 1.8,
+        "cpc": 0.46,
+        "cpm": 8.32,
+        "alcance": 2639,
         "resultado_nombre": "Citas agendadas",
-        "resultado_valor": 2
+        "resultado_valor": 4
       },
-      "recomendacion": "Campaña de retargeting con presupuesto cerrado de $250 hasta el 15 de noviembre, encendida el 17 de octubre. Lleva $58.38 gastados ($191.62 por gastar) y ya suma 2 citas agendadas a $29.19 cada una, las dos del anuncio \"RT-2 - No pagues dos veces por lo mismo\" ($45.49 gastados, 1.86% de CTR). Solo alcanzó a 2,122 personas (CPM $8.80): la audiencia es pequeña y se satura rápido, así que conviene vigilar la frecuencia. RT-1 y RT-3 no han dado citas.",
+      "recomendacion": "Campaña de retargeting con presupuesto cerrado de $250 hasta el 15 de noviembre, encendida el 17 de octubre. Lleva $72.19 gastados ($177.81 por gastar) y 4 citas agendadas a $18.05 cada una, el mejor costo por cita de las campañas activas; 2 de ellas llegaron en los últimos tres días. Las 4 citas vienen de \"RT-2 - No pagues dos veces por lo mismo\" ($56.07, 1.86% de CTR); RT-1 y RT-3 no han dado ninguna. La audiencia es pequeña (2,639 personas, CPM $8.32), así que hay que vigilar la frecuencia: si se satura, el costo por cita subirá.",
       "tendencia_semanal": [
         {
           "semana": "15–21 oct",
@@ -376,50 +412,59 @@ const SNAPSHOT = {
           "impresiones": 6395,
           "alcance": 2065,
           "resultado_valor": 2
+        },
+        {
+          "semana": "22–24 oct",
+          "desde": "2026-10-22",
+          "hasta": "2026-10-24",
+          "gasto": 15.65,
+          "impresiones": 2283,
+          "alcance": 1173,
+          "resultado_valor": 2
         }
       ],
       "por_mes": [
         {
           "mes": "Octubre 2026 (desde el 17)",
           "desde": "2026-10-17",
-          "hasta": "2026-10-22",
-          "gasto": 58.38,
-          "impresiones": 6632,
-          "alcance": 2122,
-          "resultado_valor": 2
+          "hasta": "2026-10-24",
+          "gasto": 72.19,
+          "impresiones": 8681,
+          "alcance": 2639,
+          "resultado_valor": 4
         }
       ],
       "ads": [
         {
           "nombre": "RT-2 - No pagues dos veces por lo mismo",
-          "gasto": 45.49,
-          "impresiones": 4902,
-          "clicks": 91,
-          "ctr": 1.86,
-          "cpc": 0.5,
-          "cpm": 9.28,
+          "gasto": 56.07,
+          "impresiones": 6429,
+          "clicks": 129,
+          "ctr": 2.01,
+          "cpc": 0.43,
+          "cpm": 8.72,
           "resultado_nombre": "Citas agendadas",
-          "resultado_valor": 2
+          "resultado_valor": 4
         },
         {
           "nombre": "RT-1 - Te quitamos la facturación electrónica de tu plato",
-          "gasto": 7.35,
-          "impresiones": 923,
-          "clicks": 9,
-          "ctr": 0.98,
-          "cpc": 0.82,
-          "cpm": 7.96,
+          "gasto": 9.11,
+          "impresiones": 1187,
+          "clicks": 13,
+          "ctr": 1.1,
+          "cpc": 0.7,
+          "cpm": 7.67,
           "resultado_nombre": null,
           "resultado_valor": null
         },
         {
           "nombre": "RT-3 - Quedan 30 días o menos",
-          "gasto": 5.54,
-          "impresiones": 807,
-          "clicks": 12,
-          "ctr": 1.49,
-          "cpc": 0.46,
-          "cpm": 6.86,
+          "gasto": 7.01,
+          "impresiones": 1065,
+          "clicks": 14,
+          "ctr": 1.31,
+          "cpc": 0.5,
+          "cpm": 6.58,
           "resultado_nombre": null,
           "resultado_valor": null
         }
@@ -702,19 +747,19 @@ const SNAPSHOT = {
       },
       "ventana": "Desde su lanzamiento (11 sep 2026) hasta hoy",
       "metricas": {
-        "gasto": 380.71,
-        "impresiones": 61052,
-        "clicks": 1524,
-        "clics_enlace": 974,
-        "vistas_landing": 622,
-        "ctr": 2.5,
+        "gasto": 400.27,
+        "impresiones": 64077,
+        "clicks": 1630,
+        "clics_enlace": 1039,
+        "vistas_landing": 679,
+        "ctr": 2.54,
         "cpc": 0.25,
-        "cpm": 6.24,
-        "alcance": 25306,
+        "cpm": 6.25,
+        "alcance": 26277,
         "resultado_nombre": "Citas agendadas",
-        "resultado_valor": 16
+        "resultado_valor": 17
       },
-      "recomendacion": "Meta la muestra activa otra vez, con un presupuesto cerrado ampliado a $458.21 y cierre el 28 de octubre (quedan $77.50 por gastar). Lleva $380.71 gastados y 16 citas agendadas a $23.79 por cita. En octubre suma 6 citas con $120.51 ($20.09 por cita). Desde que volvió a entregar no ha sumado citas nuevas (el gasto de la última semana fue $12.34, y $10.16 solo hoy). \"Faltan 180,000 empresas\" concentra el gasto ($199.89 y 8 citas); \"180,000 empresas-Imagen\" tiene 5 ($18.58 por cita) y \"Doña vs 2\" 2 ($12.43 por cita). \"te lo voy a decir v2\" y \"Desde el 31 de diciembre\" siguen sin citas. Con $77.50 por gastar en 6 días, el ritmo de gasto actual lo agotaría antes del cierre.",
+      "recomendacion": "Meta la muestra activa, con presupuesto cerrado de $458.21 y cierre el 28 de octubre (quedan $57.94 por gastar). Lleva $400.27 gastados y 17 citas agendadas a $23.55 por cita; sumó una cita nueva el 22 de octubre. En octubre acumula 7 citas con $140.07 ($20.01 por cita). \"Faltan 180,000 empresas\" concentra el gasto ($212.93) y 9 citas ($23.66 por cita), y \"180,000 empresas-Imagen\" tiene 5 ($18.77 por cita). \"te lo voy a decir v2\" y \"Desde el 31 de diciembre\" siguen sin ninguna cita ($21.93 entre los dos). Al ritmo actual (unos $10 al día) el presupuesto restante alcanza hasta el cierre.",
       "tendencia_semanal": [
         {
           "semana": "10–16 sep",
@@ -769,6 +814,15 @@ const SNAPSHOT = {
           "impresiones": 3324,
           "alcance": 2542,
           "resultado_valor": 0
+        },
+        {
+          "semana": "22–24 oct",
+          "desde": "2026-10-22",
+          "hasta": "2026-10-24",
+          "gasto": 29.65,
+          "impresiones": 4465,
+          "alcance": 3179,
+          "resultado_valor": 1
         }
       ],
       "por_mes": [
@@ -784,30 +838,30 @@ const SNAPSHOT = {
         {
           "mes": "Octubre 2026",
           "desde": "2026-10-01",
-          "hasta": "2026-10-22",
-          "gasto": 120.51,
-          "impresiones": 19850,
-          "alcance": 12992,
-          "resultado_valor": 6
+          "hasta": "2026-10-24",
+          "gasto": 140.07,
+          "impresiones": 22875,
+          "alcance": 14071,
+          "resultado_valor": 7
         }
       ],
       "ads": [
         {
           "nombre": "Faltan 180,000 empresas",
-          "gasto": 199.89,
-          "impresiones": 30576,
-          "clicks": 790,
-          "ctr": 2.58,
+          "gasto": 212.93,
+          "impresiones": 32797,
+          "clicks": 869,
+          "ctr": 2.65,
           "cpc": 0.25,
-          "cpm": 6.54,
+          "cpm": 6.49,
           "resultado_nombre": "Citas agendadas",
-          "resultado_valor": 8
+          "resultado_valor": 9
         },
         {
           "nombre": "180,000 empresas-Imagen",
-          "gasto": 92.9,
-          "impresiones": 19531,
-          "clicks": 445,
+          "gasto": 93.84,
+          "impresiones": 19719,
+          "clicks": 450,
           "ctr": 2.28,
           "cpc": 0.21,
           "cpm": 4.76,
@@ -816,45 +870,45 @@ const SNAPSHOT = {
         },
         {
           "nombre": "Cupo v2",
-          "gasto": 43.81,
-          "impresiones": 5800,
-          "clicks": 142,
-          "ctr": 2.45,
-          "cpc": 0.31,
-          "cpm": 7.55,
+          "gasto": 45.52,
+          "impresiones": 5994,
+          "clicks": 144,
+          "ctr": 2.4,
+          "cpc": 0.32,
+          "cpm": 7.59,
           "resultado_nombre": "Citas agendadas",
           "resultado_valor": 1
         },
         {
           "nombre": "Doña vs 2",
-          "gasto": 24.86,
-          "impresiones": 2745,
-          "clicks": 73,
-          "ctr": 2.66,
-          "cpc": 0.34,
-          "cpm": 9.06,
+          "gasto": 26.05,
+          "impresiones": 2890,
+          "clicks": 81,
+          "ctr": 2.8,
+          "cpc": 0.32,
+          "cpm": 9.01,
           "resultado_nombre": "Citas agendadas",
           "resultado_valor": 2
         },
         {
           "nombre": "te lo voy a decir v2",
-          "gasto": 14.84,
-          "impresiones": 1693,
-          "clicks": 54,
-          "ctr": 3.19,
-          "cpc": 0.27,
-          "cpm": 8.77,
+          "gasto": 17.49,
+          "impresiones": 1963,
+          "clicks": 66,
+          "ctr": 3.36,
+          "cpc": 0.26,
+          "cpm": 8.91,
           "resultado_nombre": null,
           "resultado_valor": null
         },
         {
           "nombre": "Desde el 31 de diciembre",
-          "gasto": 4.41,
-          "impresiones": 707,
+          "gasto": 4.44,
+          "impresiones": 714,
           "clicks": 20,
-          "ctr": 2.83,
+          "ctr": 2.8,
           "cpc": 0.22,
-          "cpm": 6.24,
+          "cpm": 6.22,
           "resultado_nombre": null,
           "resultado_valor": null
         }
@@ -873,19 +927,19 @@ const SNAPSHOT = {
       },
       "ventana": "Desde su lanzamiento (4 sep 2026) hasta hoy",
       "metricas": {
-        "gasto": 318.2,
-        "impresiones": 35369,
-        "clicks": 1000,
-        "clics_enlace": 625,
-        "vistas_landing": 418,
-        "ctr": 2.83,
+        "gasto": 330.85,
+        "impresiones": 36701,
+        "clicks": 1045,
+        "clics_enlace": 654,
+        "vistas_landing": 440,
+        "ctr": 2.85,
         "cpc": 0.32,
-        "cpm": 9,
-        "alcance": 14013,
+        "cpm": 9.01,
+        "alcance": 14485,
         "resultado_nombre": "Citas agendadas",
-        "resultado_valor": 13
+        "resultado_valor": 15
       },
-      "recomendacion": "Meta la muestra activa otra vez, con presupuesto cerrado de $357.18 y cierre el 28 de octubre (quedan $38.98 por gastar). Lleva $318.20 gastados y 13 citas agendadas a $24.48 por cita. En octubre suma 2 citas con $56.54 ($28.27 por cita); la nueva cita llegó hoy (22 oct). \"Operando a ciegas\" concentra casi todo el gasto ($256.85) y las 13 citas; los demás anuncios siguen sin citas propias. Sigue pendiente decidir con Félix si se separan 2-3 anuncios a un ad set nuevo con presupuesto propio.",
+      "recomendacion": "Meta la muestra activa, con presupuesto cerrado de $357.18 y cierre el 28 de octubre (quedan $26.33 por gastar). Lleva $330.85 gastados y 15 citas agendadas a $22.06 por cita; sumó 3 citas nuevas entre el 22 y el 24 de octubre ($18.04 de gasto, $6.01 por cita). En octubre acumula 4 citas con $69.19 ($17.30 por cita). \"Operando a ciegas\" concentra casi todo el gasto ($268.84) y las 15 citas; los demás anuncios siguen sin citas propias. Con ese ritmo los $26.33 restantes se gastarán en pocos días; si Félix quiere seguir después del 28 de octubre, hay que ampliar el presupuesto.",
       "tendencia_semanal": [
         {
           "semana": "3–9 sep",
@@ -949,6 +1003,15 @@ const SNAPSHOT = {
           "impresiones": 756,
           "alcance": 589,
           "resultado_valor": 0
+        },
+        {
+          "semana": "22–24 oct",
+          "desde": "2026-10-22",
+          "hasta": "2026-10-24",
+          "gasto": 18.04,
+          "impresiones": 1734,
+          "alcance": 1410,
+          "resultado_valor": 3
         }
       ],
       "por_mes": [
@@ -964,44 +1027,55 @@ const SNAPSHOT = {
         {
           "mes": "Octubre 2026",
           "desde": "2026-10-01",
-          "hasta": "2026-10-22",
-          "gasto": 56.54,
-          "impresiones": 6083,
-          "alcance": 3622,
-          "resultado_valor": 2
+          "hasta": "2026-10-24",
+          "gasto": 69.19,
+          "impresiones": 7415,
+          "alcance": 4342,
+          "resultado_valor": 4
         }
       ],
       "ads": [
         {
           "nombre": "Operando a ciegas",
-          "gasto": 256.85,
-          "impresiones": 27927,
-          "clicks": 760,
-          "ctr": 2.72,
+          "gasto": 268.84,
+          "impresiones": 28915,
+          "clicks": 801,
+          "ctr": 2.77,
           "cpc": 0.34,
-          "cpm": 9.2,
+          "cpm": 9.3,
           "resultado_nombre": "Citas agendadas",
-          "resultado_valor": 13
+          "resultado_valor": 15
         },
         {
           "nombre": "4 formas de resolver FE - Estática",
-          "gasto": 14.35,
-          "impresiones": 1761,
+          "gasto": 14.5,
+          "impresiones": 1787,
           "clicks": 41,
-          "ctr": 2.33,
+          "ctr": 2.29,
           "cpc": 0.35,
-          "cpm": 8.15,
+          "cpm": 8.11,
           "resultado_nombre": null,
           "resultado_valor": null
         },
         {
           "nombre": "Otros implementadores - Estática",
-          "gasto": 12.47,
-          "impresiones": 1046,
+          "gasto": 12.49,
+          "impresiones": 1051,
           "clicks": 24,
-          "ctr": 2.29,
+          "ctr": 2.28,
           "cpc": 0.52,
-          "cpm": 11.92,
+          "cpm": 11.88,
+          "resultado_nombre": null,
+          "resultado_valor": null
+        },
+        {
+          "nombre": "Scrolling (17%) - Copy",
+          "gasto": 7.43,
+          "impresiones": 1189,
+          "clicks": 46,
+          "ctr": 3.87,
+          "cpc": 0.16,
+          "cpm": 6.25,
           "resultado_nombre": null,
           "resultado_valor": null
         },
@@ -1013,17 +1087,6 @@ const SNAPSHOT = {
           "ctr": 2.38,
           "cpc": 0.42,
           "cpm": 9.9,
-          "resultado_nombre": null,
-          "resultado_valor": null
-        },
-        {
-          "nombre": "Scrolling (17%) - Copy",
-          "gasto": 6.94,
-          "impresiones": 876,
-          "clicks": 42,
-          "ctr": 4.79,
-          "cpc": 0.17,
-          "cpm": 7.92,
           "resultado_nombre": null,
           "resultado_valor": null
         }
@@ -1298,24 +1361,24 @@ const SNAPSHOT = {
       "inicio": "2026-08-20",
       "presupuesto_diario": null,
       "presupuesto_cerrado": {
-        "monto": 194.65,
+        "monto": 207.18,
         "cierre": "28 oct 2026"
       },
       "ventana": "Desde su lanzamiento (20 ago 2026) hasta hoy",
       "metricas": {
-        "gasto": 194.65,
-        "impresiones": 605022,
-        "clicks": 4194,
-        "clics_enlace": 856,
-        "vistas_landing": 198,
-        "ctr": 0.69,
+        "gasto": 207.18,
+        "impresiones": 647520,
+        "clicks": 4395,
+        "clics_enlace": 905,
+        "vistas_landing": 221,
+        "ctr": 0.68,
         "cpc": 0.05,
         "cpm": 0.32,
-        "alcance": 270909,
+        "alcance": 284170,
         "resultado_nombre": null,
         "resultado_valor": null
       },
-      "recomendacion": "Meta la muestra activa otra vez, con cierre previsto el 28 de octubre, pero el presupuesto restante figura en $0 (ya se gastó lo asignado: $194.65), por eso entrega muy poco, unos $0.89 hoy. En octubre suma $9.74. Acumula 270,909 personas alcanzadas a un CPM de $0.32 como audiencia para el retargeting. \"La llamada\" concentra el gasto ($123.29, 68,876 reproducciones completas).",
+      "recomendacion": "Meta la muestra activa, con cierre previsto el 28 de octubre, pero el presupuesto restante figura en $0, por eso entrega poco (unos $0.73 hoy). Lleva $207.18 gastados y en octubre suma $22.27. Acumula 284,170 personas alcanzadas a un CPM de $0.32 como audiencia para el retargeting. \"La llamada\" concentra el gasto ($127.17, 70,751 reproducciones completas).",
       "tendencia_semanal": [
         {
           "semana": "20–26 ago",
@@ -1397,6 +1460,15 @@ const SNAPSHOT = {
           "impresiones": 20134,
           "alcance": 18565,
           "resultado_valor": null
+        },
+        {
+          "semana": "22–24 oct",
+          "desde": "2026-10-22",
+          "hasta": "2026-10-24",
+          "gasto": 13.42,
+          "impresiones": 44852,
+          "alcance": 31768,
+          "resultado_valor": null
         }
       ],
       "por_mes": [
@@ -1421,112 +1493,112 @@ const SNAPSHOT = {
         {
           "mes": "Octubre 2026",
           "desde": "2026-10-01",
-          "hasta": "2026-10-22",
-          "gasto": 9.74,
-          "impresiones": 46316,
-          "alcance": 37628,
+          "hasta": "2026-10-24",
+          "gasto": 22.27,
+          "impresiones": 88814,
+          "alcance": 61216,
           "resultado_valor": null
         }
       ],
       "ads": [
         {
           "nombre": "La llamada",
-          "gasto": 123.29,
-          "impresiones": 247882,
-          "clicks": 3347,
+          "gasto": 127.17,
+          "impresiones": 254899,
+          "clicks": 3436,
           "ctr": 1.35,
           "cpc": 0.04,
           "cpm": 0.5,
           "resultado_nombre": "Reproducciones",
-          "resultado_valor": 68876
+          "resultado_valor": 70751
         },
         {
           "nombre": "Carrusel sera una de ellas",
-          "gasto": 42.28,
-          "impresiones": 208182,
-          "clicks": 353,
+          "gasto": 42.63,
+          "impresiones": 209564,
+          "clicks": 354,
           "ctr": 0.17,
           "cpc": 0.12,
           "cpm": 0.2,
           "resultado_nombre": "Alcance",
-          "resultado_valor": 80064
+          "resultado_valor": 81232
         },
         {
           "nombre": "Carrusel mexico",
-          "gasto": 7.21,
-          "impresiones": 41556,
-          "clicks": 81,
+          "gasto": 9.13,
+          "impresiones": 50534,
+          "clicks": 97,
           "ctr": 0.19,
           "cpc": 0.09,
-          "cpm": 0.17,
+          "cpm": 0.18,
           "resultado_nombre": "Alcance",
-          "resultado_valor": 26656
+          "resultado_valor": 32090
         },
         {
           "nombre": "Carrusel la llamada",
-          "gasto": 5.96,
-          "impresiones": 33665,
-          "clicks": 62,
+          "gasto": 7.58,
+          "impresiones": 41678,
+          "clicks": 75,
           "ctr": 0.18,
           "cpc": 0.1,
           "cpm": 0.18,
           "resultado_nombre": "Alcance",
-          "resultado_valor": 24218
+          "resultado_valor": 30043
         },
         {
           "nombre": "mexico",
-          "gasto": 5.08,
-          "impresiones": 13715,
-          "clicks": 217,
-          "ctr": 1.58,
+          "gasto": 6.55,
+          "impresiones": 16796,
+          "clicks": 279,
+          "ctr": 1.66,
           "cpc": 0.02,
-          "cpm": 0.37,
+          "cpm": 0.39,
           "resultado_nombre": "Reproducciones",
-          "resultado_valor": 2043
+          "resultado_valor": 3173
         },
         {
           "nombre": "Arte mexico",
-          "gasto": 4.09,
-          "impresiones": 20200,
-          "clicks": 30,
-          "ctr": 0.15,
-          "cpc": 0.14,
-          "cpm": 0.2,
+          "gasto": 5.23,
+          "impresiones": 25364,
+          "clicks": 36,
+          "ctr": 0.14,
+          "cpc": 0.15,
+          "cpm": 0.21,
           "resultado_nombre": "Alcance",
-          "resultado_valor": 11202
+          "resultado_valor": 17797
         },
         {
           "nombre": "Arte la llamada",
-          "gasto": 3.1,
-          "impresiones": 20071,
-          "clicks": 33,
+          "gasto": 4.21,
+          "impresiones": 25159,
+          "clicks": 39,
           "ctr": 0.16,
-          "cpc": 0.09,
-          "cpm": 0.15,
-          "resultado_nombre": "Alcance",
-          "resultado_valor": 11211
-        },
-        {
-          "nombre": "Arte tu empresa sera una de ellas",
-          "gasto": 2.47,
-          "impresiones": 14429,
-          "clicks": 22,
-          "ctr": 0.15,
           "cpc": 0.11,
           "cpm": 0.17,
           "resultado_nombre": "Alcance",
-          "resultado_valor": 9414
+          "resultado_valor": 20463
+        },
+        {
+          "nombre": "Arte tu empresa sera una de ellas",
+          "gasto": 3.13,
+          "impresiones": 17433,
+          "clicks": 22,
+          "ctr": 0.13,
+          "cpc": 0.14,
+          "cpm": 0.18,
+          "resultado_nombre": "Alcance",
+          "resultado_valor": 13933
         },
         {
           "nombre": "\"Tu empresa será una de ellas?\"",
-          "gasto": 1.17,
-          "impresiones": 5322,
-          "clicks": 49,
-          "ctr": 0.92,
-          "cpc": 0.02,
-          "cpm": 0.22,
+          "gasto": 1.55,
+          "impresiones": 6093,
+          "clicks": 57,
+          "ctr": 0.94,
+          "cpc": 0.03,
+          "cpm": 0.25,
           "resultado_nombre": "Reproducciones",
-          "resultado_valor": 442
+          "resultado_valor": 817
         }
       ]
     },
@@ -1720,11 +1792,12 @@ const SNAPSHOT = {
       "Se refrescaron métricas y recomendaciones con datos reales al 9 de octubre. Hallazgos clave: Ready to Buy sumó 3 citas (16 en total, $22.37 por cita) y Contabilidad sumó la cita #8 con el anuncio de Excel; Consideración sigue en 12. Meta ya no muestra activas Ready to Buy, Consideración, Reconocimiento ni Contabilidad (Sept–Dic): solo Clase Gratuita y la campaña nueva de Contabilidad (Excel, 5 leads a $2.02).",
       "Se refrescaron datos al 10 de octubre: Clase Gratuita subió a $8 diarios (73 registros, $108.44), el webinar del 13 de octubre ya tiene 47 inscritos, y las campañas pausadas pasaron al Histórico para que el dashboard muestre solo lo activo.",
       "Se refrescaron datos al 19 de octubre: entraron 3 campañas nuevas de Citas de Félix (FE $500, Contabilidad $250 y Retargeting Clases $250, todas hasta el 15 de noviembre, activas desde el 17 de octubre) y la campaña \"comenta la palabra\" del webinar del 13 de octubre ($99.81, 145 registros a $0.69) quedó cerrada. Clase Gratuita y Excel quedaron pausadas. Se sumaron semanas del 8 al 14 y del 15 al 19 de octubre.",
-      "Se refrescaron datos al 22 de octubre: Ready to Buy, Consideración y Reconocimiento volvieron a estar activas en Meta (cierre el 28 de octubre), entraron 2 campañas nuevas (registros para el webinar del 28 de octubre, con 36 registros a $0.80, y una de leads calificados con formulario Instaform) y las campañas de Citas de Félix sumaron sus primeras 3 citas (1 en Contabilidad, 2 en Retargeting Clases)."
+      "Se refrescaron datos al 22 de octubre: Ready to Buy, Consideración y Reconocimiento volvieron a estar activas en Meta (cierre el 28 de octubre), entraron 2 campañas nuevas (registros para el webinar del 28 de octubre, con 36 registros a $0.80, y una de leads calificados con formulario Instaform) y las campañas de Citas de Félix sumaron sus primeras 3 citas (1 en Contabilidad, 2 en Retargeting Clases).",
+      "Se refrescaron datos al 24 de octubre: Citas Retargeting Clases ya suma 4 citas a $18.05 (la más barata de las activas), Consideración sube a 15 y Ready to Buy a 17; Citas FE y Contabilidad tienen 1 cita cada una; el webinar del 28 de octubre llega a 55 registros a $0.81 y el formulario Instaform consiguió su primer lead."
     ],
     "pendientes": [
-      "Webinar del 28 de octubre (Meta lo nombra así; el cierre de la campaña es el 29 de octubre a las 17:00): ya hay 36 registros en el píxel de Meta, falta crear la sesión de Zoom y confirmar la fecha exacta. Además de reconciliar los registros del píxel con los inscritos reales del formulario, que históricamente han sido menos.",
-      "Citas de Félix (campañas FE, Contabilidad y Retargeting Clases, activas desde el 17 de octubre, presupuestos cerrados de $500, $250 y $250 hasta el 15 de noviembre): ya suman 3 citas en total (1 en Contabilidad a $44.63 y 2 en Retargeting a $29.19); FE lleva $86.59 y ninguna cita. Comparar el costo por cita contra las campañas anteriores (Ready to Buy $23.79, Consideración $24.48) cuando lleven más días. Las campañas del embudo anterior (Ready to Buy, Consideración, Reconocimiento) volvieron a activarse hasta el 28 de octubre; Contabilidad Sept–Dic, Clase Gratuita y Excel siguen pausadas.",
+      "Webinar del 28 de octubre (Meta lo nombra así; el cierre de la campaña es el 29 de octubre a las 17:00): ya hay 55 registros en el píxel de Meta a $0.81 cada uno. Falta crear la sesión de Zoom y confirmar la fecha exacta, y reconciliar los registros del píxel con los inscritos reales del formulario, que históricamente han sido menos.",
+      "Citas de Félix (campañas FE, Contabilidad y Retargeting Clases, activas desde el 17 de octubre, presupuestos cerrados de $500, $250 y $250 hasta el 15 de noviembre): ya suman 6 citas en total (4 en Retargeting a $18.05, 1 en Contabilidad a $61.03 y 1 en FE a $118.05). FE es la más cara, con $118.05 gastados por una sola cita: conviene decidir con Félix si se cambia algo en esa campaña. Las campañas del embudo anterior (Ready to Buy, Consideración, Reconocimiento) siguen activas hasta el 28 de octubre, cuando se cierran.",
       "Contabilidad aparece pausada en Meta, con 8 citas (la #8 llegó entre el 8 y el 9 de octubre) y $43.68 gastados en octubre. Si se reactiva, lo más urgente es meterle 1-2 artes estáticas: la campaña es 100% video con los mismos creativos desde que se armó, y \"Yo se que todavia usas excel (nuevo)\" llegó a $22.84 con un CPC 3 veces más alto que el resto y sin citas.",
       "Sacar 2-3 anuncios de Consideración (los con algo de CTR, como \"Hay empresarios\") a un ad set nuevo con presupuesto propio, para que Félix vea más variedad de creativos sin depender del algoritmo — pendiente de confirmar con Félix cuáles anuncios y cuánto presupuesto asignarles. \"Scrolling (17%) - Copy\" ya lleva cuatro semanas seguidas recibiendo más gasto cada vez (subió de $0.35 a $1.45), señal cada vez más clara de que el algoritmo lo está probando en serio.",
       "Webinar del 13 de octubre: ya se realizó, con 47 inscritos en el formulario. La campaña de registros atribuyó 109 + 145 registros en Meta (campaña principal + la de \"comenta la palabra\"), más de los 47 del formulario, así que conviene reconciliar cuántos de esos registros de píxel son inscripciones reales. Siguen pendientes las sesiones de Zoom del 29 de octubre y el 12 de noviembre.",
@@ -1795,7 +1868,7 @@ for (const c of SNAPSHOT.campanas) {
 // way; campaigns were configured with a single closed lifetime budget and a
 // stop_time instead). Same map used in snapshot and live mode.
 const FE_PRESUPUESTOS = {
-  "120251858423240560": { monto: 194.65, cierre: "28 oct 2026" }, // Reconocimiento (20%): reactivada hasta el 28 oct
+  "120251858423240560": { monto: 207.18, cierre: "28 oct 2026" }, // Reconocimiento (20%): reactivada hasta el 28 oct
   "120252085024140560": { monto: 357.18, cierre: "28 oct 2026" }, // Consideración (40%)
   "120252187070040560": { monto: 458.21, cierre: "28 oct 2026" },  // Ready to Buy (40%)
   "120252758005220560": { monto: 250.00, cierre: "15 nov 2026" }, // Oct 2026 - Citas Contabilidad Félix
