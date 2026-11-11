@@ -411,9 +411,9 @@
     const activas = data.campanas.filter(c => c.estado === 'ACTIVE');
     const pausadas = data.campanas.length - activas.length;
     const GROUPS = [
-      { t: 'Citas de Félix', d: 'Campañas nuevas, activas hasta el 15 de noviembre', ids: ['120252758005220560', '120252757568140560', '120252755221670560'] },
-      { t: 'Embudo de Facturación Electrónica', d: 'Reconocimiento, Consideración y Ready to Buy, cierran el 28 de octubre', ids: ['120251858423240560', '120252085024140560', '120252187070040560'] },
-      { t: 'Webinar y leads', d: 'Registros al webinar y formulario de leads calificados', ids: [] }
+      { t: 'Citas de Félix', d: 'Campañas de citas directas', ids: ['120252758005220560', '120252757568140560', '120252755221670560'] },
+      { t: 'Embudo de Facturación Electrónica', d: 'Reconocimiento, Consideración y Ready to Buy, activas hasta el 31 de diciembre', ids: ['120251858423240560', '120252085024140560', '120252187070040560'] },
+      { t: 'Otras campañas', d: 'Interacción con publicaciones y otras', ids: [] }
     ];
     const used = new Set(GROUPS.flatMap(g => g.ids));
     const card = c => {
